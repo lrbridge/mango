@@ -17,6 +17,7 @@ public class MazeSolution {
 	public String toString() {
 		
 		StringBuilder str = new StringBuilder();
+				
 		str.append("Solution:" + '\n');
 		
 		for(char[] x : path) {
@@ -27,7 +28,9 @@ public class MazeSolution {
 		}
 		
 		str.append("Path cost: " + pathCost + '\n');
-		str.append("Number of nodes expanded: " + numNodesExpanded);
+		str.append("Number of nodes expanded: " + numNodesExpanded + '\n');
+		
+		str.append("----------------------------\n");
 		
 		return str.toString();
 		

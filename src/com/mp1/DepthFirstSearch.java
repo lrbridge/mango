@@ -20,7 +20,7 @@ public class DepthFirstSearch {
 	private HashMap<String, Boolean> wasOnFrontier;
 	
 	private enum ACTIONS {
-		L, U, R, D
+		LEFT, UP, RIGHT, DOWN
 	};
 	
 	public MazeSolution findSolution() {
@@ -38,39 +38,34 @@ public class DepthFirstSearch {
 			this.wasOnFrontier.put(firstNode.state.x + "," + firstNode.state.y, true);
 		}
 		
-		// doesn't really make sense, but including b/c in algorithm
+		// doesn't really make sense (since can't have character P and . in same space), but including b/c in algorithm
 		if(this.maze[firstNode.state.x][firstNode.state.y] == '.') {
-			System.out.println("FOUnd solution!!!");
 			return this.makeSolution(this.maze, firstNode, numNodesExpanded);					
 		}
 				
 		while(!this.frontier.empty()) {
-			System.out.println("tpo " + this.frontier.empty());
 			Node node = this.frontier.pop();
 			numNodesExpanded++;
-			System.out.println("looking at " + node.state.x + " " + node.state.y);
 			this.isExplored.put(node.state.x + "," + node.state.y, true);
-			
-			int x = node.state.x;
-			int y = node.state.y;
-			
+	
 			for(ACTIONS action : ACTIONS.values()) {
 				
 				Node child = new Node();
 				child.parent = node;
-				child.state = new State(x, y);
+				child.state = new State(node.state.x, node.state.y);
 				
 				switch(action) {
-				case L: 
+				case LEFT: 
 					child.state.y--;
 					break;
-				case U:
+				case UP:
 					child.state.x--;
 					break;
-				case R:
+				case RIGHT:
 					child.state.y++;
 					break;
-				default: // case D
+				case DOWN:
+				default:
 					child.state.x++;
 					break;
 				}
@@ -81,32 +76,32 @@ public class DepthFirstSearch {
 					// if is not a % (wall)
 					if(this.maze[child.state.x][child.state.y] != '%') {
 					
-		 				// if child state ! in frontier or explored TODO
+		 				// if child state ! in frontier or explored
 						String rep = child.state.x + "," + child.state.y;
 						if(!this.isExplored.containsKey(rep) && !this.wasOnFrontier.containsKey(rep)) {
+							// TODO : better way to figure out if is in the frontier instead of a separate object?
 							
 							// if is goal, return solution
 							if(this.maze[child.state.x][child.state.y] == '.') {
-								System.out.println("FOUnd solution!!!");
 								return this.makeSolution(this.maze, child, numNodesExpanded);					
 							}
 							
-							System.out.println("push on frontier " + child.state.x + " " + child.state.y);
+//							System.out.println("push on frontier " + child.state.x + " " + child.state.y);
 							this.frontier.push(child);
 							this.wasOnFrontier.put(node.state.x + "," + node.state.y, true);
 						}
 						else{
-							System.out.println("was already in frontier or explored");
+//							System.out.println("was already in frontier or explored");
 						}
 						
 					}
 					else {
-						System.out.println("wall");
+//						System.out.println("wall");
 					}
 					
 				}
 				else {
-					System.out.println("not in maze");
+//					System.out.println("not in maze");
 				}
 			
 			}			
@@ -116,6 +111,13 @@ public class DepthFirstSearch {
 		return null; // fail if no solution is found
 	}
 	
+	/**
+	 * Summarize the solution - path cost, number of nodes expanded, pretty maze path output
+	 * @param maze
+	 * @param node
+	 * @param numNodesExpanded
+	 * @return solution
+	 */
 	private MazeSolution makeSolution(char[][] maze, Node node, int numNodesExpanded) {
 		
 		int pathCost = 0;
@@ -129,6 +131,11 @@ public class DepthFirstSearch {
 		return new MazeSolution(maze, pathCost, numNodesExpanded);
 	}
 
+	/**
+	 * Returns the first node in the maze ('P' character), or null if it can't find a 'P'
+	 * @param maze
+	 * @return node or null
+	 */
 	private Node findFirstNode(char[][] maze) {
         int x = 0;
         int y = 0;
@@ -136,7 +143,6 @@ public class DepthFirstSearch {
         for(char[] row : maze) {
 	        for(char content : row) {
 	        	if(content == 'P') {
-	        		System.out.println("found it!" + content + x + " " +  y);
 	        		Node node = new Node();
 	        		node.state = new State(x, y);
 	        		node.parent = null;
@@ -150,6 +156,11 @@ public class DepthFirstSearch {
         return null;
 	}
 
+	/**
+	 * Reads the input file and returns a char[][] of the maze
+	 * @param filename
+	 * @return char[][] maze
+	 */
 	private char[][] readMazeInput(String filename) {
 		List<char[]> maze = new ArrayList<char[]>();
 		
@@ -159,7 +170,6 @@ public class DepthFirstSearch {
 		      new BufferedReader(new InputStreamReader(in))) {
 		    String line = null;
 		    while ((line = reader.readLine()) != null) {
-		    	System.out.println(line);
 		        maze.add(line.toCharArray());
 		    }
 		} catch (IOException e) {
