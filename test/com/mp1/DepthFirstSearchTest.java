@@ -17,7 +17,7 @@ public class DepthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '.', '.', '.', '%', '%', 'P', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
-		DepthFirstSearch x = new DepthFirstSearch();
+		DepthFirstSearch x = new DepthFirstSearch("simpleMaze.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
@@ -30,5 +30,34 @@ public class DepthFirstSearchTest {
 		assertArrayEquals(actual.path[2], expectedPath[2]);
 		assertArrayEquals(actual.path[3], expectedPath[3]);
 	}
+	
+	@Test
+	public void dfsSmall() {
+		System.out.println("Depth First Search - small");
+		
+		DepthFirstSearch x = new DepthFirstSearch("smallMaze.txt");
+		MazeSolution actual = x.findSolution();
 
+		System.out.println(actual.toString());
+	}
+	
+	@Test
+	public void dfsMedium() {
+		System.out.println("Depth First Search - medium");
+		
+		DepthFirstSearch x = new DepthFirstSearch("mediumMaze.txt");
+		MazeSolution actual = x.findSolution();
+
+		System.out.println(actual.toString());
+	}
+	
+	@Test
+	public void dfsBig() {
+		System.out.println("Depth First Search - big");
+		
+		DepthFirstSearch x = new DepthFirstSearch("bigMaze.txt");
+		MazeSolution actual = x.findSolution();
+
+		System.out.println(actual.toString());
+	}
 }

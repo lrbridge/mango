@@ -13,6 +13,7 @@ import java.util.Stack;
 
 public class DepthFirstSearch {
 
+	private String filename;
 	private char[][] maze;
 	private Stack<Node> frontier;
 	private List<Node> explored;
@@ -21,9 +22,13 @@ public class DepthFirstSearch {
 		LEFT, UP, RIGHT, DOWN
 	};
 	
+	public DepthFirstSearch(String filename) {
+		this.filename = filename;
+	}
+	
 	public MazeSolution findSolution() {
 		
-		this.maze = this.readMazeInput("simpleMaze.txt");				
+		this.maze = this.readMazeInput(this.filename);				
 		this.frontier = new Stack<Node>();
 		this.explored = new ArrayList<Node>();
 		
@@ -35,8 +40,8 @@ public class DepthFirstSearch {
 		}
 		
 		// doesn't really make sense (since can't have character P and . in same space), but including b/c in algorithm
-		if(this.maze[firstNode.state.x][firstNode.state.y] == '.') {
-			return this.makeSolution(this.maze, firstNode, numNodesExpanded);					
+		if(isGoal(firstNode)) {
+			return makeSolution(this.maze, firstNode, numNodesExpanded);					
 		}
 				
 		while(!this.frontier.empty()) {
@@ -66,36 +71,15 @@ public class DepthFirstSearch {
 					break;
 				}
 				
-				// if is in the maze
-				if(child.state.y >= 0 && child.state.y < this.maze[0].length && child.state.x >=0 && child.state.x < this.maze.length) {
+				if(isInMaze(child) && isNotAWall(child) && !this.explored.contains(child) && !this.frontier.contains(child)) {
 					
-					// if is not a % (wall)
-					if(this.maze[child.state.x][child.state.y] != '%') {
-					
-		 				// if child state ! in frontier or explored
-						if(!this.explored.contains(child) && !this.frontier.contains(child)) {
-							// TODO : better way to figure out if is in the frontier instead of a separate object?
-							
-							// if is goal, return solution
-							if(this.maze[child.state.x][child.state.y] == '.') {
-								return this.makeSolution(this.maze, child, numNodesExpanded);					
-							}
-							
-//							System.out.println("push on frontier " + child.state.x + " " + child.state.y);
-							this.frontier.push(child);
-						}
-						else{
-//							System.out.println("was already in frontier or explored");
-						}
-						
-					}
-					else {
-//						System.out.println("wall");
+					// if is goal, return solution
+					if(isGoal(child)) {
+						return makeSolution(this.maze, child, numNodesExpanded);					
 					}
 					
-				}
-				else {
-//					System.out.println("not in maze");
+//					System.out.println("push on frontier " + child.state.x + " " + child.state.y);
+					this.frontier.push(child);
 				}
 			
 			}			
@@ -105,6 +89,18 @@ public class DepthFirstSearch {
 		return null; // fail if no solution is found
 	}
 	
+	private boolean isGoal(Node child) {
+		return this.maze[child.state.x][child.state.y] == '.';
+	}
+
+	private boolean isNotAWall(Node child) {
+		return this.maze[child.state.x][child.state.y] != '%';
+	}
+
+	private boolean isInMaze(Node child) {
+		return child.state.y >= 0 && child.state.y < this.maze[0].length && child.state.x >=0 && child.state.x < this.maze.length;
+	}
+
 	/**
 	 * Summarize the solution - path cost, number of nodes expanded, pretty maze path output
 	 * @param maze
