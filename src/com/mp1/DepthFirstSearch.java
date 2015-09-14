@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -16,8 +15,7 @@ public class DepthFirstSearch {
 
 	private char[][] maze;
 	private Stack<Node> frontier;
-	private HashMap<String, Boolean> isExplored;
-	private HashMap<String, Boolean> wasOnFrontier;
+	private List<Node> explored;
 	
 	private enum ACTIONS {
 		LEFT, UP, RIGHT, DOWN
@@ -27,15 +25,13 @@ public class DepthFirstSearch {
 		
 		this.maze = this.readMazeInput("simpleMaze.txt");				
 		this.frontier = new Stack<Node>();
-		this.isExplored = new HashMap<String, Boolean>();
-		this.wasOnFrontier = new HashMap<String, Boolean>();
+		this.explored = new ArrayList<Node>();
 		
 		int numNodesExpanded = 0;
 		
 		Node firstNode = this.findFirstNode(this.maze);
 		if(firstNode != null) {
 			this.frontier.push(firstNode);
-			this.wasOnFrontier.put(firstNode.state.x + "," + firstNode.state.y, true);
 		}
 		
 		// doesn't really make sense (since can't have character P and . in same space), but including b/c in algorithm
@@ -46,7 +42,7 @@ public class DepthFirstSearch {
 		while(!this.frontier.empty()) {
 			Node node = this.frontier.pop();
 			numNodesExpanded++;
-			this.isExplored.put(node.state.x + "," + node.state.y, true);
+			this.explored.add(node);
 	
 			for(ACTIONS action : ACTIONS.values()) {
 				
@@ -77,8 +73,7 @@ public class DepthFirstSearch {
 					if(this.maze[child.state.x][child.state.y] != '%') {
 					
 		 				// if child state ! in frontier or explored
-						String rep = child.state.x + "," + child.state.y;
-						if(!this.isExplored.containsKey(rep) && !this.wasOnFrontier.containsKey(rep)) {
+						if(!this.explored.contains(child) && !this.frontier.contains(child)) {
 							// TODO : better way to figure out if is in the frontier instead of a separate object?
 							
 							// if is goal, return solution
@@ -88,7 +83,6 @@ public class DepthFirstSearch {
 							
 //							System.out.println("push on frontier " + child.state.x + " " + child.state.y);
 							this.frontier.push(child);
-							this.wasOnFrontier.put(node.state.x + "," + node.state.y, true);
 						}
 						else{
 //							System.out.println("was already in frontier or explored");
