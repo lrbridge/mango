@@ -5,7 +5,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
-public class DepthFirstSearchTest {
+public class BreadthFirstSearchTest {
 
 	private void assertMazesAreEqual(MazeSolution actual, char[][] expectedPath) {
 		assertEquals(actual.path.length, expectedPath.length);
@@ -15,8 +15,8 @@ public class DepthFirstSearchTest {
 	}
 	
 	@Test
-	public void dfsSimple() {
-		System.out.println("Depth First Search - simple");
+	public void bfsSimple() {
+		System.out.println("Breadth First Search - simple");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
@@ -24,7 +24,7 @@ public class DepthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '.', '.', '.', '%', '%', 'P', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
-		Search x = new DepthFirstSearch("simpleMaze.txt");
+		Search x = new BreadthFirstSearch("simpleMaze.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
@@ -35,30 +35,30 @@ public class DepthFirstSearchTest {
 	}
 	
 	@Test
-	public void dfsSmall() {
-		System.out.println("Depth First Search - small");
+	public void bfsSmall() {
+		System.out.println("Breadth First Search - small");
 		
-		Search x = new DepthFirstSearch("smallMaze.txt");
+		Search x = new BreadthFirstSearch("smallMaze.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
 	}
 	
 	@Test
-	public void dfsMedium() {
-		System.out.println("Depth First Search - medium");
+	public void bfsMedium() {
+		System.out.println("Breadth First Search - medium");
 		
-		Search x = new DepthFirstSearch("mediumMaze.txt");
+		Search x = new BreadthFirstSearch("mediumMaze.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
 	}
 	
 	@Test
-	public void dfsBig() {
-		System.out.println("Depth First Search - big");
+	public void bfsBig() {
+		System.out.println("Breadth First Search - big");
 		
-		Search x = new DepthFirstSearch("bigMaze.txt");
+		Search x = new BreadthFirstSearch("bigMaze.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
@@ -66,43 +66,43 @@ public class DepthFirstSearchTest {
 	
 	@Test
 	public void dfsVsBfs() {
-		System.out.println("Depth First Search - should go right, up... because pop down off stack first");
+		System.out.println("Breadth First Search - should go up, across");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '.', '%' },
-				{ '%', ' ', ' ', ' ', ' ', 'P', ' ', ' ', ' ', ' ', '.', '%' },
 				{ '%', ' ', ' ', ' ', ' ', '.', '.', '.', '.', '.', '.', '%' },
+				{ '%', ' ', ' ', ' ', ' ', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 		
-		Search x = new DepthFirstSearch("dfsVsBfs.txt");
+		Search x = new BreadthFirstSearch("dfsVsBfs.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 8);
-		assertEquals(actual.numNodesExpanded, 8);
+		assertEquals(actual.pathCost, 6);
+		assertEquals(actual.numNodesExpanded, 26);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 
 	@Test
 	public void dfsVsBfs2() {
-		System.out.println("Depth First Search - should go long way around to right");
+		System.out.println("Breadth First Search - should find solution fast");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', ' ', '.', '.', '.', '%' },
-				{ '%', ' ', 'P', '%', '%', '.', '%' },
-				{ '%', ' ', '.', '.', '.', '.', '%' },
+				{ '%', ' ', '.', '.', ' ', ' ', '%' },
+				{ '%', ' ', 'P', '%', '%', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new DepthFirstSearch("dfsVsBfs2.txt");
+		Search x = new BreadthFirstSearch("dfsVsBfs2.txt");
 		MazeSolution actual = x.findSolution();
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 8);
-		assertEquals(actual.numNodesExpanded, 8);
+		assertEquals(actual.pathCost, 2);
+		assertEquals(actual.numNodesExpanded, 3);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 }
