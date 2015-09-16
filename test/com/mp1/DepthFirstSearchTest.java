@@ -25,7 +25,7 @@ public class DepthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
 		Search x = new DepthFirstSearch("simpleMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
@@ -39,7 +39,7 @@ public class DepthFirstSearchTest {
 		System.out.println("Depth First Search - small");
 		
 		Search x = new DepthFirstSearch("smallMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 	}
@@ -49,7 +49,7 @@ public class DepthFirstSearchTest {
 		System.out.println("Depth First Search - medium");
 		
 		Search x = new DepthFirstSearch("mediumMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 	}
@@ -59,7 +59,7 @@ public class DepthFirstSearchTest {
 		System.out.println("Depth First Search - big");
 		
 		Search x = new DepthFirstSearch("bigMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 	}
@@ -76,7 +76,7 @@ public class DepthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 		
 		Search x = new DepthFirstSearch("dfsVsBfs.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
@@ -97,7 +97,7 @@ public class DepthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 		
 		Search x = new DepthFirstSearch("dfsVsBfs2.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		

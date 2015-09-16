@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Search {
-	
+
 	private String filename;
 	private char[][] maze;
 	private List<Node> explored;
+	private boolean shouldWaitForExpandToTestGoal = false;
 
 	protected enum ACTIONS {
 		LEFT, UP, RIGHT, DOWN
@@ -25,7 +26,12 @@ public abstract class Search {
 		this.filename = filename;
 	}
 
-	public MazeSolution findSolution() {
+	public Search(String filename, Boolean shouldWaitForExpandToTestGoal) {
+		this(filename);
+		this.shouldWaitForExpandToTestGoal = shouldWaitForExpandToTestGoal;
+	}
+
+	public MazeSolution solve() {
 
 		this.maze = this.readMazeInput(this.filename);
 		this.explored = new ArrayList<Node>();
@@ -37,7 +43,7 @@ public abstract class Search {
 
 		// doesn't really make sense (since can't have character P and . in same
 		// space), but including b/c in algorithm
-		if (isGoal(firstNode)) {
+		if (!this.shouldWaitForExpandToTestGoal && isGoal(firstNode)) {
 			return makeSolution(this.maze, firstNode, numNodesExpanded);
 		}
 
@@ -46,34 +52,20 @@ public abstract class Search {
 			numNodesExpanded++;
 			this.explored.add(node);
 
+			if(this.shouldWaitForExpandToTestGoal && isGoal(node)) {
+				return makeSolution(this.maze, node, numNodesExpanded);
+			}
+			
 			for (ACTIONS action : ACTIONS.values()) {
 
-				Node child = new Node();
-				child.parent = node;
-				child.state = new State(node.state.x, node.state.y);
-
-				switch (action) {
-				case LEFT:
-					child.state.y--;
-					break;
-				case UP:
-					child.state.x--;
-					break;
-				case RIGHT:
-					child.state.y++;
-					break;
-				case DOWN:
-				default:
-					child.state.x++;
-					break;
-				}
+				Node child = getChildNode(node, action);
 
 				if (isInMaze(child) && isNotAWall(child)
 						&& !this.explored.contains(child)
 						&& !this.doesFrontierContain(child)) {
 
 					// if is goal, return solution
-					if (isGoal(child)) {
+					if (!this.shouldWaitForExpandToTestGoal && isGoal(child)) {
 						return makeSolution(this.maze, child, numNodesExpanded);
 					}
 
@@ -106,6 +98,29 @@ public abstract class Search {
 	private boolean isInMaze(Node child) {
 		return child.state.y >= 0 && child.state.y < this.maze[0].length
 				&& child.state.x >= 0 && child.state.x < this.maze.length;
+	}
+
+	private Node getChildNode(Node node, ACTIONS action) {
+		Node child = new Node();
+		child.parent = node;
+		child.state = new State(node.state.x, node.state.y);
+
+		switch (action) {
+		case LEFT:
+			child.state.y--;
+			break;
+		case UP:
+			child.state.x--;
+			break;
+		case RIGHT:
+			child.state.y++;
+			break;
+		case DOWN:
+		default:
+			child.state.x++;
+			break;
+		}
+		return child;
 	}
 
 	/**

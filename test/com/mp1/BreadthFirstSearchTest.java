@@ -25,7 +25,7 @@ public class BreadthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
 		Search x = new BreadthFirstSearch("simpleMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
@@ -39,7 +39,7 @@ public class BreadthFirstSearchTest {
 		System.out.println("Breadth First Search - small");
 		
 		Search x = new BreadthFirstSearch("smallMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 	}
@@ -49,7 +49,7 @@ public class BreadthFirstSearchTest {
 		System.out.println("Breadth First Search - medium");
 		
 		Search x = new BreadthFirstSearch("mediumMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 	}
@@ -59,7 +59,7 @@ public class BreadthFirstSearchTest {
 		System.out.println("Breadth First Search - big");
 		
 		Search x = new BreadthFirstSearch("bigMaze.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 	}
@@ -76,7 +76,7 @@ public class BreadthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 		
 		Search x = new BreadthFirstSearch("dfsVsBfs.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
@@ -97,7 +97,7 @@ public class BreadthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 		
 		Search x = new BreadthFirstSearch("dfsVsBfs2.txt");
-		MazeSolution actual = x.findSolution();
+		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
