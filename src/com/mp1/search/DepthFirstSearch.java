@@ -1,6 +1,9 @@
-package com.mp1;
+package com.mp1.search;
 
 import java.util.Stack;
+
+import com.mp1.node.Node;
+import com.mp1.search.base.UninformedSearch;
 
 public class DepthFirstSearch extends UninformedSearch {
 

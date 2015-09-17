@@ -1,4 +1,4 @@
-package com.mp1;
+package com.mp1.node;
 
 import java.util.Objects;
 

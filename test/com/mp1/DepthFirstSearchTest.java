@@ -5,6 +5,10 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 
+import com.mp1.search.DepthFirstSearch;
+import com.mp1.search.base.Search;
+import com.mp1.solution.MazeSolution;
+
 public class DepthFirstSearchTest {
 
 	private void assertMazesAreEqual(MazeSolution actual, char[][] expectedPath) {

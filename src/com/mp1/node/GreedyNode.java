@@ -1,4 +1,4 @@
-package com.mp1;
+package com.mp1.node;
 
 public class GreedyNode extends Node implements Comparable<GreedyNode> {
 

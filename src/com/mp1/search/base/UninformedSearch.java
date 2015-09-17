@@ -1,4 +1,8 @@
-package com.mp1;
+package com.mp1.search.base;
+
+import com.mp1.node.Node;
+import com.mp1.node.State;
+import com.mp1.solution.MazeSolution;
 
 public abstract class UninformedSearch extends Search {
 

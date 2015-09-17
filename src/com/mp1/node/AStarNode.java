@@ -1,4 +1,4 @@
-package com.mp1;
+package com.mp1.node;
 
 public class AStarNode extends Node implements Comparable<AStarNode> {
 

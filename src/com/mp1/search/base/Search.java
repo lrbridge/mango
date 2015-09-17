@@ -1,4 +1,4 @@
-package com.mp1;
+package com.mp1.search.base;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mp1.node.Node;
+import com.mp1.node.State;
+import com.mp1.solution.MazeSolution;
 
 public abstract class Search {
 

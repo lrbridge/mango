@@ -1,6 +1,9 @@
-package com.mp1;
+package com.mp1.search;
 
 import java.util.concurrent.LinkedBlockingDeque;
+
+import com.mp1.node.Node;
+import com.mp1.search.base.UninformedSearch;
 
 public class BreadthFirstSearch extends UninformedSearch {
 
