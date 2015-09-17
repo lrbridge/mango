@@ -2,7 +2,7 @@ package com.mp1;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class BreadthFirstSearch extends Search {
+public class BreadthFirstSearch extends UninformedSearch {
 
 	private LinkedBlockingDeque<Node> frontier;
 	
@@ -28,7 +28,9 @@ public class BreadthFirstSearch extends Search {
 	}
 
 	@Override
-	protected void addNodeToFrontier(Node firstNode) {
-		this.frontier.add(firstNode);
+	protected void addNodeToFrontier(Node node) {
+		if(node != null) {
+			this.frontier.add(node);
+		}
 	}
 }

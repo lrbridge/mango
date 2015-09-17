@@ -2,7 +2,7 @@ package com.mp1;
 
 import java.util.Stack;
 
-public class DepthFirstSearch extends Search {
+public class DepthFirstSearch extends UninformedSearch {
 
 	private Stack<Node> frontier;
 	
@@ -18,8 +18,10 @@ public class DepthFirstSearch extends Search {
 	}
 
 	@Override
-	protected void addNodeToFrontier(Node firstNode) {
-		this.frontier.push(firstNode);
+	protected void addNodeToFrontier(Node node) {
+		if(node != null) {
+			this.frontier.push(node);
+		}
 	}
 
 	@Override

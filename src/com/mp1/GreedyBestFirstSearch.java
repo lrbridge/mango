@@ -3,13 +3,12 @@ package com.mp1;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class GreedyBestFirstSearch extends Search {
+public class GreedyBestFirstSearch extends InformedSearch {
 
 	private PriorityQueue<Node> frontier;
 	
 	public GreedyBestFirstSearch(String filename) {
-		super(filename, true); // should wait for expand to do goal test (to ensure optimality)
-
+		super(filename);
 		// TODO need to setup priority queue - comparator? natural ordering (path cost?)... but don't want to break other equals/contains
 //		this.frontier = new PriorityQueue<Node>(20, pathCostComparator);
 		

@@ -12,73 +12,26 @@ import java.util.List;
 
 public abstract class Search {
 
-	private String filename;
-	private char[][] maze;
-	private List<Node> explored;
-	private boolean shouldWaitForExpandToTestGoal = false;
+	protected char[][] maze;
+	protected List<Node> explored;
+	protected int numNodesExpanded;
 
 	protected enum ACTIONS {
 		LEFT, UP, RIGHT, DOWN
 	}
 
-	public Search(String filename) {
-		super();
-		this.filename = filename;
-	}
-
-	public Search(String filename, Boolean shouldWaitForExpandToTestGoal) {
-		this(filename);
-		this.shouldWaitForExpandToTestGoal = shouldWaitForExpandToTestGoal;
-	}
-
-	public MazeSolution solve() {
-
-		this.maze = this.readMazeInput(this.filename);
+	public Search(String filename) {		
+		this.maze = this.readMazeInput(filename);
 		this.explored = new ArrayList<Node>();
-		int numNodesExpanded = 0;
-		Node firstNode = this.findFirstNode(this.maze);
-		if (firstNode != null) {
-			this.addNodeToFrontier(firstNode);
-		}
-
-		// doesn't really make sense (since can't have character P and . in same
-		// space), but including b/c in algorithm
-		if (!this.shouldWaitForExpandToTestGoal && isGoal(firstNode)) {
-			return makeSolution(this.maze, firstNode, numNodesExpanded);
-		}
-
-		while (!this.isFrontierEmpty()) {
-			Node node = this.popNodeOffFrontier();
-			numNodesExpanded++;
-			this.explored.add(node);
-
-			if(this.shouldWaitForExpandToTestGoal && isGoal(node)) {
-				return makeSolution(this.maze, node, numNodesExpanded);
-			}
-			
-			for (ACTIONS action : ACTIONS.values()) {
-
-				Node child = getChildNode(node, action);
-
-				if (isInMaze(child) && isNotAWall(child)
-						&& !this.explored.contains(child)
-						&& !this.doesFrontierContain(child)) {
-
-					// if is goal, return solution
-					if (!this.shouldWaitForExpandToTestGoal && isGoal(child)) {
-						return makeSolution(this.maze, child, numNodesExpanded);
-					}
-
-					this.addNodeToFrontier(child);
-				}
-
-			}
-
-		}
-
-		return null; // fail if no solution is found
+		this.numNodesExpanded = 0;
 	}
 
+	/**
+	 * Solve the maze
+	 * @return
+	 */
+	public abstract MazeSolution solve();
+	
 	protected abstract boolean doesFrontierContain(Node child);
 
 	protected abstract Node popNodeOffFrontier();
@@ -87,20 +40,26 @@ public abstract class Search {
 
 	protected abstract void addNodeToFrontier(Node firstNode);
 
-	private boolean isGoal(Node child) {
+	protected boolean isGoal(Node child) {
 		return this.maze[child.state.x][child.state.y] == '.';
 	}
 
-	private boolean isNotAWall(Node child) {
+	protected boolean isNotAWall(Node child) {
 		return this.maze[child.state.x][child.state.y] != '%';
 	}
 
-	private boolean isInMaze(Node child) {
+	protected boolean isInMaze(Node child) {
 		return child.state.y >= 0 && child.state.y < this.maze[0].length
 				&& child.state.x >= 0 && child.state.x < this.maze.length;
 	}
 
-	private Node getChildNode(Node node, ACTIONS action) {
+	/**
+	 * Returns the child node from the given node with the action
+	 * @param node
+	 * @param action
+	 * @return
+	 */
+	protected Node getChildNode(Node node, ACTIONS action) {
 		Node child = new Node();
 		child.parent = node;
 		child.state = new State(node.state.x, node.state.y);
@@ -132,18 +91,17 @@ public abstract class Search {
 	 * @param numNodesExpanded
 	 * @return solution
 	 */
-	private MazeSolution makeSolution(char[][] maze, Node node,
-			int numNodesExpanded) {
+	protected MazeSolution makeSolution(Node node) {
 
 		int pathCost = 0;
 
-		while (maze[node.state.x][node.state.y] != 'P') {
-			maze[node.state.x][node.state.y] = '.';
+		while (this.maze[node.state.x][node.state.y] != 'P') {
+			this.maze[node.state.x][node.state.y] = '.';
 			node = node.parent;
 			pathCost++;
 		}
 
-		return new MazeSolution(maze, pathCost, numNodesExpanded);
+		return new MazeSolution(this.maze, pathCost, this.numNodesExpanded);
 	}
 
 	/**
@@ -153,7 +111,7 @@ public abstract class Search {
 	 * @param maze
 	 * @return node or null
 	 */
-	private Node findFirstNode(char[][] maze) {
+	protected Node findFirstNode(char[][] maze) {
 		int x = 0;
 		int y = 0;
 
