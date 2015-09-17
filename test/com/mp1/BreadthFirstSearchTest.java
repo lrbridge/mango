@@ -105,4 +105,26 @@ public class BreadthFirstSearchTest {
 		assertEquals(actual.numNodesExpanded, 3);
 		assertMazesAreEqual(actual, expectedPath);
 	}
+	
+	@Test
+	public void badGreedy() {
+		System.out.println("Breadth First Search - does poorly on bad greedy");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', ' ', '%', '%' },
+				{ '%', 'P', ' ', '%', '.', '%' },
+				{ '%', '.', '%', '.', '.', '%' },
+				{ '%', '.', '.', '.', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%' }};
+		
+		Search x = new BreadthFirstSearch("badGreedy.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 7);
+		assertEquals(actual.numNodesExpanded, 12);
+		assertMazesAreEqual(actual, expectedPath);
+	}
 }

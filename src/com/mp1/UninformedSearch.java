@@ -49,9 +49,16 @@ public abstract class UninformedSearch extends Search {
 	}
 	
 	protected Node makeNode(int x, int y, Node parent) {
+		int distanceSoFar = 0;
+		if(parent != null) {
+			// add 1 to the parent's distance since all steps are equal cost (1)
+			distanceSoFar = parent.distanceSoFar + 1;
+		}
+		
 		Node newNode = new Node();
 		newNode.parent = parent;
 		newNode.state = new State(x, y);
+		newNode.distanceSoFar = distanceSoFar;
 		return newNode;
 	}
 

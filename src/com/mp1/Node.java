@@ -6,7 +6,7 @@ public class Node implements Comparable<Node> {
 
 	public Node parent;
 	
-	public int distanceSoFar;
+	public int distanceSoFar = 0;
 	
 	public int expectedDistanceToGo;
 

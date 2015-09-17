@@ -55,4 +55,47 @@ public class GreedyBestFirstSearchTest {
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
+	@Test
+	public void dfsVsBfs2() {
+		System.out.println("Greedy Best First Search - should take fastest");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', '.', '.', ' ', ' ', '%' },
+				{ '%', ' ', 'P', '%', '%', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%' }};
+		
+		Search x = new GreedyBestFirstSearch("dfsVsBfs2.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 2);
+		assertEquals(actual.numNodesExpanded, 3);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void badGreedy() {
+		System.out.println("Greedy Best First Search - expands most nodes");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', ' ', '%', '%' },
+				{ '%', 'P', ' ', '%', '.', '%' },
+				{ '%', '.', '%', '.', '.', '%' },
+				{ '%', '.', '.', '.', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%' }};
+		
+		Search x = new GreedyBestFirstSearch("badGreedy.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 7);
+		assertEquals(actual.numNodesExpanded, 12);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
 }

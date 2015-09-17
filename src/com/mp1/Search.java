@@ -94,13 +94,11 @@ public abstract class Search {
 	 * @return solution
 	 */
 	protected MazeSolution makeSolution(Node node) {
-
-		int pathCost = 0;
-
+		int pathCost = node.distanceSoFar;
+		
 		while (this.maze[node.state.x][node.state.y] != 'P') {
 			this.maze[node.state.x][node.state.y] = '.';
 			node = node.parent;
-			pathCost++;
 		}
 
 		return new MazeSolution(this.maze, pathCost, this.numNodesExpanded);

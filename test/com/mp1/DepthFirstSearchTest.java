@@ -105,4 +105,26 @@ public class DepthFirstSearchTest {
 		assertEquals(actual.numNodesExpanded, 8);
 		assertMazesAreEqual(actual, expectedPath);
 	}
+	
+	@Test
+	public void badGreedy() {
+		System.out.println("Depth First Search - does great on bad greedy");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', ' ', '%', '%' },
+				{ '%', 'P', ' ', '%', '.', '%' },
+				{ '%', '.', '%', ' ', '.', '%' },
+				{ '%', '.', '.', '.', '.', '%' },
+				{ '%', '%', '%', '%', '%', '%' }};
+		
+		Search x = new DepthFirstSearch("badGreedy.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 7);
+		assertEquals(actual.numNodesExpanded, 7);
+		assertMazesAreEqual(actual, expectedPath);
+	}
 }
