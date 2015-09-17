@@ -52,14 +52,10 @@ public abstract class UninformedSearch extends Search {
 		int distanceSoFar = 0;
 		if(parent != null) {
 			// add 1 to the parent's distance since all steps are equal cost (1)
-			distanceSoFar = parent.distanceSoFar + 1;
+			distanceSoFar = parent.getDistanceSoFar() + 1;
 		}
 		
-		Node newNode = new Node();
-		newNode.parent = parent;
-		newNode.state = new State(x, y);
-		newNode.distanceSoFar = distanceSoFar;
-		return newNode;
+		return new Node(new State(x,y), parent, distanceSoFar);
 	}
 
 }

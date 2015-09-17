@@ -43,16 +43,19 @@ public abstract class Search {
 	protected abstract Node makeNode(int x, int y, Node node);
 	
 	protected boolean isGoal(Node child) {
-		return this.maze[child.state.x][child.state.y] == '.';
+		State childState = child.getState();
+		return this.maze[childState.x][childState.y] == '.';
 	}
 
 	protected boolean isNotAWall(Node child) {
-		return this.maze[child.state.x][child.state.y] != '%';
+		State childState = child.getState();
+		return this.maze[childState.x][childState.y] != '%';
 	}
 
 	protected boolean isInMaze(Node child) {
-		return child.state.y >= 0 && child.state.y < this.maze[0].length
-				&& child.state.x >= 0 && child.state.x < this.maze.length;
+		State childState = child.getState();
+		return childState.y >= 0 && childState.y < this.maze[0].length
+				&& childState.x >= 0 && childState.x < this.maze.length;
 	}
 
 	/**
@@ -62,8 +65,9 @@ public abstract class Search {
 	 * @return
 	 */
 	protected Node getChildNode(Node node, ACTIONS action) {
-		int x = node.state.x;
-		int y = node.state.y;
+		State state = node.getState();
+		int x = state.x;
+		int y = state.y;
 		
 		switch (action) {
 		case LEFT:
@@ -94,11 +98,11 @@ public abstract class Search {
 	 * @return solution
 	 */
 	protected MazeSolution makeSolution(Node node) {
-		int pathCost = node.distanceSoFar;
+		int pathCost = node.getDistanceSoFar();
 		
-		while (this.maze[node.state.x][node.state.y] != 'P') {
-			this.maze[node.state.x][node.state.y] = '.';
-			node = node.parent;
+		while (this.maze[node.getState().x][node.getState().y] != 'P') {
+			this.maze[node.getState().x][node.getState().y] = '.';
+			node = node.getParent();
 		}
 
 		return new MazeSolution(this.maze, pathCost, this.numNodesExpanded);

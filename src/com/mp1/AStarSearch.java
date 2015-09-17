@@ -1,9 +1,9 @@
 package com.mp1;
 
 
-public class GreedyBestFirstSearch extends InformedSearch {
+public class AStarSearch extends InformedSearch {
 	
-	public GreedyBestFirstSearch(String filename) {
+	public AStarSearch(String filename) {
 		super(filename);
 	}
 	
@@ -14,7 +14,7 @@ public class GreedyBestFirstSearch extends InformedSearch {
 			distanceSoFar = parent.getDistanceSoFar() + 1;
 		}
 		
-		GreedyNode newNode = new GreedyNode(new State(x, y), parent, distanceSoFar);
+		AStarNode newNode = new AStarNode(new State(x, y), parent, distanceSoFar);
 		if(this.heuristicValues != null) { // check for end node (before heuristics)
 			newNode.setExpectedDistanceToGo(this.heuristicValues[x][y]);
 		}

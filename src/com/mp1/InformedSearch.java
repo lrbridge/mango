@@ -1,11 +1,17 @@
 package com.mp1;
 
+import java.util.PriorityQueue;
+
 public abstract class InformedSearch extends Search {
 
-	private int[][] heuristicValues;
+	protected int[][] heuristicValues;
+	
+	private PriorityQueue<Node> frontier;
 	
 	public InformedSearch(String filename) {
 		super(filename);
+		
+		this.frontier = new PriorityQueue<Node>();
 	}
 
 	public MazeSolution solve() {
@@ -20,7 +26,7 @@ public abstract class InformedSearch extends Search {
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
-			System.out.println("Expanding " + node.state.x + " " + node.state.y);
+			System.out.println("Expanding " + node.getState().x + " " + node.getState().y);
 
 			if(this.isGoal(node)) {
 				return this.makeSolution(node);
@@ -48,23 +54,6 @@ public abstract class InformedSearch extends Search {
 
 		return null; // fail if no solution is found
 	}
-	
-	protected Node makeNode(int x, int y, Node parent) {
-		int distanceSoFar = 0;
-		if(parent != null) {
-			// add 1 to the parent's distance since all steps are equal cost (1)
-			distanceSoFar = parent.distanceSoFar + 1;
-		}
-		
-		Node newNode = new Node();
-		newNode.parent = parent;
-		newNode.state = new State(x, y);
-		newNode.distanceSoFar = distanceSoFar;
-		if(this.heuristicValues != null) { // check for end node (before heuristics)
-			newNode.expectedDistanceToGo = this.heuristicValues[x][y];
-		}
-		return newNode;
-	}
 
 	private int[][] computeHeuristics() {
 		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
@@ -74,8 +63,9 @@ public abstract class InformedSearch extends Search {
 		for(int i=0; i<this.maze.length; i++) {
 			for(int j=0; j<this.maze[i].length; j++) {
 				
-				int xDifference = Math.abs(i - goalNode.state.x);
-				int yDifference = Math.abs(j - goalNode.state.y);
+				State state = goalNode.getState();
+				int xDifference = Math.abs(i - state.x);
+				int yDifference = Math.abs(j - state.y);
 
 				int manhattanDistance = xDifference + yDifference;
 				
@@ -88,5 +78,25 @@ public abstract class InformedSearch extends Search {
 		return heuristicValues;
 	}
 
-	
+	@Override
+	protected boolean doesFrontierContain(Node child) {
+		return this.frontier.contains(child);
+	}
+
+	@Override
+	protected Node popNodeOffFrontier() {
+		return this.frontier.poll();
+	}
+
+	@Override
+	protected boolean isFrontierEmpty() {
+		return this.frontier.isEmpty();
+	}
+
+	@Override
+	protected void addNodeToFrontier(Node node) {
+		if(node != null) {
+			this.frontier.add(node);
+		}
+	}
 }
