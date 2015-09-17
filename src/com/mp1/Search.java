@@ -40,6 +40,8 @@ public abstract class Search {
 
 	protected abstract void addNodeToFrontier(Node firstNode);
 
+	protected abstract Node makeNode(int x, int y, Node node);
+	
 	protected boolean isGoal(Node child) {
 		return this.maze[child.state.x][child.state.y] == '.';
 	}
@@ -60,26 +62,26 @@ public abstract class Search {
 	 * @return
 	 */
 	protected Node getChildNode(Node node, ACTIONS action) {
-		Node child = new Node();
-		child.parent = node;
-		child.state = new State(node.state.x, node.state.y);
-
+		int x = node.state.x;
+		int y = node.state.y;
+		
 		switch (action) {
 		case LEFT:
-			child.state.y--;
+			y--;
 			break;
 		case UP:
-			child.state.x--;
+			x--;
 			break;
 		case RIGHT:
-			child.state.y++;
+			y++;
 			break;
 		case DOWN:
 		default:
-			child.state.x++;
+			x++;
 			break;
 		}
-		return child;
+		
+		return this.makeNode(x, y, node);
 	}
 
 	/**
@@ -105,23 +107,19 @@ public abstract class Search {
 	}
 
 	/**
-	 * Returns the first node in the maze ('P' character), or null if it can't
-	 * find a 'P'
+	 * Returns the first node in the maze with the given character, or null
+	 * if it can't be found.
 	 * 
-	 * @param maze
 	 * @return node or null
 	 */
-	protected Node findFirstNode(char[][] maze) {
+	protected Node findNode(char characterToFind) {
 		int x = 0;
 		int y = 0;
 
-		for (char[] row : maze) {
+		for (char[] row : this.maze) {
 			for (char content : row) {
-				if (content == 'P') {
-					Node node = new Node();
-					node.state = new State(x, y);
-					node.parent = null;
-					return node;
+				if (content == characterToFind) {
+					return this.makeNode(x, y, null);
 				}
 				y++;
 			}
