@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.mp1.search.AStarSearch;
 import com.mp1.search.GreedyBestFirstSearch;
 import com.mp1.search.base.Search;
 import com.mp1.solution.MazeSolution;
@@ -123,6 +124,33 @@ public class GreedyBestFirstSearchTest {
 		
 		assertEquals(actual.pathCost, 7);
 		assertEquals(actual.numNodesExpanded, 17);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void greedyVsAStar2() {
+		System.out.println("Greedy Best First Search - doesn't see optimal... expands lots of nodes");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', '%', ' ', '%' },
+				{ '%', ' ', ' ', '%', '%', '%', '.', '%', '%' },
+				{ '%', ' ', ' ', '%', '%', '%', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
+		
+		Search x = new GreedyBestFirstSearch("greedyVsAStar2.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 7);
+		assertEquals(actual.numNodesExpanded, 11);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	

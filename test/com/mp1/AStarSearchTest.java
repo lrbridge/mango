@@ -127,4 +127,31 @@ public class AStarSearchTest {
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
+	@Test
+	public void greedyVsAStar2() {
+		System.out.println("AStar Search - finds optimal, better than greedy");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', '%', ' ', '%' },
+				{ '%', ' ', ' ', '%', '%', '%', '.', '%', '%' },
+				{ '%', ' ', ' ', '%', '%', '%', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
+		
+		Search x = new AStarSearch("greedyVsAStar2.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 7);
+		assertEquals(actual.numNodesExpanded, 11);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
 }
