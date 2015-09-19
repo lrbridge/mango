@@ -1,12 +1,11 @@
 package com.mp1.search.base;
 
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
-import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
-import java.util.Iterator;
 
 public abstract class InformedSearch extends Search {
 
@@ -51,42 +50,7 @@ public abstract class InformedSearch extends Search {
 					this.addNodeToFrontier(child);
 				}
 				else if(this.doesFrontierContain(child)) {
-					this.replaceNodeOnFrontierIfBetter(child);
-					// TODO if has less path cost, replace the one on the frontier
-                               
-//                                    //This is the only way I could find to iterate through the
-//                                    //nodes on the frontier to find the equal node and then
-//                                    //compare it to the child node
-//                                    
-//                                    Iterator<Node> frontierIterator = this.frontier.iterator();
-//
-//                                    boolean addChild = true;
-//                                    while (frontierIterator.hasNext()) {
-//
-//                                        Node nodeToCheck = frontierIterator.next();
-//
-//                                        if (nodeToCheck.equals(child) &&
-//                                            nodeToCheck.getDistanceSoFar() <= child.getDistanceSoFar()) {
-//
-//                                            addChild = false;
-//                                        }
-//
-//                                        else if (nodeToCheck.equals(child) &&
-//                                                nodeToCheck.getDistanceSoFar() > child.getDistanceSoFar()) {
-//
-//                                            addChild = true;
-//
-//                                            //This removes the last item from the iterator, which
-//                                            //would be the node that is equal to the child
-//                                            //but has a greater current distance
-//                                            frontierIterator.remove();
-//                                        }
-//                                    }
-//
-//                                    if (addChild) {
-//
-//                                        this.addNodeToFrontier(child);
-//                                    }
+					this.replaceNodeOnFrontierIfBetter(child);                               
                                     
 				}
 
@@ -97,7 +61,40 @@ public abstract class InformedSearch extends Search {
 		return null; // fail if no solution is found
 	}
 
-	protected abstract void replaceNodeOnFrontierIfBetter(Node child);
+	protected void replaceNodeOnFrontierIfBetter(Node child) {
+
+      Iterator<Node> frontierIterator = this.frontier.iterator();
+
+      boolean addChild = true;
+      while (frontierIterator.hasNext()) {
+
+          Node nodeToCheck = frontierIterator.next();
+
+          if(nodeToCheck.equals(child)) { // nodes = if states = by our definition
+        	  
+        	  if (nodeToCheck.getDistanceSoFar() <= child.getDistanceSoFar()) {
+        		  // already has a better one
+        		  addChild = false;
+        	  }
+        	  
+        	  else if (nodeToCheck.getDistanceSoFar() >= child.getDistanceSoFar()) {
+            	  // if my node has a lower PATH COST SO FAR 
+
+        		  addChild = true;
+
+	              //This removes the last item from the iterator, which
+	              //would be the node that is equal to the child
+	              //but has a greater current distance
+	              frontierIterator.remove();
+        	  }
+          }
+      }
+
+      if (addChild) {
+          this.addNodeToFrontier(child);
+      }
+		
+	};
 
 	private int[][] computeHeuristics() {
 		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
