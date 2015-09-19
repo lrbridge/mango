@@ -126,5 +126,29 @@ public class AStarSearchTest {
 		assertEquals(actual.numNodesExpanded, 11);
 		assertMazesAreEqual(actual, expectedPath);
 	}
+        
+        @Test
+	public void ckwTest() {
+		System.out.println("CKW Test");
+		
+		char[][] expectedPath = {
+                    {'%','%','%','%','%','%','%','%','%','%','%','%','%','%','%','%','%'},
+                    {'%','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','%'},
+                    {'%','.','%','%','%','%','%','%','%','%','%','%','%','%','%','.','%'},
+                    {'%','.','.','.','.','.','.','.','.','.','.','.','.','.','%','.','%'},
+                    {'%',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','.','%','%','%'},
+                    {'%',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','.','.','P','%'},
+                    {'%','%','%','%','%','%','%','%','%','%','%','%','%','%','%','%','%'}};
+                    
+		
+		Search x = new AStarSearch("simpleMazeCKW.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 34);
+		assertEquals(actual.numNodesExpanded, 59);
+		assertMazesAreEqual(actual, expectedPath);
+	}
 	
 }
