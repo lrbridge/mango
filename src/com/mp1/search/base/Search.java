@@ -103,7 +103,7 @@ public abstract class Search {
 	 */
 	protected MazeSolution makeSolution(Node node) {
 		int pathCost = node.getDistanceSoFar();
-		
+		System.out.println("SOLUTION:");
 		while (this.maze[node.getState().x][node.getState().y] != 'P') {
 			this.maze[node.getState().x][node.getState().y] = '.';
 			node = node.getParent();

@@ -133,10 +133,10 @@ public class GreedyBestFirstSearchTest {
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' },
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', 'P', '.', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', '.', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', '.', '.', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', '.', ' ', ' ', ' ', '%', ' ', '%' },
+				{ '%', ' ', 'P', '.', '.', '.', '.', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', ' ', '.', ' ', '%' },
+				{ '%', ' ', ' ', ' ', ' ', '.', '.', ' ', '%' },
+				{ '%', ' ', '.', '.', '.', '.', '%', ' ', '%' },
 				{ '%', ' ', '.', '%', '%', '%', '.', '%', '%' },
 				{ '%', ' ', '.', '%', '%', '%', '.', ' ', '%' },
 				{ '%', ' ', '.', '.', '.', '.', '.', ' ', '%' },
@@ -148,7 +148,7 @@ public class GreedyBestFirstSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 13);
+		assertEquals(actual.pathCost, 20);
 		assertEquals(actual.numNodesExpanded, 37);
 		assertMazesAreEqual(actual, expectedPath);
 	}

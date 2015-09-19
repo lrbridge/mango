@@ -31,7 +31,6 @@ public abstract class InformedSearch extends Search {
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
-			System.out.println("Expanding " + node.getState().x + " " + node.getState().y);
 
 			if(this.isGoal(node)) {
 				return this.makeSolution(node);
@@ -98,7 +97,6 @@ public abstract class InformedSearch extends Search {
 
 	private int[][] computeHeuristics() {
 		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
-		System.out.println("HEURISTIC VALUES ");
 		Node goalNode = this.findNode('.');
 
 		for(int i=0; i<this.maze.length; i++) {
@@ -111,9 +109,7 @@ public abstract class InformedSearch extends Search {
 				int manhattanDistance = xDifference + yDifference;
 				
 				heuristicValues[i][j] = manhattanDistance;
-				System.out.print(manhattanDistance + " ");
 			}
-			System.out.println("");
 		}
 		
 		return heuristicValues;
@@ -126,11 +122,6 @@ public abstract class InformedSearch extends Search {
 
 	@Override
 	protected Node popNodeOffFrontier() {
-//		System.out.println("FRONTIER ABOUT TO POP");
-//		for(Node x : this.frontier) {
-//			AStarNode node = (AStarNode) x;
-//			System.out.println(node.getState().x + ", " + node.getState().y + " - " + node.getDistanceSoFar() + " " + node.expectedDistanceToGo);
-//		}
 		return this.frontier.poll();
 	}
 

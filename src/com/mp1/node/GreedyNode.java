@@ -13,27 +13,26 @@ public class GreedyNode extends Node implements Comparable<GreedyNode> {
 	 */
 	@Override
 	public int compareTo(GreedyNode o) {
-//		System.out.println("comparing " + this.state.x + "," + this.state.y + "(" + this.expectedDistanceToGo + ") && " + o.state.x + "," + o.state.y + "(" + o.expectedDistanceToGo + ")");
-		if(this.expectedDistanceToGo < o.expectedDistanceToGo) { //System.out.println("distless");
+		if(this.expectedDistanceToGo < o.expectedDistanceToGo) {
 			return -1;
 		}
-		else if(this.expectedDistanceToGo > o.expectedDistanceToGo) { //System.out.println("distmore");
+		else if(this.expectedDistanceToGo > o.expectedDistanceToGo) {
 			return 1;
 		}
 		else { // if tied
 			// always go UP over DOWN
-			if(this.state.x < o.state.x) { //System.out.println("up");
+			if(this.state.x < o.state.x) {
 				return -1;
 			}
-			else if(this.state.x > o.state.x) { //System.out.println("down");
+			else if(this.state.x > o.state.x) {
 				return 1;
 			}
 			
 			// if still tied, then LEFT over RIGHT
-			if(this.state.y < o.state.y) { //System.out.println("left");
+			if(this.state.y < o.state.y) {
 				return -1;
 			}
-			else if(this.state.y > o.state.y) { //System.out.println("right");
+			else if(this.state.y > o.state.y) {
 				return 1;
 			}
 			

@@ -20,7 +20,7 @@ public class GreedyBestFirstSearch extends InformedSearch {
 		}
 		
 		GreedyNode newNode = new GreedyNode(new State(x, y), parent, distanceSoFar);
-		if(this.heuristicValues != null) { // check for end node (before heuristics)
+		if(this.heuristicValues != null) { // check for end node, which has to be made at the beginning (before heuristics)
 			newNode.setExpectedDistanceToGo(this.heuristicValues[x][y]);
 		}
 		return newNode;
