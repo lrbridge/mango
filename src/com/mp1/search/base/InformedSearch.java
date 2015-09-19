@@ -2,6 +2,7 @@ package com.mp1.search.base;
 
 import java.util.PriorityQueue;
 
+import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
@@ -10,7 +11,7 @@ public abstract class InformedSearch extends Search {
 
 	protected int[][] heuristicValues;
 	
-	private PriorityQueue<Node> frontier;
+	protected PriorityQueue<Node> frontier;
 	
 	public InformedSearch(String filename) {
 		super(filename);
@@ -49,6 +50,7 @@ public abstract class InformedSearch extends Search {
 					this.addNodeToFrontier(child);
 				}
 				else if(this.doesFrontierContain(child)) {
+					this.replaceNodeOnFrontierIfBetter(child);
 					// TODO if has less path cost, replace the one on the frontier
 				}
 
@@ -58,6 +60,8 @@ public abstract class InformedSearch extends Search {
 
 		return null; // fail if no solution is found
 	}
+
+	protected abstract void replaceNodeOnFrontierIfBetter(Node child);
 
 	private int[][] computeHeuristics() {
 		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
@@ -89,6 +93,11 @@ public abstract class InformedSearch extends Search {
 
 	@Override
 	protected Node popNodeOffFrontier() {
+//		System.out.println("FRONTIER ABOUT TO POP");
+//		for(Node x : this.frontier) {
+//			AStarNode node = (AStarNode) x;
+//			System.out.println(node.getState().x + ", " + node.getState().y + " - " + node.getDistanceSoFar() + " " + node.expectedDistanceToGo);
+//		}
 		return this.frontier.poll();
 	}
 

@@ -129,18 +129,18 @@ public class AStarSearchTest {
 	
 	@Test
 	public void greedyVsAStar2() {
-		System.out.println("AStar Search - finds optimal, better than greedy");
+		System.out.println("AStar Search - finds optimal (unlike greedy)");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' },
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', ' ', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', '%', ' ', '%' },
-				{ '%', ' ', ' ', '%', '%', '%', '.', '%', '%' },
-				{ '%', ' ', ' ', '%', '%', '%', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', '.', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', '.', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', '.', ' ', ' ', ' ', '%', ' ', '%' },
+				{ '%', ' ', '.', '%', '%', '%', '.', '%', '%' },
+				{ '%', ' ', '.', '%', '%', '%', '.', ' ', '%' },
+				{ '%', ' ', '.', '.', '.', '.', '.', ' ', '%' },
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 		
@@ -149,8 +149,8 @@ public class AStarSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 7);
-		assertEquals(actual.numNodesExpanded, 11);
+		assertEquals(actual.pathCost, 12);
+		assertEquals(actual.numNodesExpanded, 44);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	

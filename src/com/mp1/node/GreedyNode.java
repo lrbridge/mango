@@ -2,7 +2,7 @@ package com.mp1.node;
 
 public class GreedyNode extends Node implements Comparable<GreedyNode> {
 
-	private int expectedDistanceToGo;
+	public int expectedDistanceToGo;
 	
 	public GreedyNode(State state, Node parent, int distanceSoFar) {
 		super(state, parent, distanceSoFar);

@@ -2,7 +2,7 @@ package com.mp1.node;
 
 public class AStarNode extends Node implements Comparable<AStarNode> {
 
-	private int expectedDistanceToGo;
+	public int expectedDistanceToGo;
 		
 	public AStarNode(State state, Node parent, int distanceSoFar) {
 		super(state, parent, distanceSoFar);
@@ -24,25 +24,36 @@ public class AStarNode extends Node implements Comparable<AStarNode> {
 		else if(myExpectedTotalDistance > theirExpectedTotalDistance) { //System.out.println("distmore");
 			return 1;
 		}
-		else { // if tied
-			// always go UP over DOWN
-			if(this.state.x < o.state.x) { //System.out.println("up");
+		else { // if tied, use just expected distance to go to resolve (greedy)
+			
+			if(this.expectedDistanceToGo < o.expectedDistanceToGo) { //System.out.println("greedydistless");
 				return -1;
 			}
-			else if(this.state.x > o.state.x) { //System.out.println("down");
+			else if(this.expectedDistanceToGo > o.expectedDistanceToGo) { //System.out.println("greedydistmore");
 				return 1;
 			}
 			
-			// if still tied, then LEFT over RIGHT
-			if(this.state.y < o.state.y) { //System.out.println("left");
-				return -1;
-			}
-			else if(this.state.y > o.state.y) { //System.out.println("right");
-				return 1;
+			else { // if STILL tied, just some conventions
+				// always go UP over DOWN
+				if(this.state.x < o.state.x) { //System.out.println("up");
+					return -1;
+				}
+				else if(this.state.x > o.state.x) { //System.out.println("down");
+					return 1;
+				}
+				
+				// if still tied, then LEFT over RIGHT
+				if(this.state.y < o.state.y) { //System.out.println("left");
+					return -1;
+				}
+				else if(this.state.y > o.state.y) { //System.out.println("right");
+					return 1;
+				}
+				
+				// if still tied, go with equal
+				return 0;
 			}
 			
-			// if still tied, go with equal
-			return 0;
 		}
 	}
 

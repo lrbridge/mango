@@ -129,18 +129,18 @@ public class GreedyBestFirstSearchTest {
 	
 	@Test
 	public void greedyVsAStar2() {
-		System.out.println("Greedy Best First Search - doesn't see optimal... expands lots of nodes");
+		System.out.println("Greedy Best First Search - actually expands LESS nodes, but NOT optimal solution");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' },
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', '%', ' ', '%' },
-				{ '%', ' ', ' ', '%', '%', '%', '.', '%', '%' },
-				{ '%', ' ', ' ', '%', '%', '%', ' ', ' ', '%' },
-				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', 'P', '.', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', '.', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', '.', '.', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', '.', ' ', ' ', ' ', '%', ' ', '%' },
+				{ '%', ' ', '.', '%', '%', '%', '.', '%', '%' },
+				{ '%', ' ', '.', '%', '%', '%', '.', ' ', '%' },
+				{ '%', ' ', '.', '.', '.', '.', '.', ' ', '%' },
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 		
@@ -149,8 +149,8 @@ public class GreedyBestFirstSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 7);
-		assertEquals(actual.numNodesExpanded, 11);
+		assertEquals(actual.pathCost, 13);
+		assertEquals(actual.numNodesExpanded, 37);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	

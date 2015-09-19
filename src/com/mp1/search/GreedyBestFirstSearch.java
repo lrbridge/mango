@@ -1,5 +1,6 @@
 package com.mp1.search;
 
+import com.mp1.node.AStarNode;
 import com.mp1.node.GreedyNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
@@ -24,6 +25,28 @@ public class GreedyBestFirstSearch extends InformedSearch {
 			newNode.setExpectedDistanceToGo(this.heuristicValues[x][y]);
 		}
 		return newNode;
+	}
+
+	@Override
+	protected void replaceNodeOnFrontierIfBetter(Node c) {
+		GreedyNode child = (GreedyNode) c;
+		System.out.println(" GBFSFRONTIER: ");
+		for(Node plainnode : this.frontier) {
+			GreedyNode node = (GreedyNode) plainnode;
+			System.out.println(node.getState().x + ", " + node.getState().y + " - " + node.expectedDistanceToGo);
+			
+			if(node.equals(child)) {  // nodes = if states = by our definition
+				System.out.println("EQUAL vs "+ child.expectedDistanceToGo);
+				
+				int nodeVsChild = node.compareTo(child);
+				if(nodeVsChild < 0) { // if my node has a lower expected distance to go
+					System.out.println("SWAP IT");
+					this.frontier.remove(child);
+					this.frontier.add(node);
+				}
+				
+			}
+		}
 	}
 
 }
