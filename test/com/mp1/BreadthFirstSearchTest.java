@@ -39,36 +39,6 @@ public class BreadthFirstSearchTest {
 	}
 	
 	@Test
-	public void bfsSmall() {
-		System.out.println("Breadth First Search - small");
-		
-		Search x = new BreadthFirstSearch("smallMaze.txt");
-		MazeSolution actual = x.solve();
-
-		System.out.println(actual.toString());
-	}
-	
-	@Test
-	public void bfsMedium() {
-		System.out.println("Breadth First Search - medium");
-		
-		Search x = new BreadthFirstSearch("mediumMaze.txt");
-		MazeSolution actual = x.solve();
-
-		System.out.println(actual.toString());
-	}
-	
-	@Test
-	public void bfsBig() {
-		System.out.println("Breadth First Search - big");
-		
-		Search x = new BreadthFirstSearch("bigMaze.txt");
-		MazeSolution actual = x.solve();
-
-		System.out.println(actual.toString());
-	}
-	
-	@Test
 	public void dfsVsBfs() {
 		System.out.println("Breadth First Search - should go up, across");
 		
