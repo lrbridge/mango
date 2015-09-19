@@ -1,11 +1,14 @@
 package com.mp1.search.base;
 
+import com.mp1.movement.NormalMovement;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
 
 public abstract class UninformedSearch extends Search {
-
+	
+	private NormalMovement movement = new NormalMovement();
+	
 	public UninformedSearch(String filename) {
 		super(filename);
 	}
@@ -25,7 +28,7 @@ public abstract class UninformedSearch extends Search {
 			this.numNodesExpanded++;
 			this.explored.add(node);
 
-			for (ACTIONS action : ACTIONS.values()) {
+			for (String action : this.movement.ACTIONS) {
 
 				Node child = this.getChildNode(node, action);
 
@@ -52,6 +55,13 @@ public abstract class UninformedSearch extends Search {
 
 	}
 	
+	private Node getChildNode(Node node, String action) {
+		State state = node.getState();
+		int x = this.movement.getChildX(state.x, action);
+		int y = this.movement.getChildY(state.y, action);
+		return this.makeNode(x, y, node);
+	}
+
 	protected Node makeNode(int x, int y, Node parent) {
 		int distanceSoFar = 0;
 		if(parent != null) {

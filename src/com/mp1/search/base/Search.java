@@ -20,10 +20,6 @@ public abstract class Search {
 	protected List<Node> explored;
 	protected int numNodesExpanded;
 
-	protected enum ACTIONS {
-		LEFT, UP, RIGHT, DOWN
-	}
-
 	public Search(String filename) {		
 		this.maze = this.readMazeInput(filename);
 		this.explored = new ArrayList<Node>();
@@ -63,36 +59,6 @@ public abstract class Search {
 	}
 
 	/**
-	 * Returns the child node from the given node with the action
-	 * @param node
-	 * @param action
-	 * @return
-	 */
-	protected Node getChildNode(Node node, ACTIONS action) {
-		State state = node.getState();
-		int x = state.x;
-		int y = state.y;
-		
-		switch (action) {
-		case LEFT:
-			y--;
-			break;
-		case UP:
-			x--;
-			break;
-		case RIGHT:
-			y++;
-			break;
-		case DOWN:
-		default:
-			x++;
-			break;
-		}
-		
-		return this.makeNode(x, y, node);
-	}
-
-	/**
 	 * Summarize the solution - path cost, number of nodes expanded, pretty maze
 	 * path output
 	 * 
@@ -103,7 +69,7 @@ public abstract class Search {
 	 */
 	protected MazeSolution makeSolution(Node node) {
 		int pathCost = node.getDistanceSoFar();
-		System.out.println("SOLUTION:");
+
 		while (this.maze[node.getState().x][node.getState().y] != 'P') {
 			this.maze[node.getState().x][node.getState().y] = '.';
 			node = node.getParent();
