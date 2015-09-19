@@ -3,23 +3,25 @@ package com.mp1.search.base;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-import com.mp1.movement.NormalMovement;
+import com.mp1.movement.DIRECTION;
+import com.mp1.movement.Movement;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
 
 public abstract class InformedSearch extends Search {
 
-	private NormalMovement movement = new NormalMovement();
+	protected Movement movement;
 	
 	protected int[][] heuristicValues;
 	
 	protected PriorityQueue<Node> frontier;
 	
-	public InformedSearch(String filename) {
+	public InformedSearch(String filename, Movement movement) {
 		super(filename);
 		
 		this.frontier = new PriorityQueue<Node>();
+		this.movement = movement;
 	}
 
 	public MazeSolution solve() {
@@ -39,7 +41,7 @@ public abstract class InformedSearch extends Search {
 				return this.makeSolution(node);
 			}
 			
-			for (String action : this.movement.ACTIONS) {
+			for (String action : this.movement.getActions()) {
 
 				Node child = this.getChildNode(node, action);
 
@@ -67,7 +69,8 @@ public abstract class InformedSearch extends Search {
 		State state = node.getState();
 		int x = this.movement.getChildX(state.x, action);
 		int y = this.movement.getChildY(state.y, action);
-		return this.makeNode(x, y, node);
+		DIRECTION directionFacing = this.movement.getChildDirectionFacing(state.directionFacing, action);
+		return this.makeNode(x, y, directionFacing, node);
 	}
 
 	protected void replaceNodeOnFrontierIfBetter(Node child) {

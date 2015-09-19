@@ -2,6 +2,7 @@ package com.mp1.search;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
+import com.mp1.movement.NormalMovement;
 import com.mp1.node.Node;
 import com.mp1.search.base.UninformedSearch;
 
@@ -10,7 +11,7 @@ public class BreadthFirstSearch extends UninformedSearch {
 	private LinkedBlockingDeque<Node> frontier;
 	
 	public BreadthFirstSearch(String filename) {
-		super(filename);
+		super(filename, new NormalMovement());
 		
 		this.frontier = new LinkedBlockingDeque<Node>();
 	}

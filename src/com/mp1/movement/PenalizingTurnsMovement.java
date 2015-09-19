@@ -1,24 +1,23 @@
 package com.mp1.movement;
 
-public class PenalizingTurnsMovement {
+public class PenalizingTurnsMovement implements Movement {
 
-	public String[] ACTIONS = {"TURN LEFT", "TURN RIGHT", "FORWARD"};
+	public String[] actions = {"TURN LEFT", "TURN RIGHT", "FORWARD"};
 	
-	
+	public String[] getActions() {
+		return actions;
+	}
 	
 	public int getChildX(int x, String action) {
 		
-		switch (action) {
-		case "TURN LEFT":
-			x--;
-			break;
-		case "DOWN":
-			x++;
-			break;
-		default:
-			break;
-		}
-		
+		// TODO need to modify this
+//		switch (action) {
+//		case "FORWARD":
+//			if()
+//		default:
+//			break;
+//		}
+//		
 		return x;
 	}
 	
@@ -37,5 +36,10 @@ public class PenalizingTurnsMovement {
 //		}
 		
 		return y;
+	}
+	
+	public DIRECTION getChildDirectionFacing(DIRECTION directionFacing, String action) {
+		// TODO fill this in
+		return directionFacing;
 	}
 }

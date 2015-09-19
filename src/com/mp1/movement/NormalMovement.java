@@ -1,8 +1,12 @@
 package com.mp1.movement;
 
-public class NormalMovement {
+public class NormalMovement implements Movement {
 
-	public String[] ACTIONS = {"LEFT", "UP", "RIGHT", "DOWN"};
+	private String[] actions = {"LEFT", "UP", "RIGHT", "DOWN"};
+	
+	public String[] getActions() {
+		return actions;
+	}
 	
 	public int getChildX(int x, String action) {
 		
@@ -34,5 +38,9 @@ public class NormalMovement {
 		}
 		
 		return y;
+	}
+
+	public DIRECTION getChildDirectionFacing(DIRECTION directionFacing, String action) {
+		return directionFacing;
 	}
 }

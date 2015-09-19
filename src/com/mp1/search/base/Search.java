@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mp1.movement.DIRECTION;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
@@ -40,7 +41,7 @@ public abstract class Search {
 
 	protected abstract void addNodeToFrontier(Node firstNode);
 
-	protected abstract Node makeNode(int x, int y, Node node);
+	protected abstract Node makeNode(int x, int y, DIRECTION directionFacing, Node node);
 	
 	protected boolean isGoal(Node child) {
 		State childState = child.getState();
@@ -91,7 +92,7 @@ public abstract class Search {
 		for (char[] row : this.maze) {
 			for (char content : row) {
 				if (content == characterToFind) {
-					return this.makeNode(x, y, null);
+					return this.makeNode(x, y, DIRECTION.RIGHT, null); // pacman initially facing right (and doesn't matter direction for part 1/part 3)
 				}
 				y++;
 			}

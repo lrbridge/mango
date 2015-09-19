@@ -2,20 +2,22 @@ package com.mp1.node;
 
 import java.util.Objects;
 
+import com.mp1.movement.DIRECTION;
+
 public class State {
 
 	// x & y coordinates in maze.  Top Left is 0, 0.  x is across, y is down.
 	public int x;
 	public int y;
 	
-	public char directionFacing; // (OPTIONAL) the direction facing - L is left, R is right, U is up, D is down
+	public DIRECTION directionFacing; // (OPTIONAL) the direction facing
 	
 	public State(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public State(int x, int y, char directionFacing) {
+	public State(int x, int y, DIRECTION directionFacing) {
 		this.x = x;
 		this.y = y;
 		this.directionFacing = directionFacing;

@@ -1,16 +1,19 @@
 package com.mp1.search.base;
 
-import com.mp1.movement.NormalMovement;
+import com.mp1.movement.DIRECTION;
+import com.mp1.movement.Movement;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
 
 public abstract class UninformedSearch extends Search {
 	
-	private NormalMovement movement = new NormalMovement();
+	private Movement movement;
 	
-	public UninformedSearch(String filename) {
+	public UninformedSearch(String filename, Movement movement) {
 		super(filename);
+		
+		this.movement = movement;
 	}
 
 	public MazeSolution solve() {
@@ -28,7 +31,7 @@ public abstract class UninformedSearch extends Search {
 			this.numNodesExpanded++;
 			this.explored.add(node);
 
-			for (String action : this.movement.ACTIONS) {
+			for (String action : this.movement.getActions()) {
 
 				Node child = this.getChildNode(node, action);
 
@@ -59,17 +62,18 @@ public abstract class UninformedSearch extends Search {
 		State state = node.getState();
 		int x = this.movement.getChildX(state.x, action);
 		int y = this.movement.getChildY(state.y, action);
-		return this.makeNode(x, y, node);
+		DIRECTION directionFacing = this.movement.getChildDirectionFacing(state.directionFacing, action);
+		return this.makeNode(x, y, directionFacing, node);
 	}
 
-	protected Node makeNode(int x, int y, Node parent) {
+	protected Node makeNode(int x, int y, DIRECTION directionFacing, Node parent) {
 		int distanceSoFar = 0;
 		if(parent != null) {
 			// add 1 to the parent's distance since all steps are equal cost (1)
 			distanceSoFar = parent.getDistanceSoFar() + 1;
 		}
 		
-		return new Node(new State(x,y), parent, distanceSoFar);
+		return new Node(new State(x, y, directionFacing), parent, distanceSoFar);
 	}
 
 }
