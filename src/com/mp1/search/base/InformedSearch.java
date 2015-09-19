@@ -6,6 +6,7 @@ import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
+import java.util.Iterator;
 
 public abstract class InformedSearch extends Search {
 
@@ -52,6 +53,41 @@ public abstract class InformedSearch extends Search {
 				else if(this.doesFrontierContain(child)) {
 					this.replaceNodeOnFrontierIfBetter(child);
 					// TODO if has less path cost, replace the one on the frontier
+                               
+//                                    //This is the only way I could find to iterate through the
+//                                    //nodes on the frontier to find the equal node and then
+//                                    //compare it to the child node
+//                                    
+//                                    Iterator<Node> frontierIterator = this.frontier.iterator();
+//
+//                                    boolean addChild = true;
+//                                    while (frontierIterator.hasNext()) {
+//
+//                                        Node nodeToCheck = frontierIterator.next();
+//
+//                                        if (nodeToCheck.equals(child) &&
+//                                            nodeToCheck.getDistanceSoFar() <= child.getDistanceSoFar()) {
+//
+//                                            addChild = false;
+//                                        }
+//
+//                                        else if (nodeToCheck.equals(child) &&
+//                                                nodeToCheck.getDistanceSoFar() > child.getDistanceSoFar()) {
+//
+//                                            addChild = true;
+//
+//                                            //This removes the last item from the iterator, which
+//                                            //would be the node that is equal to the child
+//                                            //but has a greater current distance
+//                                            frontierIterator.remove();
+//                                        }
+//                                    }
+//
+//                                    if (addChild) {
+//
+//                                        this.addNodeToFrontier(child);
+//                                    }
+                                    
 				}
 
 			}
