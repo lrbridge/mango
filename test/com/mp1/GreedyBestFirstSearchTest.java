@@ -37,7 +37,31 @@ public class GreedyBestFirstSearchTest {
 		assertEquals(actual.numNodesExpanded, 13);
 		assertMazesAreEqual(actual, expectedPath);
 	}
-	
+
+    @Test
+    public void gbfsSmall() {
+        System.out.println("Greedy Best First Search - simple");
+
+        char[][] expectedPath = {
+                { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
+                { '%', '.', '%', ' ', ' ', ' ', '%', ' ', ' ', ' ', '%', ' ', ' ', ' ', '%', '.', '.', '.', '%', ' ', '%', ' ', '%' },
+                { '%', '.', '%', '%', ' ', '%', ' ', '%', '%', '%', '%', '%', ' ', '%', ' ', '.', ' ', '.', '.', '.', ' ', ' ', '%' },
+                { '%', '.', '%', '.', '.', '.', '.', '.', '.', '.', '%', ' ', ' ', ' ', '%', '.', '%', ' ', '%', '.', '%', ' ', '%' },
+                { '%', '.', '.', '.', '%', '%', ' ', '%', '%', '.', '%', '%', '%', ' ', '%', '.', ' ', ' ', '%', '.', '%', '%', '%' },
+                { '%', ' ', '%', ' ', '%', ' ', ' ', ' ', '%', '.', '.', '.', '.', '.', '.', '.', '%', ' ', '%', '.', '.', 'P', '%' },
+                { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
+        };
+
+        Search x = new GreedyBestFirstSearch("smallMaze.txt");
+        MazeSolution actual = x.solve();
+
+        System.out.println(actual.toString());
+
+        assertEquals(actual.pathCost, 34);
+        assertEquals(actual.numNodesExpanded, 53);
+        assertMazesAreEqual(actual, expectedPath);
+    }
+
 	@Test
 	public void dfsVsBfs() {
 		System.out.println("Greedy Best First Search - should go up and across (tiebreaker is up)");
