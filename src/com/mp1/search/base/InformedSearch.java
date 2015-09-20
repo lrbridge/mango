@@ -3,6 +3,8 @@ package com.mp1.search.base;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
+import com.mp1.heuristic.Heuristic;
+import com.mp1.heuristic.ManhattanDistanceHeuristic;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.Movement;
 import com.mp1.node.Node;
@@ -17,11 +19,15 @@ public abstract class InformedSearch extends Search {
 	
 	protected PriorityQueue<Node> frontier;
 	
+    private Heuristic heuristic;
+	
 	public InformedSearch(String filename, Movement movement) {
 		super(filename);
 		
 		this.frontier = new PriorityQueue<Node>();
 		this.movement = movement;
+		
+        this.heuristic = new ManhattanDistanceHeuristic();
 	}
 
 	public MazeSolution solve() {
@@ -111,17 +117,12 @@ public abstract class InformedSearch extends Search {
 	private int[][] computeHeuristics() {
 		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
 		Node goalNode = this.findNode('.');
-
+		
 		for(int i=0; i<this.maze.length; i++) {
 			for(int j=0; j<this.maze[i].length; j++) {
 				
-				State state = goalNode.getState();
-				int xDifference = Math.abs(i - state.x);
-				int yDifference = Math.abs(j - state.y);
-
-				int manhattanDistance = xDifference + yDifference;
-				
-				heuristicValues[i][j] = manhattanDistance;
+                int value = heuristic.computeHeuristic(goalNode.getState(), i, j, 0, 0);
+				heuristicValues[i][j] = value;
 			}
 		}
 		

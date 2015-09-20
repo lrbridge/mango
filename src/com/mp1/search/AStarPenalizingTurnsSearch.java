@@ -1,19 +1,20 @@
 package com.mp1.search;
 
+import com.mp1.heuristic.Heuristic;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.PenalizingTurnsMovement;
-import com.mp1.node.PenalizeNode;
 import com.mp1.node.Node;
+import com.mp1.node.PenalizeNode;
 import com.mp1.node.State;
 import com.mp1.search.base.PenalizedSearch;
 
 public class AStarPenalizingTurnsSearch extends PenalizedSearch {
 
 
-	public AStarPenalizingTurnsSearch(String filename, int forwardCode, int turnCost) {
+	public AStarPenalizingTurnsSearch(String filename, int forwardCode, int turnCost, Heuristic heuristic) {
 //        this.forwardCode = forwardCode;
 //        this.turnCost = turnCost;
-		super(filename, new PenalizingTurnsMovement(), forwardCode, turnCost);
+		super(filename, new PenalizingTurnsMovement(), forwardCode, turnCost, heuristic);
 	}
 
     protected Node makePNode(int x, int y, DIRECTION directionFacing, Node parent, int new_x, int new_y, int forwardCode, int turnCost) {

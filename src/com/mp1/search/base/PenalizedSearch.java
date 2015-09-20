@@ -6,10 +6,10 @@ package com.mp1.search.base;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
+import com.mp1.heuristic.Heuristic;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.PenalizeMovement;
 import com.mp1.node.Node;
-import com.mp1.node.PenalizeNode;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
 
@@ -21,24 +21,27 @@ public abstract class PenalizedSearch extends PSearch {
 
     protected PriorityQueue<Node> frontier;
 
-    protected int forwardCode;
+    protected int forwardCost;
 
     protected int turnCost;
+    
+    private Heuristic heuristic;
 
-    public PenalizedSearch(String filename, PenalizeMovement movement, int forwardCode, int turnCost) {
+    public PenalizedSearch(String filename, PenalizeMovement movement, int forwardCost, int turnCost, Heuristic heuristic) {
         super(filename);
 
         this.frontier = new PriorityQueue<Node>();
         this.movement = movement;
-        this.forwardCode = forwardCode;
+        this.forwardCost = forwardCost;
         this.turnCost = turnCost;
+        this.heuristic = heuristic;
     }
 
     public MazeSolution solve() {
 
         this.heuristicValues = this.computeHeuristics();
 
-        Node firstNode = this.findPNode('P', this.forwardCode, this.turnCost);
+        Node firstNode = this.findPNode('P', this.forwardCost, this.turnCost);
         this.addNodeToFrontier(firstNode);
 
         while (!this.isFrontierEmpty()) {
@@ -100,7 +103,7 @@ public abstract class PenalizedSearch extends PSearch {
         }
         
         
-        Node newnode = this.makePNode(x, y, directionFacing, node, new_x, new_y, this.forwardCode, this.turnCost);
+        Node newnode = this.makePNode(x, y, directionFacing, node, new_x, new_y, this.forwardCost, this.turnCost);
 //        System.out.println(newnode.getState().x + " " + newnode.getState().y + " " + newnode.getState().directionFacing);
         
         return newnode;
@@ -143,19 +146,14 @@ public abstract class PenalizedSearch extends PSearch {
 
     private int[][] computeHeuristics() {
         int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
-        Node goalNode = this.findPNode('.', this.forwardCode, this.turnCost);
-
+        Node goalNode = this.findPNode('.', this.forwardCost, this.turnCost);
+        
         for (int i = 0; i < this.maze.length; i++) {
             for (int j = 0; j < this.maze[i].length; j++) {
 
-                State state = goalNode.getState();
-                int xDifference = Math.abs(i - state.x);// * this.forwardCode;
-                int yDifference = Math.abs(j - state.y);// * this.forwardCode;
-
-                int penalizeDistance = xDifference + yDifference;// + (this.numOfTurns * this.turnCost);
-
-//                System.out.println("the distance = " + penalizeDistance);
-                heuristicValues[i][j] = penalizeDistance;
+                int value = this.heuristic.computeHeuristic(goalNode.getState(), i, j, this.forwardCost, this.turnCost);
+//                System.out.println("the distance = " + value);
+                heuristicValues[i][j] = value;
             }
         }
 
