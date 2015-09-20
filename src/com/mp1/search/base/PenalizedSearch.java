@@ -9,6 +9,7 @@ import java.util.PriorityQueue;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.PenalizeMovement;
 import com.mp1.node.Node;
+import com.mp1.node.PenalizeNode;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
 
@@ -42,8 +43,14 @@ public abstract class PenalizedSearch extends PSearch {
 
         while (!this.isFrontierEmpty()) {
 
+//        	System.out.println("FRONTIER: ");
+//        	for(Node x : this.frontier) {
+//        		PenalizeNode n = (PenalizeNode) x;
+//        		System.out.println(n.getState().x + " " + n.getState().y + " " + n.getState().directionFacing + " -> " + n.getDistanceSoFar() + " + " + n.expectedDistanceToGo);
+//        	}
+        	
             Node node = this.popNodeOffFrontier();
-            System.out.println("EXPAND " + node.getState().x + " " + node.getState().y);
+//            System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
 			this.numNodesExpanded++;
             this.explored.add(node);
 
@@ -74,9 +81,7 @@ public abstract class PenalizedSearch extends PSearch {
         return null; // fail if no solution is found
     }
 
-    private Node getChildNode(Node node, String action) {
-    	System.out.println("CHILD for " + action);
-    	
+    private Node getChildNode(Node node, String action) {    	
         State state = node.getState();
         DIRECTION directionFacing = this.movement.getChildDirectionFacing(state.directionFacing, action);
         int x = state.x;
@@ -92,12 +97,11 @@ public abstract class PenalizedSearch extends PSearch {
         else {
             new_x = this.movement.getPChildX(state.x, directionFacing);
             new_y = this.movement.getPChildY(state.y, directionFacing);
-            System.out.println(new_x + "," + new_y);
         }
         
         
         Node newnode = this.makePNode(x, y, directionFacing, node, new_x, new_y, this.forwardCode, this.turnCost);
-        System.out.println(newnode.getState().x + " " + newnode.getState().y + " " + newnode.getState().directionFacing);
+//        System.out.println(newnode.getState().x + " " + newnode.getState().y + " " + newnode.getState().directionFacing);
         
         return newnode;
     }

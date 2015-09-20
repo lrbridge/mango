@@ -39,17 +39,17 @@ public class PenalizeSearchTest {
     }
     
     @Test
-    public void penalizeTurns1Forward() {
+    public void penalizeTurns1ForwardWeighted2() {
         System.out.println("A* Penalizing Search - turns1 with forward weighted 2");
 
         char[][] expectedPath = {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
-                { '%', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-                { '%', '.', '%', '%', '%', '%', '%', '%', '%', ' ' },
-                { '%', '.', '.', '%', '%', '%', '%', '%', '%', ' ' },
-                { '%', '%', '.', '.', '%', '%', '%', '%', '%', ' ' },
-                { '%', '%', '%', '.', '.', '%', '%', '%', '%', ' ' },
-                { '%', '%', '%', '%', '.', '.', '.', '.', ' ', ' ' },
+                { '%', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+                { '%', '.', '%', '%', '%', '%', '%', '%', ' ', '%' },
+                { '%', '.', '.', '%', '%', '%', '%', '%', ' ', '%' },
+                { '%', '%', '.', '.', '%', '%', '%', '%', ' ', '%' },
+                { '%', '%', '%', '.', '.', '%', '%', '%', ' ', '%' },
+                { '%', '%', '%', '%', '.', '.', '.', ' ', ' ', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
         PSearch x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1);
@@ -57,23 +57,23 @@ public class PenalizeSearchTest {
 
         System.out.println(actual.toString());
 
-        assertEquals(actual.pathCost, 27);
-        assertEquals(actual.numNodesExpanded, 24); // guess?
+        assertEquals(actual.pathCost, 28);
+        assertEquals(actual.numNodesExpanded, 82);
         assertMazesAreEqual(actual, expectedPath);
     }
     
     @Test
-    public void penalizeTurns1Turns() {
+    public void penalizeTurns1TurnsWeighted2() {
         System.out.println("A* Penalizing Search - turns1 with turns weighted 2");
 
         char[][] expectedPath = {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
-                { '%', 'P', '.', '.', '.', '.', '.', '.', '.', '.' },
-                { '%', ' ', '%', '%', '%', '%', '%', '%', '%', '.' },
-                { '%', ' ', ' ', '%', '%', '%', '%', '%', '%', '.' },
-                { '%', '%', ' ', ' ', '%', '%', '%', '%', '%', '.' },
-                { '%', '%', '%', ' ', ' ', '%', '%', '%', '%', '.' },
-                { '%', '%', '%', '%', ' ', ' ', ' ', '.', '.', '.' },
+                { '%', 'P', '.', '.', '.', '.', '.', '.', '.', '%' },
+                { '%', ' ', '%', '%', '%', '%', '%', '%', '.', '%' },
+                { '%', ' ', ' ', '%', '%', '%', '%', '%', '.', '%' },
+                { '%', '%', ' ', ' ', '%', '%', '%', '%', '.', '%' },
+                { '%', '%', '%', ' ', ' ', '%', '%', '%', '.', '%' },
+                { '%', '%', '%', '%', ' ', ' ', '.', '.', '.', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
         PSearch x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2);
@@ -82,7 +82,7 @@ public class PenalizeSearchTest {
         System.out.println(actual.toString());
 
         assertEquals(actual.pathCost, 18);
-        assertEquals(actual.numNodesExpanded, 24); // guess?
+        assertEquals(actual.numNodesExpanded, 51); // explores U/L/R/D for every node
         assertMazesAreEqual(actual, expectedPath);
     }
 

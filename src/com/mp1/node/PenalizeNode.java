@@ -1,5 +1,7 @@
 package com.mp1.node;
 
+import com.mp1.movement.DIRECTION;
+
 public class PenalizeNode extends Node implements Comparable<PenalizeNode> {
 
     public int expectedDistanceToGo;
@@ -47,6 +49,14 @@ public class PenalizeNode extends Node implements Comparable<PenalizeNode> {
                 }
                 else if(this.state.y > o.state.y) {
                     return 1;
+                }
+                
+                // if still tied, then UP over DOWN
+                if(this.state.directionFacing == DIRECTION.UP) {
+                	return -1;
+                }
+                if(this.state.directionFacing == DIRECTION.DOWN) {
+                	return 1;
                 }
 
                 // if still tied, go with equal
