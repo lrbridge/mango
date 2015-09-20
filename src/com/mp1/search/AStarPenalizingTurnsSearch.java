@@ -27,9 +27,9 @@ public class AStarPenalizingTurnsSearch extends PenalizedSearch {
 
         }
 
-        PenalizeNode newNode = new PenalizeNode(new State(x, y, directionFacing), parent, distanceSoFar);
+        PenalizeNode newNode = new PenalizeNode(new State(new_x, new_y, directionFacing), parent, distanceSoFar);
         if(this.heuristicValues != null) { // check for end node (before heuristics)
-            newNode.setExpectedDistanceToGo(this.heuristicValues[x][y]);
+            newNode.setExpectedDistanceToGo(this.heuristicValues[new_x][new_y]);
         }
         return newNode;
     }

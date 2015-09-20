@@ -98,7 +98,7 @@ public abstract class PSearch {
         for (char[] row : this.maze) {
             for (char content : row) {
                 if (content == characterToFind) {
-                    return this.makePNode(x, y, DIRECTION.RIGHT, null, 0, 0, forwardCode, turnCost); // pacman initially facing right (and doesn't matter direction for part 1/part 3)
+                    return this.makePNode(x, y, DIRECTION.RIGHT, null, x, y, forwardCode, turnCost); // pacman initially facing right (and doesn't matter direction for part 1/part 3)
                 }
                 y++;
             }

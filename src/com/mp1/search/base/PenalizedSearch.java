@@ -43,7 +43,8 @@ public abstract class PenalizedSearch extends PSearch {
         while (!this.isFrontierEmpty()) {
 
             Node node = this.popNodeOffFrontier();
-            this.numNodesExpanded++;
+            System.out.println("EXPAND " + node.getState().x + " " + node.getState().y);
+			this.numNodesExpanded++;
             this.explored.add(node);
 
             if (this.isGoal(node)) {
@@ -74,6 +75,8 @@ public abstract class PenalizedSearch extends PSearch {
     }
 
     private Node getChildNode(Node node, String action) {
+    	System.out.println("CHILD for " + action);
+    	
         State state = node.getState();
         DIRECTION directionFacing = this.movement.getChildDirectionFacing(state.directionFacing, action);
         int x = state.x;
@@ -89,8 +92,14 @@ public abstract class PenalizedSearch extends PSearch {
         else {
             new_x = this.movement.getPChildX(state.x, directionFacing);
             new_y = this.movement.getPChildY(state.y, directionFacing);
+            System.out.println(new_x + "," + new_y);
         }
-        return this.makePNode(x, y, directionFacing, node, new_x, new_y, this.forwardCode, this.turnCost);
+        
+        
+        Node newnode = this.makePNode(x, y, directionFacing, node, new_x, new_y, this.forwardCode, this.turnCost);
+        System.out.println(newnode.getState().x + " " + newnode.getState().y + " " + newnode.getState().directionFacing);
+        
+        return newnode;
     }
 
     protected void replaceNodeOnFrontierIfBetter(Node child) {
@@ -136,12 +145,12 @@ public abstract class PenalizedSearch extends PSearch {
             for (int j = 0; j < this.maze[i].length; j++) {
 
                 State state = goalNode.getState();
-                int xDifference = Math.abs(i - state.x) * this.forwardCode;
-                int yDifference = Math.abs(j - state.y) * this.forwardCode;
+                int xDifference = Math.abs(i - state.x);// * this.forwardCode;
+                int yDifference = Math.abs(j - state.y);// * this.forwardCode;
 
-                int penalizeDistance = xDifference + yDifference + (this.numOfTurns * this.turnCost);
+                int penalizeDistance = xDifference + yDifference;// + (this.numOfTurns * this.turnCost);
 
-                System.out.println("the distance = " + penalizeDistance);
+//                System.out.println("the distance = " + penalizeDistance);
                 heuristicValues[i][j] = penalizeDistance;
             }
         }
