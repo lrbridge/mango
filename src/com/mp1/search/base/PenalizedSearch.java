@@ -12,7 +12,7 @@ import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
 
-public abstract class PenalizedSearch extends Search {
+public abstract class PenalizedSearch extends PSearch {
 
     protected PenalizeMovement movement;
 
@@ -20,18 +20,24 @@ public abstract class PenalizedSearch extends Search {
 
     protected PriorityQueue<Node> frontier;
 
-    public PenalizedSearch(String filename, PenalizeMovement movement) {
+    protected int forwardCode;
+
+    protected int turnCost;
+
+    public PenalizedSearch(String filename, PenalizeMovement movement, int forwardCode, int turnCost) {
         super(filename);
 
         this.frontier = new PriorityQueue<Node>();
         this.movement = movement;
+        this.forwardCode = forwardCode;
+        this.turnCost = turnCost;
     }
 
     public MazeSolution solve() {
 
         this.heuristicValues = this.computeHeuristics();
 
-        Node firstNode = this.findNode('P');
+        Node firstNode = this.findPNode('P', this.forwardCode, this.turnCost);
         this.addNodeToFrontier(firstNode);
 
         while (!this.isFrontierEmpty()) {
@@ -73,15 +79,18 @@ public abstract class PenalizedSearch extends Search {
         int x = state.x;
         int y = state.y;
 
+        int new_x = state.x;
+        int new_y = state.y;
         /* call different method based on the action */
         if(action == "TURN LEFT" || action == "TURN RIGHT") {
             directionFacing = this.movement.getNewChildDirectionFacing(state.directionFacing, action);
+            this.numOfTurns++;
         }
         else {
-            x = this.movement.getPChildX(state.x, directionFacing);
-            y = this.movement.getPChildY(state.y, directionFacing);
+            new_x = this.movement.getPChildX(state.x, directionFacing);
+            new_y = this.movement.getPChildY(state.y, directionFacing);
         }
-        return this.makeNode(x, y, directionFacing, node);
+        return this.makePNode(x, y, directionFacing, node, new_x, new_y, this.forwardCode, this.turnCost);
     }
 
     protected void replaceNodeOnFrontierIfBetter(Node child) {
@@ -119,21 +128,21 @@ public abstract class PenalizedSearch extends Search {
 
     ;
 
-    // TODO : update heuristics
     private int[][] computeHeuristics() {
         int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
-        Node goalNode = this.findNode('.');
+        Node goalNode = this.findPNode('.', this.forwardCode, this.turnCost);
 
         for (int i = 0; i < this.maze.length; i++) {
             for (int j = 0; j < this.maze[i].length; j++) {
 
                 State state = goalNode.getState();
-                int xDifference = Math.abs(i - state.x);
-                int yDifference = Math.abs(j - state.y);
+                int xDifference = Math.abs(i - state.x) * this.forwardCode;
+                int yDifference = Math.abs(j - state.y) * this.forwardCode;
 
-                int manhattanDistance = xDifference + yDifference;
+                int penalizeDistance = xDifference + yDifference + (this.numOfTurns * this.turnCost);
 
-                heuristicValues[i][j] = manhattanDistance;
+                System.out.println("the distance = " + penalizeDistance);
+                heuristicValues[i][j] = penalizeDistance;
             }
         }
 

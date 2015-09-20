@@ -10,20 +10,20 @@ public class PenalizingTurnsMovement implements PenalizeMovement {
 	
 	public int getPChildX(int x, DIRECTION directionFacing) {
 
-        if (directionFacing == DIRECTION.UP)
-            x -= 2;
-        else if (directionFacing == DIRECTION.DOWN)
-            x += 2;
+        if (directionFacing == DIRECTION.LEFT)
+            x -= 1;
+        else if (directionFacing == DIRECTION.RIGHT)
+            x += 1;
 
 		return x;
 	}
 	
 	public int getPChildY(int y, DIRECTION directionFacing) {
 
-        if (directionFacing == DIRECTION.LEFT)
-            y -= 2;
-        else if (directionFacing == DIRECTION.RIGHT)
-            y += 2;
+        if (directionFacing == DIRECTION.UP)
+            y -= 1;
+        else if (directionFacing == DIRECTION.DOWN)
+            y += 1;
 		
 		return y;
 	}

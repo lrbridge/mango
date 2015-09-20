@@ -32,4 +32,5 @@ public class AStarSearch extends InformedSearch {
 		return newNode;
 	}
 
+
 }

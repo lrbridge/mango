@@ -42,7 +42,7 @@ public abstract class Search {
 	protected abstract void addNodeToFrontier(Node firstNode);
 
 	protected abstract Node makeNode(int x, int y, DIRECTION directionFacing, Node node);
-	
+
 	protected boolean isGoal(Node child) {
 		State childState = child.getState();
 		return this.maze[childState.x][childState.y] == '.';
@@ -101,6 +101,9 @@ public abstract class Search {
 		}
 		return null;
 	}
+
+
+
 
 	/**
 	 * Reads the input file and returns a char[][] of the maze
