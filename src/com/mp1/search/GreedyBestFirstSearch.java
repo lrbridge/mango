@@ -7,7 +7,6 @@ import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.search.base.InformedSearch;
 
-
 public class GreedyBestFirstSearch extends InformedSearch {
 	
 	public GreedyBestFirstSearch(String filename) {

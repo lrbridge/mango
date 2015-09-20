@@ -183,9 +183,9 @@ public class DepthFirstSearchTest {
 
         System.out.println(actual.toString());
 
-//        assertEquals(actual.pathCost, 8);
-//        assertEquals(actual.numNodesExpanded, 8);
-//        assertMazesAreEqual(actual, expectedPath);
+        assertEquals(actual.pathCost, 162);
+        assertEquals(actual.numNodesExpanded, 274);
+        assertMazesAreEqual(actual, expectedPath);
     }
 
 	@Test

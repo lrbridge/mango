@@ -216,8 +216,9 @@ public class GreedyBestFirstSearchTest {
 		assertEquals(actual.numNodesExpanded, 12);
 		assertMazesAreEqual(actual, expectedPath);
 	}
-	
-	@Test
+
+
+    @Test
 	public void greedyVsAStar() {
 		System.out.println("Greedy Best First Search - worse than Astar, goes down wrong path longer");
 		
