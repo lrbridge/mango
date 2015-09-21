@@ -14,17 +14,13 @@ public class TurnsHeuristic implements Heuristic {
 		int manhattanDistance = xDifference + yDifference;
 		
 		int minNumberTurns;
-		if(goalState.y < y) { // if goal is behind (up or down, doesn't matter)
-			minNumberTurns = 2; // need to get 180 around (since start facing right)
+		
+		// always assume we are headed toward the goal as best as possible to be admissible (never need 2 turns)
+		if(goalState.y == y || goalState.x == x) {
+			minNumberTurns = 0; // if in line with me, don't need to turn at all best case
 		}
-		else if(goalState.y == y) { // if goal just up or down
-			minNumberTurns = 1; // minimally just need to turn up or down
-		}
-		else if(goalState.x == x) { // if goal is directly in front of me
-			minNumberTurns = 0;
-		}
-		else { // if in front of me & up or down
-			minNumberTurns = 1;
+		else {
+			minNumberTurns = 1;  // if x & y are different, I'll have to turn at least 1 time to get to the goal.
 		}
 		
 		return (manhattanDistance * forwardCost) + (minNumberTurns * turnCost);
