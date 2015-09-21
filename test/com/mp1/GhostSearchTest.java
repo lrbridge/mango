@@ -87,4 +87,27 @@ public class GhostSearchTest {
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
+	@Test
+	public void ghost4() {
+		System.out.println("Ghost 4 - should go long way");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', '.', '.', '.', '%' },
+				{ '%', '%', 'G', '%', '.', '%' },
+				{ '%', '%', ' ', '%', '.', '%' },
+				{ '%', '%', '.', '.', '.', '%' },
+				{ '%', '%', 'P', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%' }};
+
+		Search x = new AStarSearch("ghost4.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 8);
+		assertEquals(actual.numNodesExpanded, 11);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
 }
