@@ -7,6 +7,7 @@ import com.mp1.heuristic.Heuristic;
 import com.mp1.heuristic.ManhattanDistanceHeuristic;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.Movement;
+import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
@@ -65,7 +66,11 @@ public abstract class InformedSearch extends Search {
 		this.addNodeToFrontier(firstNode);
 		
 		while (!this.isFrontierEmpty()) {
-
+System.out.println("FRONTIER:");
+for(Node na : this.frontier) {
+	AStarNode n = (AStarNode) na;
+	System.out.println(n.getState().x + " " + n.getState().y + " " + n.expectedDistanceToGo + " " + n.getDistanceSoFar());
+}
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
@@ -78,6 +83,7 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " "
 			for (String action : this.movement.getActions()) {
 
 				Node child = this.getChildNode(node, action);
+				System.out.print(child.getState().x + " " + child.getState().y + ":");
 
 				if(this.collidesWithGhost(child)) { //|| this.crossesGhost()) { TODO
 					// don't put it anywhere
@@ -87,14 +93,13 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " "
 						&& !this.doesFrontierContain(child)) {
 					// explored & frontier 'contains' checks look for when states are equal
 					// because Node is equal when State is equal and State is equal when x & y are same
-
+System.out.print("add");
 					this.addNodeToFrontier(child);
 				}
-				else if(this.doesFrontierContain(child)) {
-					this.replaceNodeOnFrontierIfBetter(child);                               
-                                    
+				else if(this.doesFrontierContain(child)) {  System.out.print("if better");
+					this.replaceNodeOnFrontierIfBetter(child);
 				}
-
+				System.out.print("\n");
 			}
 
 		}
@@ -109,7 +114,7 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " "
 		
 		if(child.getState().x == child.getState().ghostX && 
 				child.getState().y == child.getState().ghostY) {
-			System.out.println("GHOST!");
+			System.out.print("GHOST!");
 			return true;
 		}
 		return false;

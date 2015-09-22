@@ -36,7 +36,7 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 12);
+		assertEquals(actual.pathCost, 6);
 		assertEquals(actual.numNodesExpanded, 113);
 		assertMazesAreEqual(actual, expectedPath);
 	}
@@ -128,8 +128,8 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 83);
-		assertEquals(actual.numNodesExpanded, 11);
+		assertEquals(actual.pathCost, 10);
+		assertEquals(actual.numNodesExpanded, 19);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
