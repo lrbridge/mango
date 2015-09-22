@@ -69,7 +69,7 @@ public abstract class InformedSearch extends Search {
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
-
+System.out.println("EXPAND " + node.getState().x + " " + node.getState().y);
 			if(this.isGoal(node)) {
 				return this.makeSolution(node);
 			}
@@ -78,7 +78,7 @@ public abstract class InformedSearch extends Search {
 
 				Node child = this.getChildNode(node, action);
 
-				if(this.collidesWithGhost(child)) { //|| this.crossesGhost()) {
+				if(this.collidesWithGhost(child)) { //|| this.crossesGhost()) { TODO
 					// don't put it anywhere
 				}
 				else if (this.isInMaze(child) && this.isNotAWall(child)

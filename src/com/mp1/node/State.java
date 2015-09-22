@@ -12,6 +12,9 @@ public class State {
 	
 	public DIRECTION directionFacing; // (OPTIONAL) the direction facing
 	
+	public int ghostX; // (OPTIONAL)
+	public int ghostY; // (OPTIONAL)
+	
 	public State(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -21,6 +24,13 @@ public class State {
 		this.x = x;
 		this.y = y;
 		this.directionFacing = directionFacing;
+	}
+	
+	public State(int x, int y, int ghostX, int ghostY) {
+		this.x = x;
+		this.y = y;
+		this.ghostX = ghostX;
+		this.ghostY = ghostY;
 	}
 	
 	/*
@@ -34,7 +44,11 @@ public class State {
 		}
 		State otherState = (State) obj;
 		// states are equal if we are in the same cell on the map and facing the same way (optional)
-		return this.x == otherState.x && this.y == otherState.y && this.directionFacing == otherState.directionFacing;
+		return this.x == otherState.x && 
+				this.y == otherState.y && 
+				this.directionFacing == otherState.directionFacing &&
+				this.ghostX == otherState.ghostX &&
+				this.ghostY == otherState.ghostY;
 	}
 
 	/*

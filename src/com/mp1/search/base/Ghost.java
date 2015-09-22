@@ -14,13 +14,26 @@ public class Ghost {
 		this.ghostLeftY = ghostLeftY;
 		this.ghostRightY = ghostRightY;
 	}
-	
+
 	public int getGhostX() {
 		return this.ghostStartX;
 	}
 	
 	public int getGhostY(int moveNumber) {
-		return this.ghostStartY; // TODO logic here
+		int ghostY = this.ghostStartY;
+		
+		int move = 0;
+		while(move < moveNumber) {
+			if(ghostY < this.ghostRightY) {
+				ghostY++; // move left to right
+			}
+			else if(ghostY > this.ghostLeftY) {
+				ghostY--;
+			}
+			move++;
+		}
+		
+		return this.ghostStartY;
 	}
 
 }
