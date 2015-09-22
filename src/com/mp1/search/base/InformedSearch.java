@@ -69,7 +69,8 @@ public abstract class InformedSearch extends Search {
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
-System.out.println("EXPAND " + node.getState().x + " " + node.getState().y);
+			
+System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " " + node.getState().ghostX + " " + node.getState().ghostY);
 			if(this.isGoal(node)) {
 				return this.makeSolution(node);
 			}
@@ -106,8 +107,9 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y);
 			return false; // no ghost
 		}
 		
-		if(child.getState().x == this.ghost.getGhostX() && 
-				child.getState().y == this.ghost.getGhostY(1)) {
+		if(child.getState().x == child.getState().ghostX && 
+				child.getState().y == child.getState().ghostY) {
+			System.out.println("GHOST!");
 			return true;
 		}
 		return false;

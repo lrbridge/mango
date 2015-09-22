@@ -18,16 +18,16 @@ public class AStarWithGhostSearch extends AStarSearch {
 		int ghostStartX = ghostInitialLocation.getState().x;
 		int ghostStartY = ghostInitialLocation.getState().y;
 		
-		int ghostLeftY = ghostStartY;
-		while(this.maze[ghostStartX][ghostLeftY] == 'g' || this.maze[ghostStartX][ghostLeftY] == 'G') {
-			ghostLeftY--;
+		int wallToLeftOfGhost = ghostStartY;
+		while(this.maze[ghostStartX][wallToLeftOfGhost] == 'g' || this.maze[ghostStartX][wallToLeftOfGhost] == 'G') {
+			wallToLeftOfGhost--;
 		}
-		int ghostRightY = ghostStartY;
-		while(this.maze[ghostStartX][ghostRightY] == 'g' || this.maze[ghostStartX][ghostRightY] == 'G') {
-			ghostRightY++;
+		int wallToRightOfGhost = ghostStartY;
+		while(this.maze[ghostStartX][wallToRightOfGhost] == 'g' || this.maze[ghostStartX][wallToRightOfGhost] == 'G') {
+			wallToRightOfGhost++;
 		}
 		
-		this.ghost = new Ghost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
+		this.ghost = new Ghost(ghostStartX, ghostStartY, wallToLeftOfGhost, wallToRightOfGhost);
 	}
 
 	@Override
