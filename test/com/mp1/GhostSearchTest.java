@@ -148,7 +148,7 @@ public class GhostSearchTest {
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
-		
+		  
 		assertEquals(actual.pathCost, 4);
 		assertEquals(actual.numNodesExpanded, 5);
 		assertMazesAreEqual(actual, expectedPath);
@@ -166,6 +166,121 @@ public class GhostSearchTest {
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%'}};
 
 		Search x = new AStarWithGhostSearch("ghost7.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 4);
+		assertEquals(actual.numNodesExpanded, 5);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void ghost8() {
+		System.out.println("Ghost 8 - always collide, so long way");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', '.', ' ', ' ', '%' },
+				{ '%', '%', '%', ' ', ' ', ' ', '%' },
+				{ '%', 'G', 'g', 'g', 'g', ' ', '%' },
+				{ '%', ' ', '%', '%', '%', ' ', '%' },
+				{ '%', 'P', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%'}};
+
+		Search x = new AStarWithGhostSearch("ghost8.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 4);
+		assertEquals(actual.numNodesExpanded, 5);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void ghost9() {
+		System.out.println("Ghost 9 - always pass in night/swap, so long way");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', '.', ' ', ' ', '%' },
+				{ '%', '%', '%', ' ', ' ', ' ', '%' },
+				{ '%', 'g', 'G', 'g', 'g', ' ', '%' },
+				{ '%', ' ', '%', '%', '%', ' ', '%' },
+				{ '%', 'P', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%'}};
+
+		Search x = new AStarWithGhostSearch("ghost9.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 4);
+		assertEquals(actual.numNodesExpanded, 5);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void ghost10() {
+		System.out.println("Ghost 10 - easy, straight up");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', '.', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', ' ', ' ', ' ', ' ', '%' },
+				{ '%', 'G', 'g', 'g', 'g', 'g', ' ', '%' },
+				{ '%', ' ', '%', '%', '%', '%', ' ', '%' },
+				{ '%', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%', '%'}};
+
+		Search x = new AStarWithGhostSearch("ghost10.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 4);
+		assertEquals(actual.numNodesExpanded, 5);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void ghost11() {
+		System.out.println("Ghost 11 - stall x2 then up");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', ' ', '.', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', ' ', ' ', ' ', ' ', '%' },
+				{ '%', 'G', 'g', 'g', 'g', 'g', ' ', '%' },
+				{ '%', ' ', '%', '%', '%', '%', ' ', '%' },
+				{ '%', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%', '%', '%'}};
+
+		Search x = new AStarWithGhostSearch("ghost11.txt");
+		MazeSolution actual = x.solve();
+
+		System.out.println(actual.toString());
+		
+		assertEquals(actual.pathCost, 4);
+		assertEquals(actual.numNodesExpanded, 5);
+		assertMazesAreEqual(actual, expectedPath);
+	}
+	
+	@Test
+	public void ghost12() {
+		System.out.println("Ghost 12 (starting on right) should make it straight thru");
+		
+		char[][] expectedPath = {
+				{ '%', '%', '%', '%', '%', '%' },
+				{ '%', ' ', '.', ' ', ' ', '%' },
+				{ '%', ' ', '.', ' ', ' ', '%' },
+				{ '%', 'g', '.', 'G', ' ', '%' },
+				{ '%', '%', '.', '%', ' ', '%' },
+				{ '%', '%', 'P', ' ', ' ', '%' },
+				{ '%', '%', '%', '%', '%', '%' }};
+
+		Search x = new AStarWithGhostSearch("ghost12.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
