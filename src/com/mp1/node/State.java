@@ -14,6 +14,7 @@ public class State {
 	
 	public int ghostX; // (OPTIONAL)
 	public int ghostY; // (OPTIONAL)
+	public DIRECTION ghostDirection; // (OPTIONAL) the direction moving - left or right
 	
 	public State(int x, int y) {
 		this.x = x;
@@ -26,11 +27,12 @@ public class State {
 		this.directionFacing = directionFacing;
 	}
 	
-	public State(int x, int y, int ghostX, int ghostY) {
+	public State(int x, int y, int ghostX, int ghostY, DIRECTION ghostDirection) {
 		this.x = x;
 		this.y = y;
 		this.ghostX = ghostX;
 		this.ghostY = ghostY;
+		this.ghostDirection = ghostDirection;
 	}
 	
 	/*
@@ -48,7 +50,8 @@ public class State {
 				this.y == otherState.y && 
 				this.directionFacing == otherState.directionFacing &&
 				this.ghostX == otherState.ghostX &&
-				this.ghostY == otherState.ghostY;
+				this.ghostY == otherState.ghostY &&
+				this.ghostDirection == otherState.ghostDirection;
 	}
 
 	/*

@@ -37,7 +37,7 @@ public class GhostSearchTest {
 		System.out.println(actual.toString());
 		
 		assertEquals(actual.pathCost, 8);
-		assertEquals(actual.numNodesExpanded, 10);
+		assertEquals(actual.numNodesExpanded, 13);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
@@ -83,7 +83,7 @@ public class GhostSearchTest {
 		System.out.println(actual.toString());
 		
 		assertEquals(actual.pathCost, 8);
-		assertEquals(actual.numNodesExpanded, 12);
+		assertEquals(actual.numNodesExpanded, 16);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
@@ -112,14 +112,14 @@ public class GhostSearchTest {
 
 	@Test
 	public void ghost5() {
-		System.out.println("Ghost 5 - should go long way");
+		System.out.println("Ghost 5 - stalls 2x then up");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', '.', '.', '.', '.', '%' },
-				{ '%', 'g', 'g', 'G', 'g', '.', '%' },
-				{ '%', '%', ' ', '%', '%', '.', '%' },
-				{ '%', '%', '.', '.', '.', '.', '%' },
+				{ '%', ' ', '.', ' ', ' ', ' ', '%' },
+				{ '%', 'g', '.', 'G', 'g', ' ', '%' },
+				{ '%', '%', '.', '%', '%', ' ', '%' },
+				{ '%', '%', '.', ' ', ' ', ' ', '%' },
 				{ '%', '%', 'P', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 
@@ -128,8 +128,8 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 10);
-		assertEquals(actual.numNodesExpanded, 19);
+		assertEquals(actual.pathCost, 8);
+		assertEquals(actual.numNodesExpanded, 12);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
@@ -181,11 +181,11 @@ public class GhostSearchTest {
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', ' ', '.', ' ', ' ', '%' },
-				{ '%', '%', '%', ' ', ' ', ' ', '%' },
-				{ '%', 'G', 'g', 'g', 'g', ' ', '%' },
-				{ '%', ' ', '%', '%', '%', ' ', '%' },
-				{ '%', 'P', ' ', ' ', ' ', ' ', '%' },
+				{ '%', ' ', ' ', '.', '.', '.', '%' },
+				{ '%', '%', '%', ' ', ' ', '.', '%' },
+				{ '%', 'G', 'g', 'g', 'g', '.', '%' },
+				{ '%', ' ', '%', '%', '%', '.', '%' },
+				{ '%', 'P', '.', '.', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%'}};
 
 		Search x = new AStarWithGhostSearch("ghost8.txt");
@@ -193,21 +193,21 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 4);
-		assertEquals(actual.numNodesExpanded, 5);
+		assertEquals(actual.pathCost, 10);
+		assertEquals(actual.numNodesExpanded, 24);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
 	@Test
 	public void ghost9() {
-		System.out.println("Ghost 9 - always pass in night/swap, so long way");
+		System.out.println("Ghost 9 - stall x2 for pass in the nights... then go through");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%' },
 				{ '%', ' ', ' ', '.', ' ', ' ', '%' },
-				{ '%', '%', '%', ' ', ' ', ' ', '%' },
-				{ '%', 'g', 'G', 'g', 'g', ' ', '%' },
-				{ '%', ' ', '%', '%', '%', ' ', '%' },
+				{ '%', '%', '%', '.', ' ', ' ', '%' },
+				{ '%', '.', '.', '.', 'g', ' ', '%' },
+				{ '%', '.', '%', '%', '%', ' ', '%' },
 				{ '%', 'P', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%'}};
 
@@ -216,8 +216,8 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 4);
-		assertEquals(actual.numNodesExpanded, 5);
+		assertEquals(actual.pathCost, 10);
+		assertEquals(actual.numNodesExpanded, 18);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
@@ -228,9 +228,9 @@ public class GhostSearchTest {
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%', '%', '%' },
 				{ '%', ' ', ' ', '.', ' ', ' ', ' ', '%' },
-				{ '%', '%', '%', ' ', ' ', ' ', ' ', '%' },
-				{ '%', 'G', 'g', 'g', 'g', 'g', ' ', '%' },
-				{ '%', ' ', '%', '%', '%', '%', ' ', '%' },
+				{ '%', '%', '%', '.', ' ', ' ', ' ', '%' },
+				{ '%', '.', '.', '.', 'g', 'g', ' ', '%' },
+				{ '%', '.', '%', '%', '%', '%', ' ', '%' },
 				{ '%', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%'}};
 
@@ -239,37 +239,14 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 4);
-		assertEquals(actual.numNodesExpanded, 5);
+		assertEquals(actual.pathCost, 6);
+		assertEquals(actual.numNodesExpanded, 7);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
 	@Test
 	public void ghost11() {
-		System.out.println("Ghost 11 - stall x2 then up");
-		
-		char[][] expectedPath = {
-				{ '%', '%', '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', ' ', '.', ' ', ' ', ' ', '%' },
-				{ '%', '%', '%', ' ', ' ', ' ', ' ', '%' },
-				{ '%', 'G', 'g', 'g', 'g', 'g', ' ', '%' },
-				{ '%', ' ', '%', '%', '%', '%', ' ', '%' },
-				{ '%', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
-				{ '%', '%', '%', '%', '%', '%', '%', '%'}};
-
-		Search x = new AStarWithGhostSearch("ghost11.txt");
-		MazeSolution actual = x.solve();
-
-		System.out.println(actual.toString());
-		
-		assertEquals(actual.pathCost, 4);
-		assertEquals(actual.numNodesExpanded, 5);
-		assertMazesAreEqual(actual, expectedPath);
-	}
-	
-	@Test
-	public void ghost12() {
-		System.out.println("Ghost 12 (starting on right) should make it straight thru");
+		System.out.println("Ghost 11 (starting on right) should make it straight thru");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%' },
@@ -280,7 +257,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost12.txt");
+		Search x = new AStarWithGhostSearch("ghost11.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());

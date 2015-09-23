@@ -85,7 +85,7 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " "
 				Node child = this.getChildNode(node, action);
 				System.out.print(child.getState().x + " " + child.getState().y + ":");
 
-				if(this.collidesWithGhost(child)) { //|| this.crossesGhost()) { TODO
+				if(this.collidesWithGhost(child)) { 
 					// don't put it anywhere
 				}
 				else if (this.isInMaze(child) && this.isNotAWall(child)
@@ -106,17 +106,28 @@ System.out.print("add");
 
 		return null; // fail if no solution is found
 	}
-	
+
 	private boolean collidesWithGhost(Node child) {
 		if(this.ghost == null) {
 			return false; // no ghost
 		}
 		
-		if(child.getState().x == child.getState().ghostX && 
-				child.getState().y == child.getState().ghostY) {
-			System.out.print("GHOST!");
-			return true;
+		State childState = child.getState();
+		State parentState = child.getParent().getState();
+		
+		if(childState.x == childState.ghostX) {
+			
+			if(childState.y == childState.ghostY) {
+				System.out.print("GHOST!");
+				return true;
+			}
+			else if(parentState.y == childState.ghostY && parentState.ghostY == childState.y) {
+				System.out.println("pass in night");
+				return true;
+			}
+			
 		}
+
 		return false;
 	}
 

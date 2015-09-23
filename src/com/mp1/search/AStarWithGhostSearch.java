@@ -41,10 +41,11 @@ public class AStarWithGhostSearch extends AStarSearch {
 		AStarNode newNode;
 		if(this.ghost != null) {
 			int ghostX = this.ghost.getGhostX();
-			int ghostY = this.ghost.getGhostY(distanceSoFar);
-			newNode = new AStarNode(new State(x, y, ghostX, ghostY), parent, distanceSoFar);
+			int ghostY = this.ghost.getGhostY(parent);
+			DIRECTION ghostDirection = this.ghost.getGhostDirection(parent);
+			newNode = new AStarNode(new State(x, y, ghostX, ghostY, ghostDirection), parent, distanceSoFar);
 		}
-		else { // need this check just for the first time
+		else { // need this check just for the first time (when finding the ghost node)
 			newNode = new AStarNode(new State(x, y), parent, distanceSoFar);
 		}
 
