@@ -20,7 +20,10 @@ public class Ghost {
 	}
 	
 	public int getGhostY(int moveNumber) {
-		return this.ghostStartY; // TODO logic here
+
+
+		return this.ghostStartY;
+
 	}
 
 }
