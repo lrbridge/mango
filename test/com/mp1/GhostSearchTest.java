@@ -20,15 +20,15 @@ public class GhostSearchTest {
 	
 	@Test
 	public void ghost1() {
-		System.out.println("Ghost 1 - should go right/left fast to stall and then up");
+		System.out.println("Ghost 1 - should go long way");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', '.', ' ', ' ', '%' },
-				{ '%', ' ', '.', ' ', ' ', '%' },
-				{ '%', 'g', '.', 'g', ' ', '%' },
-				{ '%', '%', '.', '%', ' ', '%' },
-				{ '%', '%', '.', '.', ' ', '%' },
+				{ '%', ' ', '.', '.', '.', '%' },
+				{ '%', ' ', ' ', ' ', '.', '%' },
+				{ '%', 'g', 'G', 'g', '.', '%' },
+				{ '%', '%', ' ', '%', '.', '%' },
+				{ '%', '%', 'P', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
 		Search x = new AStarWithGhostSearch("ghost1.txt");
@@ -36,8 +36,8 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 6);
-		assertEquals(actual.numNodesExpanded, 113);
+		assertEquals(actual.pathCost, 8);
+		assertEquals(actual.numNodesExpanded, 10);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
@@ -54,36 +54,36 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost1.txt");
+		Search x = new AStarWithGhostSearch("ghost2.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
 		assertEquals(actual.pathCost, 4);
-		assertEquals(actual.numNodesExpanded, 131);
+		assertEquals(actual.numNodesExpanded, 5);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
 	@Test
 	public void ghost3() {
-		System.out.println("Ghost 3 - should stall");
+		System.out.println("Ghost 3 - should go all the way around");
 		
 		char[][] expectedPath = {
 				{ '%', '%', '%', '%', '%', '%' },
-				{ '%', ' ', '.', ' ', ' ', '%' },
-				{ '%', 'G', '.', 'g', ' ', '%' },
-				{ '%', '%', '.', '%', ' ', '%' },
-				{ '%', '%', '.', '.', ' ', '%' },
-				{ '%', '%', 'P', '.', ' ', '%' },
+				{ '%', ' ', '.', '.', '.', '%' },
+				{ '%', 'G', 'g', 'g', '.', '%' },
+				{ '%', '%', ' ', '%', '.', '%' },
+				{ '%', '%', '.', '.', '.', '%' },
+				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost1.txt");
+		Search x = new AStarWithGhostSearch("ghost3.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 6);
-		assertEquals(actual.numNodesExpanded, 131);
+		assertEquals(actual.pathCost, 8);
+		assertEquals(actual.numNodesExpanded, 12);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	
@@ -149,8 +149,8 @@ public class GhostSearchTest {
 
 		System.out.println(actual.toString());
 		
-		assertEquals(actual.pathCost, 8);
-		assertEquals(actual.numNodesExpanded, 11);
+		assertEquals(actual.pathCost, 4);
+		assertEquals(actual.numNodesExpanded, 5);
 		assertMazesAreEqual(actual, expectedPath);
 	}
 	

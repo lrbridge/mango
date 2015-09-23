@@ -66,11 +66,11 @@ public abstract class InformedSearch extends Search {
 		this.addNodeToFrontier(firstNode);
 		
 		while (!this.isFrontierEmpty()) {
-System.out.println("FRONTIER:");
-for(Node na : this.frontier) {
-	AStarNode n = (AStarNode) na;
-	System.out.println(n.getState().x + " " + n.getState().y + " " + n.expectedDistanceToGo + " " + n.getDistanceSoFar());
-}
+//System.out.println("FRONTIER:");
+//for(Node na : this.frontier) {
+//	AStarNode n = (AStarNode) na;
+//	System.out.println(n.getState().x + " " + n.getState().y + " " + n.expectedDistanceToGo + " " + n.getDistanceSoFar());
+//}
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
