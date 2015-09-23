@@ -1,5 +1,7 @@
 package com.mp1.movement;
 
+import com.mp1.node.State;
+
 public class NormalMovement implements Movement {
 
 	private String[] actions = {"LEFT", "UP", "RIGHT", "DOWN"};
@@ -8,7 +10,8 @@ public class NormalMovement implements Movement {
 		return actions;
 	}
 	
-	public int getChildX(int x, String action) {
+	public int getChildX(State state, String action) {
+		int x = state.x;
 		
 		switch (action) {
 		case "UP":
@@ -24,7 +27,8 @@ public class NormalMovement implements Movement {
 		return x;
 	}
 	
-	public int getChildY(int y, String action) {
+	public int getChildY(State state, String action) {
+		int y = state.y;
 		
 		switch (action) {
 		case "LEFT":
@@ -40,7 +44,7 @@ public class NormalMovement implements Movement {
 		return y;
 	}
 
-	public DIRECTION getChildDirectionFacing(DIRECTION directionFacing, String action) {
-		return directionFacing;
+	public DIRECTION getChildDirectionFacing(State state, String action) {
+		return state.directionFacing;
 	}
 }

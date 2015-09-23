@@ -3,8 +3,6 @@ package com.mp1.search.base;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-import com.mp1.heuristic.Heuristic;
-import com.mp1.heuristic.ManhattanDistanceHeuristic;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.Movement;
 import com.mp1.node.Node;
@@ -18,9 +16,7 @@ public abstract class InformedSearch extends Search {
 	protected int[][] heuristicValues;
 	
 	protected PriorityQueue<Node> frontier;
-	
-    private Heuristic heuristic;
-    
+	    
     private Ghost ghost;
     
 	public InformedSearch(String filename, Movement movement) {
@@ -29,8 +25,6 @@ public abstract class InformedSearch extends Search {
 		this.frontier = new PriorityQueue<Node>();
 		this.movement = movement;
 		
-        this.heuristic = new ManhattanDistanceHeuristic();
-                
         Node ghostStart = this.findNode('G');
         if(ghostStart == null) {
         	this.ghost = null;
@@ -62,6 +56,7 @@ public abstract class InformedSearch extends Search {
 		while (!this.isFrontierEmpty()) {
 
 			Node node = this.popNodeOffFrontier();
+			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
 			this.numNodesExpanded++;
 			this.explored.add(node);
 			
@@ -72,19 +67,20 @@ public abstract class InformedSearch extends Search {
 			for (String action : this.movement.getActions()) {
 
 				Node child = this.getChildNode(node, action);
-
+//System.out.println(action+ "    CHILD: "+ child.getState().x + " " + child.getState().y + " " + child.getState().directionFacing);
 				if(this.collidesWithGhost(child)) { 
 					// don't put it anywhere
+//					System.out.println("GHOST");
 				}
 				else if (this.isInMaze(child) && this.isNotAWall(child)
 						&& !this.explored.contains(child)
 						&& !this.doesFrontierContain(child)) {
 					// explored & frontier 'contains' checks look for when states are equal
 					// because Node is equal when State is equal and State is equal when x & y are same
-
+//System.out.println("ADD");
 					this.addNodeToFrontier(child);
 				}
-				else if(this.doesFrontierContain(child)) {
+				else if(this.doesFrontierContain(child)) {//System.out.println("IF BETT");
 					this.replaceNodeOnFrontierIfBetter(child);
 				}
 
@@ -119,12 +115,12 @@ public abstract class InformedSearch extends Search {
 
 	private Node getChildNode(Node node, String action) {
 		State state = node.getState();
-		int x = this.movement.getChildX(state.x, action);
-		int y = this.movement.getChildY(state.y, action);
-		DIRECTION directionFacing = this.movement.getChildDirectionFacing(state.directionFacing, action);
-		return this.makeNode(x, y, directionFacing, node);
+		int x = this.movement.getChildX(state, action);
+		int y = this.movement.getChildY(state, action);
+		DIRECTION directionFacing = this.movement.getChildDirectionFacing(state, action);
+		return this.makeNode(x, y, directionFacing, node, action);
 	}
-
+	
 	protected void replaceNodeOnFrontierIfBetter(Node child) {
 
       Iterator<Node> frontierIterator = this.frontier.iterator();
@@ -160,20 +156,7 @@ public abstract class InformedSearch extends Search {
 		
 	};
 
-	private int[][] computeHeuristics() {
-		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
-		Node goalNode = this.findNode('.');
-		
-		for(int i=0; i<this.maze.length; i++) {
-			for(int j=0; j<this.maze[i].length; j++) {
-				
-                int value = heuristic.computeHeuristic(goalNode.getState(), i, j, 0, 0);
-				heuristicValues[i][j] = value;
-			}
-		}
-		
-		return heuristicValues;
-	}
+	protected abstract int[][] computeHeuristics();
 
 	@Override
 	protected boolean doesFrontierContain(Node child) {

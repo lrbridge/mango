@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.mp1.heuristic.ManhattanDistanceHeuristic;
 import com.mp1.heuristic.TurnsHeuristic;
 import com.mp1.search.AStarPenalizingTurnsSearch;
-import com.mp1.search.base.PSearch;
+import com.mp1.search.base.Search;
 import com.mp1.solution.MazeSolution;
 
 public class PenalizeSearchTest {
@@ -26,7 +26,7 @@ public class PenalizeSearchTest {
 
         char[][] expectedPath = {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
-                { '%', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+                { '%', '.', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' }, // . instead of P is ok here because we turn first in place
                 { '%', '.', '%', '%', '%', '%', '%', '%', ' ', '%' },
                 { '%', '.', '.', '%', '%', '%', '%', '%', ' ', '%' },
                 { '%', '%', '.', '.', '%', '%', '%', '%', ' ', '%' },
@@ -34,7 +34,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', '.', '.', '.', ' ', ' ', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        PSearch x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1, new ManhattanDistanceHeuristic());
+        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1, new ManhattanDistanceHeuristic());
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -59,7 +59,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', ' ', ' ', '.', '.', '.', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        PSearch x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2, new ManhattanDistanceHeuristic());
+        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2, new ManhattanDistanceHeuristic());
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -75,7 +75,7 @@ public class PenalizeSearchTest {
 
         char[][] expectedPath = {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
-                { '%', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
+                { '%', '.', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' }, // . is instead of P here because we go down first, so we do a turn in place
                 { '%', '.', '%', '%', '%', '%', '%', '%', ' ', '%' },
                 { '%', '.', '.', '%', '%', '%', '%', '%', ' ', '%' },
                 { '%', '%', '.', '.', '%', '%', '%', '%', ' ', '%' },
@@ -83,7 +83,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', '.', '.', '.', ' ', ' ', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        PSearch x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1, new TurnsHeuristic());
+        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1, new TurnsHeuristic());
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -108,13 +108,13 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', ' ', ' ', '.', '.', '.', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        PSearch x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2, new TurnsHeuristic());
+        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2, new TurnsHeuristic());
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
 
         assertEquals(actual.pathCost, 18);
-        assertEquals(actual.numNodesExpanded, 47); // explores U/L/R/D for every node
+        assertEquals(actual.numNodesExpanded, 46); // explores U/L/R/D for every node
         assertMazesAreEqual(actual, expectedPath);
     }
 

@@ -31,7 +31,7 @@ public class AStarWithGhostSearch extends AStarSearch {
 	}
 
 	@Override
-	protected Node makeNode(int x, int y, DIRECTION directionFacing, Node parent) {
+	protected Node makeNode(int x, int y, DIRECTION directionFacing, Node parent, String action) {
 		int distanceSoFar = 0;
 		if(parent != null) {
 			// add 1 to the parent's distance since all steps are equal cost (1)
