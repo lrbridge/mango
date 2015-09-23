@@ -14,7 +14,7 @@ public class AStarWithGhostSearch extends AStarSearch {
 		super(filename);
 		
 		Node ghostInitialLocation = this.findNode('G');
-		System.out.println("INITIAL LOC " + ghostInitialLocation.getState().x + " " + ghostInitialLocation.getState().y);
+
 		int ghostStartX = ghostInitialLocation.getState().x;
 		int ghostStartY = ghostInitialLocation.getState().y;
 		

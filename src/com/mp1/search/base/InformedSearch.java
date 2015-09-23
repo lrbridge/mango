@@ -7,7 +7,6 @@ import com.mp1.heuristic.Heuristic;
 import com.mp1.heuristic.ManhattanDistanceHeuristic;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.Movement;
-import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
 import com.mp1.solution.MazeSolution;
@@ -23,11 +22,6 @@ public abstract class InformedSearch extends Search {
     private Heuristic heuristic;
     
     private Ghost ghost;
-	
-    private class Pair {
-    	public int x;
-    	public int y;
-    }
     
 	public InformedSearch(String filename, Movement movement) {
 		super(filename);
@@ -66,16 +60,11 @@ public abstract class InformedSearch extends Search {
 		this.addNodeToFrontier(firstNode);
 		
 		while (!this.isFrontierEmpty()) {
-//System.out.println("FRONTIER:");
-//for(Node na : this.frontier) {
-//	AStarNode n = (AStarNode) na;
-//	System.out.println(n.getState().x + " " + n.getState().y + " " + n.expectedDistanceToGo + " " + n.getDistanceSoFar());
-//}
+
 			Node node = this.popNodeOffFrontier();
 			this.numNodesExpanded++;
 			this.explored.add(node);
 			
-System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " " + node.getState().ghostX + " " + node.getState().ghostY);
 			if(this.isGoal(node)) {
 				return this.makeSolution(node);
 			}
@@ -83,7 +72,6 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " "
 			for (String action : this.movement.getActions()) {
 
 				Node child = this.getChildNode(node, action);
-				System.out.print(child.getState().x + " " + child.getState().y + ":");
 
 				if(this.collidesWithGhost(child)) { 
 					// don't put it anywhere
@@ -93,13 +81,13 @@ System.out.println("EXPAND " + node.getState().x + " " + node.getState().y + " "
 						&& !this.doesFrontierContain(child)) {
 					// explored & frontier 'contains' checks look for when states are equal
 					// because Node is equal when State is equal and State is equal when x & y are same
-System.out.print("add");
+
 					this.addNodeToFrontier(child);
 				}
-				else if(this.doesFrontierContain(child)) {  System.out.print("if better");
+				else if(this.doesFrontierContain(child)) {
 					this.replaceNodeOnFrontierIfBetter(child);
 				}
-				System.out.print("\n");
+
 			}
 
 		}
@@ -118,11 +106,9 @@ System.out.print("add");
 		if(childState.x == childState.ghostX) {
 			
 			if(childState.y == childState.ghostY) {
-				System.out.print("GHOST!");
 				return true;
 			}
 			else if(parentState.y == childState.ghostY && parentState.ghostY == childState.y) {
-				System.out.println("pass in night");
 				return true;
 			}
 			

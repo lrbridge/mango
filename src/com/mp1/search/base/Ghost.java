@@ -58,7 +58,6 @@ public class Ghost {
 			
 		}
 
-		System.out.println("GHOST Y  " + ghostY);
 		return ghostY;
 	}
 
