@@ -60,13 +60,13 @@ public abstract class UninformedSearch extends Search {
 	
 	private Node getChildNode(Node node, String action) {
 		State state = node.getState();
-		int x = this.movement.getChildX(state.x, action);
-		int y = this.movement.getChildY(state.y, action);
-		DIRECTION directionFacing = this.movement.getChildDirectionFacing(state.directionFacing, action);
-		return this.makeNode(x, y, directionFacing, node);
+		int x = this.movement.getChildX(state, action);
+		int y = this.movement.getChildY(state, action);
+		DIRECTION directionFacing = this.movement.getChildDirectionFacing(state, action);
+		return this.makeNode(x, y, directionFacing, node, action);
 	}
 
-	protected Node makeNode(int x, int y, DIRECTION directionFacing, Node parent) {
+	protected Node makeNode(int x, int y, DIRECTION directionFacing, Node parent, String action) {
 		int distanceSoFar = 0;
 		if(parent != null) {
 			// add 1 to the parent's distance since all steps are equal cost (1)

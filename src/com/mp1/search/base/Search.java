@@ -41,7 +41,7 @@ public abstract class Search {
 
 	protected abstract void addNodeToFrontier(Node firstNode);
 
-	protected abstract Node makeNode(int x, int y, DIRECTION directionFacing, Node node);
+	protected abstract Node makeNode(int x, int y, DIRECTION directionFacing, Node node, String action);
 
 	protected boolean isGoal(Node child) {
 		State childState = child.getState();
@@ -70,8 +70,7 @@ public abstract class Search {
 	 */
 	protected MazeSolution makeSolution(Node node) {
 		int pathCost = node.getDistanceSoFar();
-
-		while (this.maze[node.getState().x][node.getState().y] != 'P') {
+		while (node.getParent() != null) {
 			this.maze[node.getState().x][node.getState().y] = '.';
 			node = node.getParent();
 		}
@@ -92,7 +91,7 @@ public abstract class Search {
 		for (char[] row : this.maze) {
 			for (char content : row) {
 				if (content == characterToFind) {
-					return this.makeNode(x, y, DIRECTION.RIGHT, null); // pacman initially facing right (and doesn't matter direction for part 1/part 3)
+					return this.makeNode(x, y, DIRECTION.RIGHT, null, "no-action"); // pacman initially facing right (and doesn't matter direction for part 1/part 3)
 				}
 				y++;
 			}
