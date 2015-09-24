@@ -36,5 +36,16 @@ public class Part3ResultsTest {
 		this.runMaze(new AStarSearch("bigGhost.txt"), "bigGhost.txt", 68, 110);
 		this.runMaze(new AStarWithGhostSearch("bigGhost.txt"), "bigGhost.txt", 70, 131);
 	}
-	
+
+    @Test
+    public void shortGhost() {
+        this.runMaze(new AStarSearch("shortGhost.txt"), "shortGhost.txt", 32, 58);
+        this.runMaze(new AStarWithGhostSearch("shortGhost.txt"), "shortGhost.txt", 32, 59);
+    }
+
+    @Test
+    public void longGhost() {
+        this.runMaze(new AStarSearch("longGhost.txt"), "longGhost.txt", 76, 469);
+        this.runMaze(new AStarWithGhostSearch("longGhost.txt"), "longGhost.txt", 76, 1304);
+    }
 }
