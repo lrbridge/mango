@@ -8,7 +8,8 @@ import com.mp1.search.base.Ghost;
 
 public class AStarWithGhostSearch extends AStarSearch {
 
-	private Ghost ghost; 
+	private Ghost ghost;
+    private int passed = 0;
 	
 	public AStarWithGhostSearch(String filename) {
 		super(filename);
@@ -43,6 +44,21 @@ public class AStarWithGhostSearch extends AStarSearch {
 			int ghostX = this.ghost.getGhostX();
 			int ghostY = this.ghost.getGhostY(parent);
 			DIRECTION ghostDirection = this.ghost.getGhostDirection(parent);
+
+            // suppose the pacman is nearby the ghost. Then we just calculate the next ghost movement
+            // and see if the pacman is going to collide with the ghost
+//            if(Math.abs(ghostX - x) <= 2 && passed == 0) {
+//                int newGhostY;
+//                if(ghostDirection == DIRECTION.LEFT)
+//                    newGhostY = ghostY - 1;
+//                else
+//                    newGhostY = ghostY + 1;
+//
+//                if(this.isNotAWall())
+//
+//
+//            }
+
 			newNode = new AStarNode(new State(x, y, ghostX, ghostY, ghostDirection), parent, distanceSoFar);
 		}
 		else { // need this check just for the first time (when finding the ghost node)

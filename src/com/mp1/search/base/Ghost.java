@@ -5,7 +5,7 @@ import com.mp1.node.Node;
 
 public class Ghost {
 
-	private int ghfostStartX;
+	private int ghostStartX;
 	private int ghostStartY;
 	private int wallToLeftOfGhost;
 	private int wallToRightOfGhost;
