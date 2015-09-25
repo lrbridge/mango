@@ -18,11 +18,12 @@ public abstract class UninformedSearch extends Search {
 
 	public MazeSolution solve() {
 
-		Node firstNode = this.findNode('P');
+		Coordinate startXY = this.maze.findNode('P');
+		Node firstNode = this.makeNode(startXY.x, startXY.y, DIRECTION.RIGHT, null, "no-action");
 		this.addNodeToFrontier(firstNode);
 
-		if (this.isGoal(firstNode)) {
-			return this.makeSolution(firstNode);
+		if (this.maze.isGoal(firstNode)) {
+			return new MazeSolution(this.maze, firstNode, this.numNodesExpanded);
 		}
 
 		while (!this.isFrontierEmpty()) {
@@ -35,7 +36,7 @@ public abstract class UninformedSearch extends Search {
 
 				Node child = this.getChildNode(node, action);
 
-				if (this.isInMaze(child) && this.isNotAWall(child)
+				if (this.maze.isInMaze(child) && this.maze.isNotAWall(child)
 						&& !this.explored.contains(child)
 						&& !this.doesFrontierContain(child)) {
 					// explored & frontier 'contains' checks look for when
@@ -43,8 +44,8 @@ public abstract class UninformedSearch extends Search {
 					// because Node is equal when State is equal and State is
 					// equal when x & y are same
 
-					if (this.isGoal(child)) {
-						return this.makeSolution(child);
+					if (this.maze.isGoal(child)) {
+						return new MazeSolution(this.maze, child, this.numNodesExpanded);
 					}
 
 					this.addNodeToFrontier(child);

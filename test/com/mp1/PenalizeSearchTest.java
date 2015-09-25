@@ -13,12 +13,12 @@ import com.mp1.solution.MazeSolution;
 
 public class PenalizeSearchTest {
 
-    private void assertMazesAreEqual(MazeSolution actual, char[][] expectedPath) {
-        assertEquals(actual.path.length, expectedPath.length);
-        for(int i=0; i<actual.path.length; i++) {
-            assertArrayEquals(actual.path[i], expectedPath[i]);
-        }
-    }
+	private void assertMazesAreEqual(MazeSolution actual, char[][] expectedPath) {
+		assertEquals(actual.path.maze.length, expectedPath.length);
+		for(int i=0; i<actual.path.maze.length; i++) {
+			assertArrayEquals(actual.path.maze[i], expectedPath[i]);
+		}
+	}
     
     @Test
     public void penalizeTurns1ForwardWeighted2Manhattan() {        
