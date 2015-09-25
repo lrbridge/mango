@@ -19,7 +19,7 @@ public class Part2ResultsTest {
 		assertEquals(solution.numNodesExpanded, numExpanded);
 	}
 
-    /* open maze has pretty much only one solution. This test case is to prove that our new heuristic is at least as good as manhattan distance heuristic. */
+    /* open maze has only one solution. This test case is to prove that our new heuristic is at least as good as manhattan distance heuristic. */
     @Test
     public void manhattanDistanceHeuristicOpenMaze() {
         this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 1, 2, new TurnsHeuristic()), "openMaze.txt", "ManhattanDistance", 1, 2, 70, 397);

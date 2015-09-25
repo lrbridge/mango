@@ -18,6 +18,8 @@ public abstract class InformedSearch extends Search {
 	protected PriorityQueue<Node> frontier;
 	    
     private Ghost ghost;
+    private FastGhost fGhost;
+    private Ghost AGhost;
     
 	public InformedSearch(String filename, Movement movement) {
 		super(filename);
@@ -29,21 +31,65 @@ public abstract class InformedSearch extends Search {
         if(ghostStart == null) {
         	this.ghost = null;
         }
+
         else {
             int ghostStartX = ghostStart.getState().x;
             int ghostStartY = ghostStart.getState().y;
-            
+
             int ghostLeftY = ghostStartY;
             while(this.maze[ghostStartX][ghostLeftY] == 'g' || this.maze[ghostStartX][ghostLeftY] == 'G') {
-            	ghostLeftY--; // find the farthest left point
+                ghostLeftY--; // find the farthest left point
             }
             int ghostRightY = ghostStartY;
             while(this.maze[ghostStartX][ghostRightY] == 'g' || this.maze[ghostStartX][ghostRightY] == 'G') {
-            	ghostRightY++; // find the farthest right point
+                ghostRightY++; // find the farthest right point
             }
-            
+
             this.ghost = new Ghost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
         }
+
+        Node fGhostStart = this.findNode('F');
+        if(fGhostStart == null) {
+            this.fGhost = null;
+        }
+
+        else {
+            int fGhostStartX = fGhostStart.getState().x;
+            int fGhostStartY = fGhostStart.getState().y;
+
+            int fGhostLeftY = fGhostStartY;
+            while(this.maze[fGhostStartX][fGhostLeftY] == 'f' || this.maze[fGhostStartX][fGhostLeftY] == 'F') {
+                fGhostLeftY--; // find the farthest left point
+            }
+            int fGhostRightY = fGhostStartY;
+            while(this.maze[fGhostStartX][fGhostRightY] == 'f' || this.maze[fGhostStartX][fGhostRightY] == 'F') {
+                fGhostRightY++; // find the farthest right point
+            }
+
+            this.ghost = new Ghost(fGhostStartX, fGhostStartY, fGhostLeftY, fGhostRightY);
+        }
+
+        Node AGhostStart = this.findNode('A');
+        if(AGhostStart == null) {
+            this.fGhost = null;
+        }
+
+        else {
+            int AGhostStartX = AGhostStart.getState().x;
+            int AGhostStartY = AGhostStart.getState().y;
+
+            int AGhostLeftY = AGhostStartY;
+            while(this.maze[AGhostStartX][AGhostLeftY] == 'f' || this.maze[AGhostStartX][AGhostLeftY] == 'F') {
+                AGhostLeftY--; // find the farthest left point
+            }
+            int AGhostRightY = AGhostStartY;
+            while(this.maze[AGhostStartX][AGhostRightY] == 'f' || this.maze[AGhostStartX][AGhostRightY] == 'F') {
+                AGhostRightY++; // find the farthest right point
+            }
+
+            this.ghost = new Ghost(AGhostStartX, AGhostStartY, AGhostLeftY, AGhostRightY);
+        }
+
 	}
 
 	public MazeSolution solve() {
@@ -92,25 +138,43 @@ public abstract class InformedSearch extends Search {
 	}
 
 	private boolean collidesWithGhost(Node child) {
-		if(this.ghost == null) {
+		if(this.ghost == null && this.fGhost == null) {
 			return false; // no ghost
 		}
 		
 		State childState = child.getState();
 		State parentState = child.getParent().getState();
-		
+
 		if(childState.x == childState.ghostX) {
-			
 			if(childState.y == childState.ghostY) {
 				return true;
 			}
 			else if(parentState.y == childState.ghostY && parentState.ghostY == childState.y) {
-				return true;
-			}
-			
+                return true;
+            }
 		}
 
-		return false;
+        if(childState.x == childState.fGhostX) {
+            if(childState.y == childState.fGhostY) {
+                return true;
+            }
+            else if(parentState.y == childState.fGhostY && parentState.fGhostY == childState.y) {
+                return true;
+            }
+        }
+
+        if(childState.x == childState.AGhostX) {
+            if(childState.y == childState.AGhostY) {
+                return true;
+            }
+            else if(parentState.y == childState.AGhostY && parentState.AGhostY == childState.y) {
+                return true;
+            }
+        }
+
+
+
+        return false;
 	}
 
 	private Node getChildNode(Node node, String action) {

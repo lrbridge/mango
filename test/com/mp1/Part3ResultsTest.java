@@ -18,7 +18,8 @@ public class Part3ResultsTest {
 		assertEquals(solution.pathCost, pathCost);
 		assertEquals(solution.numNodesExpanded, numExpanded);
 	}
-		
+
+    /* part 3-1 */
 	@Test
 	public void small() {
 		this.runMaze(new AStarSearch("smallGhost.txt"), "smallGhost.txt", 19, 54);
@@ -38,14 +39,48 @@ public class Part3ResultsTest {
 	}
 
     @Test
-    public void shortGhost() {
+    public void shortGhostMove() {
         this.runMaze(new AStarSearch("shortGhost.txt"), "shortGhost.txt", 32, 58);
         this.runMaze(new AStarWithGhostSearch("shortGhost.txt"), "shortGhost.txt", 32, 59);
     }
 
     @Test
-    public void longGhost() {
+    public void longGhostMove() {
         this.runMaze(new AStarSearch("longGhost.txt"), "longGhost.txt", 76, 469);
         this.runMaze(new AStarWithGhostSearch("longGhost.txt"), "longGhost.txt", 76, 1304);
     }
+
+    /* part 3-2: advanced ghosts added */
+    @Test
+    public void smallGhostWithFastGhost() {
+        this.runMaze(new AStarSearch("smallGhost2.txt"), "smallGhost2.txt", 19, 50);
+        this.runMaze(new AStarWithGhostSearch("smallGhost2.txt"), "smallGhost2.txt", 19, 68);
+    }
+
+    @Test
+    public void mediumGhostWithFastGhost() {
+        this.runMaze(new AStarSearch("mediumGhost2.txt"), "mediumGhost2.txt", 24, 27);
+        this.runMaze(new AStarWithGhostSearch("mediumGhost2.txt"), "mediumGhost2.txt", 26, 33);
+    }
+
+    @Test
+    public void bigGhostWithFastGhost() {
+        this.runMaze(new AStarSearch("bigGhost2.txt"), "bigGhost2.txt", 68, 110);
+        this.runMaze(new AStarWithGhostSearch("bigGhost2.txt"), "bigGhost2.txt", 70, 126);
+    }
+
+    /* part 3-2-2 : even more ghosts */
+    @Test
+    public void ghostWorld1() {
+        this.runMaze(new AStarSearch("ghostWorld1.txt"), "ghostWorld1.txt", 26, 41);
+        this.runMaze(new AStarWithGhostSearch("ghostWorld1.txt"), "ghostWorld1.txt", 32, 88);
+    }
+
+    @Test
+    public void ghostWorld2() {
+        this.runMaze(new AStarSearch("ghostWorld2.txt"), "ghostWorld2.txt", 24, 27);
+        this.runMaze(new AStarWithGhostSearch("ghostWorld2.txt"), "ghostWorld2.txt", 34, 226);
+    }
+
+
 }
