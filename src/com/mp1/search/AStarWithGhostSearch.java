@@ -115,9 +115,9 @@ public class AStarWithGhostSearch extends AStarSearch {
 			newNode = new AStarNode(new State(x, y), parent, distanceSoFar);
 		}
 
-		if(this.heuristicValues != null) { // check for end node (before heuristics)
-			newNode.setExpectedDistanceToGo(this.heuristicValues[x][y]);
-		}
+        if(this.goalNode != null) { // if the goalNode is set (when we are making the goalNode at the beginning, we need this check)
+            newNode.setExpectedDistanceToGo(this.computeHeuristic(x, y));
+        }
 		return newNode;
 	}
 

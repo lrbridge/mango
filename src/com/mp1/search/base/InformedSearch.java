@@ -13,20 +13,67 @@ public abstract class InformedSearch extends Search {
 
 	protected Movement movement;
 	
-	protected int[][] heuristicValues;
-	
 	protected PriorityQueue<Node> frontier;
 	    
+	protected Node goalNode;
+		
     private Ghost ghost;
     private FastGhost fGhost;
     private Ghost AGhost;
     
 	public InformedSearch(String filename, Movement movement) {
 		super(filename);
-		
 		this.frontier = new PriorityQueue<Node>();
 		this.movement = movement;
+	}
+
+	public MazeSolution solve() {
+
+		this.goalNode = this.findNode('.');
+		this.findGhosts();
 		
+		Node firstNode = this.findNode('P');
+		this.addNodeToFrontier(firstNode);
+		
+		while (!this.isFrontierEmpty()) {
+
+			Node node = this.popNodeOffFrontier();
+			//System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
+			this.numNodesExpanded++;
+			this.explored.add(node);
+			
+			if(this.isGoal(node)) {
+				return this.makeSolution(node);
+			}
+						
+			for (String action : this.movement.getActions()) {
+
+				Node child = this.getChildNode(node, action);
+//System.out.println(action+ "    CHILD: "+ child.getState().x + " " + child.getState().y + " " + child.getState().directionFacing);
+				if(this.collidesWithGhost(child)) { 
+					// don't put it anywhere
+//					System.out.println("GHOST");
+				}
+				else if (this.isInMaze(child) && this.isNotAWall(child)
+						&& !this.explored.contains(child)
+						&& !this.doesFrontierContain(child)) {
+					// explored & frontier 'contains' checks look for when states are equal
+					// because Node is equal when State is equal and State is equal when x & y are same
+//System.out.println("ADD");
+					this.addNodeToFrontier(child);
+				}
+				else if(this.doesFrontierContain(child)) {//System.out.println("IF BETT");
+					this.replaceNodeOnFrontierIfBetter(child);
+				}
+
+			}
+
+		}
+
+		return null; // fail if no solution is found
+	}
+
+	private void findGhosts() {
         Node ghostStart = this.findNode('G');
         if(ghostStart == null) {
         	this.ghost = null;
@@ -89,52 +136,6 @@ public abstract class InformedSearch extends Search {
 
             this.ghost = new Ghost(AGhostStartX, AGhostStartY, AGhostLeftY, AGhostRightY);
         }
-
-	}
-
-	public MazeSolution solve() {
-
-		this.heuristicValues = this.computeHeuristics();
-
-		Node firstNode = this.findNode('P');
-		this.addNodeToFrontier(firstNode);
-		
-		while (!this.isFrontierEmpty()) {
-
-			Node node = this.popNodeOffFrontier();
-			//System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
-			this.numNodesExpanded++;
-			this.explored.add(node);
-			
-			if(this.isGoal(node)) {
-				return this.makeSolution(node);
-			}
-						
-			for (String action : this.movement.getActions()) {
-
-				Node child = this.getChildNode(node, action);
-//System.out.println(action+ "    CHILD: "+ child.getState().x + " " + child.getState().y + " " + child.getState().directionFacing);
-				if(this.collidesWithGhost(child)) { 
-					// don't put it anywhere
-//					System.out.println("GHOST");
-				}
-				else if (this.isInMaze(child) && this.isNotAWall(child)
-						&& !this.explored.contains(child)
-						&& !this.doesFrontierContain(child)) {
-					// explored & frontier 'contains' checks look for when states are equal
-					// because Node is equal when State is equal and State is equal when x & y are same
-//System.out.println("ADD");
-					this.addNodeToFrontier(child);
-				}
-				else if(this.doesFrontierContain(child)) {//System.out.println("IF BETT");
-					this.replaceNodeOnFrontierIfBetter(child);
-				}
-
-			}
-
-		}
-
-		return null; // fail if no solution is found
 	}
 
 	private boolean collidesWithGhost(Node child) {
@@ -219,8 +220,6 @@ public abstract class InformedSearch extends Search {
       }
 		
 	};
-
-	protected abstract int[][] computeHeuristics();
 
 	@Override
 	protected boolean doesFrontierContain(Node child) {

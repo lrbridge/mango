@@ -32,23 +32,14 @@ public class AStarSearch extends InformedSearch {
 		}
 		
 		AStarNode newNode = new AStarNode(new State(x, y, directionFacing), parent, distanceSoFar);
-		if(this.heuristicValues != null) { // check for end node (before heuristics)
-			newNode.setExpectedDistanceToGo(this.heuristicValues[x][y]);
-		}
+        if(this.goalNode != null) { // if the goalNode is set (when we are making the goalNode at the beginning, we need this check)
+            newNode.setExpectedDistanceToGo(this.computeHeuristic(x, y));
+        }
 		return newNode;
 	}
 
-    protected int[][] computeHeuristics() {
-		int[][] heuristicValues = new int[this.maze.length][this.maze[0].length];
-		Node goalNode = this.findNode('.');
-		
-		for(int i=0; i<this.maze.length; i++) {
-			for(int j=0; j<this.maze[i].length; j++) {
-                int value = this.heuristic.computeHeuristic(goalNode.getState(), i, j, 0, 0);
-				heuristicValues[i][j] = value;
-			}
-		}
-		
-		return heuristicValues;
+    protected int computeHeuristic(int x, int y) {
+    	return this.heuristic.computeHeuristic(this.goalNode.getState(), x, y, 0, 0);
 	}
+
 }
