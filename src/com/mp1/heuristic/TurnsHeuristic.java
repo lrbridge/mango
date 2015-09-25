@@ -4,26 +4,59 @@ import com.mp1.node.State;
 
 public class TurnsHeuristic implements Heuristic {
 	
+	private int forwardCost;
+	private int turnCost;
+	
+	public TurnsHeuristic(int forwardCost, int turnCost) {
+		this.forwardCost = forwardCost;
+		this.turnCost = turnCost;
+	}
+	
 	@Override
-	public int computeHeuristic(State goalState, int x, int y, int forwardCost, int turnCost) {
-
-		// (Manhattan distance * forward cost) + (min # turns * turn cost)
+	public int computeHeuristic(State currentState, State goalState) {
 		
-        int xDifference = Math.abs(x - goalState.x);
-        int yDifference = Math.abs(y - goalState.y);
+        int xDifference = Math.abs(currentState.x - goalState.x);
+        int yDifference = Math.abs(currentState.y - goalState.y);
 		int manhattanDistance = xDifference + yDifference;
-		
+				
+		// compute the minimum number of turns we must have from this location/direction facing to be admissible
 		int minNumberTurns;
-		
-		// always assume we are headed toward the goal as best as possible to be admissible (never need 2 turns)
-		if(goalState.y == y || goalState.x == x) {
-			minNumberTurns = 0; // if in line with me, don't need to turn at all best case
+		if(goalIsBehind(currentState, goalState)) {
+			minNumberTurns = 2; //System.out.println("BEHIND - 2");
 		}
-		else {
-			minNumberTurns = 1;  // if x & y are different, I'll have to turn at least 1 time to get to the goal.
+		else if(goalIsDirectlyAhead(currentState, goalState)) {
+			minNumberTurns = 0; //System.out.println("DIRECTLY AHEAD - 0");
 		}
-		
+		else { // goal is ahead but not directly in front of me, or directly to my right or left
+			minNumberTurns = 1;  //System.out.println("FRONT SIDES OR SIDES - 1");
+		}
+
+		System.out.println("  for child " + currentState.x + " " + currentState.y + " " + currentState.directionFacing + " = " + (manhattanDistance * forwardCost) + (minNumberTurns * turnCost));
 		return (manhattanDistance * forwardCost) + (minNumberTurns * turnCost);
+	}
+	
+	private boolean goalIsBehind(State currentState, State goalState) {
+		if(currentState.directionFacing.equals("LEFT")) {
+			return currentState.y < goalState.y; // goal state is bigger = behind
+		}
+		else if(currentState.directionFacing.equals("UP")) {
+			return currentState.x < goalState.x; // goal state is bigger = behind
+		}
+		if(currentState.directionFacing.equals("RIGHT")) {
+			return currentState.y > goalState.y; // goal state is smaller = behind
+		}
+		else { // DOWN
+			return currentState.x > goalState.x; // goal state is smaller = behind
+		}
+	}
+
+	private boolean goalIsDirectlyAhead(State currentState, State goalState) {
+		if(currentState.directionFacing.equals("LEFT") || currentState.directionFacing.equals("RIGHT")) {
+			return currentState.x == goalState.x; // directly ahead if xs are equal (because this is the else if)
+		}
+		else { // UP or DOWN
+			return currentState.y == goalState.y; // directly ahead if ys are equal (because this is the else if)
+		}
 	}
 
 }

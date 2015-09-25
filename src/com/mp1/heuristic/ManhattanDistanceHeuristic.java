@@ -5,9 +5,9 @@ import com.mp1.node.State;
 public class ManhattanDistanceHeuristic implements Heuristic {
 	
 	@Override
-	public int computeHeuristic(State goalState, int x, int y, int forwardCost, int turnCost) {
-        int xDifference = Math.abs(x - goalState.x);
-        int yDifference = Math.abs(y - goalState.y);
+	public int computeHeuristic(State currentState, State goalState) {
+        int xDifference = Math.abs(currentState.x - goalState.x);
+        int yDifference = Math.abs(currentState.y - goalState.y);
 		return xDifference + yDifference;
 	}
 

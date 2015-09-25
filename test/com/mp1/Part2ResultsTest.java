@@ -22,14 +22,14 @@ public class Part2ResultsTest {
     /* open maze has only one solution. This test case is to prove that our new heuristic is at least as good as manhattan distance heuristic. */
     @Test
     public void manhattanDistanceHeuristicOpenMaze() {
-        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 1, 2, new TurnsHeuristic()), "openMaze.txt", "ManhattanDistance", 1, 2, 70, 397);
-        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 2, 1, new TurnsHeuristic()), "openMaze.txt", "ManhattanDistance", 2, 1, 116, 395);
+        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 1, 2, new ManhattanDistanceHeuristic()), "openMaze.txt", "ManhattanDistance", 1, 2, 70, 397);
+        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 2, 1, new ManhattanDistanceHeuristic()), "openMaze.txt", "ManhattanDistance", 2, 1, 116, 395);
     }
 
     @Test
     public void turnsHeuristicOpenMaze() {
-        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 1, 2, new TurnsHeuristic()), "openMaze.txt", "TurnsHeuristic", 1, 2, 70, 397);
-        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 2, 1, new TurnsHeuristic()), "openMaze.txt", "TurnsHeuristic", 2, 1, 116, 395);
+        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 1, 2, new TurnsHeuristic(1, 2)), "openMaze.txt", "TurnsHeuristic", 1, 2, 70, 397);
+        this.runMaze(new AStarPenalizingTurnsSearch("openMaze.txt", 2, 1, new TurnsHeuristic(2, 1)), "openMaze.txt", "TurnsHeuristic", 2, 1, 116, 395);
     }
 
 	@Test
@@ -40,8 +40,8 @@ public class Part2ResultsTest {
 
 	@Test
 	public void turnsHeuristicSmallTurns() {
-		this.runMaze(new AStarPenalizingTurnsSearch("smallTurns.txt", 1, 2, new TurnsHeuristic()), "smallTurns.txt", "TurnsHeuristic", 1, 2, 74, 404);
-		this.runMaze(new AStarPenalizingTurnsSearch("smallTurns.txt", 2, 1, new TurnsHeuristic()), "smallTurns.txt", "TurnsHeuristic", 2, 1, 120, 266);
+		this.runMaze(new AStarPenalizingTurnsSearch("smallTurns.txt", 1, 2, new TurnsHeuristic(1, 2)), "smallTurns.txt", "TurnsHeuristic", 1, 2, 74, 404);
+		this.runMaze(new AStarPenalizingTurnsSearch("smallTurns.txt", 2, 1, new TurnsHeuristic(2, 1)), "smallTurns.txt", "TurnsHeuristic", 2, 1, 120, 266);
 	}
 
     @Test
@@ -52,8 +52,8 @@ public class Part2ResultsTest {
 
     @Test
     public void turnsHeuristicMediumTurns() {
-        this.runMaze(new AStarPenalizingTurnsSearch("mediumTurns.txt", 1, 2, new TurnsHeuristic()), "mediumTurns.txt", "TurnsHeuristic", 1, 2, 58, 411);
-        this.runMaze(new AStarPenalizingTurnsSearch("mediumTurns.txt", 2, 1, new TurnsHeuristic()), "mediumTurns.txt", "TurnsHeuristic", 2, 1, 93, 359);
+        this.runMaze(new AStarPenalizingTurnsSearch("mediumTurns.txt", 1, 2, new TurnsHeuristic(1, 2)), "mediumTurns.txt", "TurnsHeuristic", 1, 2, 58, 411);
+        this.runMaze(new AStarPenalizingTurnsSearch("mediumTurns.txt", 2, 1, new TurnsHeuristic(2, 1)), "mediumTurns.txt", "TurnsHeuristic", 2, 1, 93, 359);
     }
 
     @Test
@@ -64,8 +64,8 @@ public class Part2ResultsTest {
 
     @Test
     public void turnsHeuristicBigTurns() {
-        this.runMaze(new AStarPenalizingTurnsSearch("bigTurns.txt", 1, 2, new TurnsHeuristic()), "bigTurns.txt", "TurnsHeuristic", 1, 2, 90, 1574);
-        this.runMaze(new AStarPenalizingTurnsSearch("bigTurns.txt", 2, 1, new TurnsHeuristic()), "bigTurns.txt", "TurnsHeuristic", 2, 1, 133, 1001);
+        this.runMaze(new AStarPenalizingTurnsSearch("bigTurns.txt", 1, 2, new TurnsHeuristic(1, 2)), "bigTurns.txt", "TurnsHeuristic", 1, 2, 90, 1574);
+        this.runMaze(new AStarPenalizingTurnsSearch("bigTurns.txt", 2, 1, new TurnsHeuristic(2, 1)), "bigTurns.txt", "TurnsHeuristic", 2, 1, 133, 1001);
     }
 
     /* this test generates different paths based on the forward code and path cost
@@ -79,8 +79,8 @@ public class Part2ResultsTest {
 
     @Test
     public void turnsHeuristicHugeTurns() {
-        this.runMaze(new AStarPenalizingTurnsSearch("hugeTurns.txt", 1, 2, new TurnsHeuristic()), "hugeTurns.txt", "TurnsHeuristic", 1, 2, 114, 2004);
-        this.runMaze(new AStarPenalizingTurnsSearch("hugeTurns.txt", 2, 1, new TurnsHeuristic()), "hugeTurns.txt", "TurnsHeuristic", 2, 1, 194, 2065);
+        this.runMaze(new AStarPenalizingTurnsSearch("hugeTurns.txt", 1, 2, new TurnsHeuristic(1, 2)), "hugeTurns.txt", "TurnsHeuristic", 1, 2, 114, 2004);
+        this.runMaze(new AStarPenalizingTurnsSearch("hugeTurns.txt", 2, 1, new TurnsHeuristic(2, 1)), "hugeTurns.txt", "TurnsHeuristic", 2, 1, 194, 2065);
     }
 
 }

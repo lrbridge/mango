@@ -26,14 +26,12 @@ public class GreedyBestFirstSearch extends InformedSearch {
 		}
 		
 		GreedyNode newNode = new GreedyNode(new State(x, y, directionFacing), parent, distanceSoFar);
+		
         if(this.goalNode != null) { // if the goalNode is set (when we are making the goalNode at the beginning, we need this check)
-            newNode.setExpectedDistanceToGo(this.computeHeuristic(x, y));
+            newNode.setExpectedDistanceToGo(this.heuristic.computeHeuristic(newNode.getState(), this.goalNode.getState()));
         }
+        
 		return newNode;
-	}
-	
-    private int computeHeuristic(int x, int y) {
-    	return this.heuristic.computeHeuristic(this.goalNode.getState(), x, y, 0, 0);
 	}
 
 }

@@ -12,7 +12,7 @@ import com.mp1.search.base.InformedSearch;
 
 public class AStarSearch extends InformedSearch {
 	
-	private Heuristic heuristic;
+	protected Heuristic heuristic;
 	
 	public AStarSearch(String filename) {
 		super(filename, new NormalMovement());
@@ -32,14 +32,12 @@ public class AStarSearch extends InformedSearch {
 		}
 		
 		AStarNode newNode = new AStarNode(new State(x, y, directionFacing), parent, distanceSoFar);
+		
         if(this.goalNode != null) { // if the goalNode is set (when we are making the goalNode at the beginning, we need this check)
-            newNode.setExpectedDistanceToGo(this.computeHeuristic(x, y));
+            newNode.setExpectedDistanceToGo(this.heuristic.computeHeuristic(newNode.getState(), this.goalNode.getState()));
         }
+        
 		return newNode;
-	}
-
-    protected int computeHeuristic(int x, int y) {
-    	return this.heuristic.computeHeuristic(this.goalNode.getState(), x, y, 0, 0);
 	}
 
 }

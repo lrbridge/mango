@@ -38,7 +38,7 @@ public abstract class InformedSearch extends Search {
 		while (!this.isFrontierEmpty()) {
 
 			Node node = this.popNodeOffFrontier();
-			//System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
+			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
 			this.numNodesExpanded++;
 			this.explored.add(node);
 			

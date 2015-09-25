@@ -4,6 +4,6 @@ import com.mp1.node.State;
 
 public interface Heuristic {
 
-	public int computeHeuristic(State goalState, int x, int y, int forwardCost, int turnCost);
+	public int computeHeuristic(State currentState, State goalState);
 	
 }
