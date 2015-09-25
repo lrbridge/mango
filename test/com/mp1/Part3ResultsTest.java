@@ -54,13 +54,13 @@ public class Part3ResultsTest {
     @Test
     public void smallGhostWithFastGhost() {
         this.runMaze(new AStarSearch("smallGhost2.txt"), "smallGhost2.txt", 19, 50);
-        this.runMaze(new AStarWithGhostSearch("smallGhost2.txt"), "smallGhost2.txt", 19, 68);
+        this.runMaze(new AStarWithGhostSearch("smallGhost2.txt"), "smallGhost2.txt", 19, 77);
     }
 
     @Test
     public void mediumGhostWithFastGhost() {
         this.runMaze(new AStarSearch("mediumGhost2.txt"), "mediumGhost2.txt", 24, 27);
-        this.runMaze(new AStarWithGhostSearch("mediumGhost2.txt"), "mediumGhost2.txt", 26, 33);
+        this.runMaze(new AStarWithGhostSearch("mediumGhost2.txt"), "mediumGhost2.txt", 26, 31);
     }
 
     @Test
