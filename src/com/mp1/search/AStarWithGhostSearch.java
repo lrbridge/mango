@@ -1,11 +1,12 @@
 package com.mp1.search;
 
+import com.mp1.ghost.FastGhost;
+import com.mp1.ghost.Ghost;
+import com.mp1.ghost.HorizontalGhost;
 import com.mp1.movement.DIRECTION;
 import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
-import com.mp1.search.base.FastGhost;
-import com.mp1.search.base.Ghost;
 
 public class AStarWithGhostSearch extends AStarSearch {
 
@@ -29,7 +30,7 @@ public class AStarWithGhostSearch extends AStarSearch {
 		while(this.maze[ghostStartX][wallToRightOfGhost] == 'g' || this.maze[ghostStartX][wallToRightOfGhost] == 'G') {
             wallToRightOfGhost++;
         }
-		this.ghost = new Ghost(ghostStartX, ghostStartY, wallToLeftOfGhost, wallToRightOfGhost);
+		this.ghost = new HorizontalGhost(ghostStartX, ghostStartY, wallToLeftOfGhost, wallToRightOfGhost);
 
 
         Node fGhostInitialLocation = this.findNode('F');
@@ -63,7 +64,7 @@ public class AStarWithGhostSearch extends AStarSearch {
                 AWallToRightOfGhost++;
             }
 
-            this.AGhost = new Ghost(AGhostStartX, AGhostStartY, AWallToLeftOfGhost, AWallToRightOfGhost);
+            this.AGhost = new HorizontalGhost(AGhostStartX, AGhostStartY, AWallToLeftOfGhost, AWallToRightOfGhost);
         }
 
 	}
@@ -78,36 +79,36 @@ public class AStarWithGhostSearch extends AStarSearch {
 		
 		AStarNode newNode;
         if(this.ghost != null && this.fGhost != null && this.AGhost != null) {
-            int ghostX = this.ghost.getGhostX();
-            int ghostY = this.ghost.getGhostY(parent);
-            DIRECTION ghostDirection = this.ghost.getGhostDirection(parent);
+            int ghostX = this.ghost.getX(parent);
+            int ghostY = this.ghost.getY(parent);
+            DIRECTION ghostDirection = this.ghost.getDirection(parent);
 
-            int fGhostX = this.fGhost.getGhostX();
-            int fGhostY = this.fGhost.getGhostY(parent);
-            DIRECTION fGhostDirection = this.fGhost.getGhostDirection(parent);
+            int fGhostX = this.fGhost.getX(parent);
+            int fGhostY = this.fGhost.getY(parent);
+            DIRECTION fGhostDirection = this.fGhost.getDirection(parent);
 
-            int AGhostX = this.AGhost.getGhostX();
-            int AGhostY = this.AGhost.getGhostY(parent);
-            DIRECTION AGhostDirection = this.AGhost.getGhostDirection(parent);
+            int AGhostX = this.AGhost.getX(parent);
+            int AGhostY = this.AGhost.getY(parent);
+            DIRECTION AGhostDirection = this.AGhost.getDirection(parent);
 
             newNode = new AStarNode(new State(x, y, ghostX, ghostY, ghostDirection, fGhostX, fGhostY, fGhostDirection,
                     AGhostX, AGhostY, AGhostDirection), parent, distanceSoFar);
         }
 		else if(this.ghost != null && this.fGhost != null && this.AGhost == null) {
-			int ghostX = this.ghost.getGhostX();
-			int ghostY = this.ghost.getGhostY(parent);
-			DIRECTION ghostDirection = this.ghost.getGhostDirection(parent);
+			int ghostX = this.ghost.getX(parent);
+			int ghostY = this.ghost.getY(parent);
+			DIRECTION ghostDirection = this.ghost.getDirection(parent);
 
-            int fGhostX = this.fGhost.getGhostX();
-            int fGhostY = this.fGhost.getGhostY(parent);
-            DIRECTION fGhostDirection = this.fGhost.getGhostDirection(parent);
+            int fGhostX = this.fGhost.getX(parent);
+            int fGhostY = this.fGhost.getY(parent);
+            DIRECTION fGhostDirection = this.fGhost.getDirection(parent);
 
 			newNode = new AStarNode(new State(x, y, ghostX, ghostY, ghostDirection, fGhostX, fGhostY, fGhostDirection), parent, distanceSoFar);
 		}
         else if (this.ghost != null && this.fGhost == null) {
-            int ghostX = this.ghost.getGhostX();
-            int ghostY = this.ghost.getGhostY(parent);
-            DIRECTION ghostDirection = this.ghost.getGhostDirection(parent);
+            int ghostX = this.ghost.getX(parent);
+            int ghostY = this.ghost.getY(parent);
+            DIRECTION ghostDirection = this.ghost.getDirection(parent);
 
             newNode = new AStarNode(new State(x, y, ghostX, ghostY, ghostDirection), parent, distanceSoFar);
         }

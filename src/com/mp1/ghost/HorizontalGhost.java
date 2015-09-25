@@ -1,16 +1,16 @@
-package com.mp1.search.base;
+package com.mp1.ghost;
 
 import com.mp1.movement.DIRECTION;
 import com.mp1.node.Node;
 
-public class Ghost {
+public class HorizontalGhost implements Ghost {
 
 	private int ghostStartX;
 	private int ghostStartY;
 	private int wallToLeftOfGhost;
 	private int wallToRightOfGhost;
 	
-	public Ghost(int ghostStartX, int ghostStartY, int wallToLeftOfGhost,
+	public HorizontalGhost(int ghostStartX, int ghostStartY, int wallToLeftOfGhost,
 			int wallToRightOfGhost) {
 		this.ghostStartX = ghostStartX;
 		this.ghostStartY = ghostStartY;
@@ -18,11 +18,11 @@ public class Ghost {
 		this.wallToRightOfGhost = wallToRightOfGhost;
 	}
 
-	public int getGhostX() {
+	public int getX(Node parent) {
 		return this.ghostStartX;
 	}
 
-	public int getGhostY(Node parent) {
+	public int getY(Node parent) {
 		
 		if(parent == null) { // if no parent, ghost is in starting position
 			return this.ghostStartY;
@@ -61,7 +61,7 @@ public class Ghost {
 		return ghostY;
 	}
 
-	public DIRECTION getGhostDirection(Node parent) {
+	public DIRECTION getDirection(Node parent) {
 		
 		if(parent == null) { // if no parent, ghost starts off right
 			return DIRECTION.RIGHT;

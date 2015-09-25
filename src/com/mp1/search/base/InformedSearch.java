@@ -3,6 +3,9 @@ package com.mp1.search.base;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
+import com.mp1.ghost.FastGhost;
+import com.mp1.ghost.Ghost;
+import com.mp1.ghost.HorizontalGhost;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.Movement;
 import com.mp1.node.Node;
@@ -92,7 +95,7 @@ public abstract class InformedSearch extends Search {
                 ghostRightY++; // find the farthest right point
             }
 
-            this.ghost = new Ghost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
+            this.ghost = new HorizontalGhost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
         }
 
         Node fGhostStart = this.findNode('F');
@@ -113,7 +116,7 @@ public abstract class InformedSearch extends Search {
                 fGhostRightY++; // find the farthest right point
             }
 
-            this.ghost = new Ghost(fGhostStartX, fGhostStartY, fGhostLeftY, fGhostRightY);
+            this.ghost = new HorizontalGhost(fGhostStartX, fGhostStartY, fGhostLeftY, fGhostRightY);
         }
 
         Node AGhostStart = this.findNode('A');
@@ -134,7 +137,7 @@ public abstract class InformedSearch extends Search {
                 AGhostRightY++; // find the farthest right point
             }
 
-            this.ghost = new Ghost(AGhostStartX, AGhostStartY, AGhostLeftY, AGhostRightY);
+            this.ghost = new HorizontalGhost(AGhostStartX, AGhostStartY, AGhostLeftY, AGhostRightY);
         }
 	}
 
