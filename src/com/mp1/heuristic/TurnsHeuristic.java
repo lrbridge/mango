@@ -32,7 +32,6 @@ public class TurnsHeuristic implements Heuristic {
 			minNumberTurns = 1;
 		}
 
-		System.out.println("  for child " + currentState.x + " " + currentState.y + " " + currentState.directionFacing + " = " + (manhattanDistance * forwardCost) + (minNumberTurns * turnCost));
 		return (manhattanDistance * forwardCost) + (minNumberTurns * turnCost);
 	}
 	

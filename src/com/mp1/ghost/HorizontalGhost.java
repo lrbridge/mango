@@ -2,6 +2,8 @@ package com.mp1.ghost;
 
 import com.mp1.movement.DIRECTION;
 import com.mp1.node.Node;
+import com.mp1.search.base.Coordinate;
+import com.mp1.search.base.Maze;
 
 public class HorizontalGhost implements Ghost {
 
@@ -10,12 +12,25 @@ public class HorizontalGhost implements Ghost {
 	private int wallToLeftOfGhost;
 	private int wallToRightOfGhost;
 	
-	public HorizontalGhost(int ghostStartX, int ghostStartY, int wallToLeftOfGhost,
-			int wallToRightOfGhost) {
-		this.ghostStartX = ghostStartX;
-		this.ghostStartY = ghostStartY;
-		this.wallToLeftOfGhost = wallToLeftOfGhost;
-		this.wallToRightOfGhost = wallToRightOfGhost;
+	public HorizontalGhost(Character uppercaseLetter, Maze maze) {
+		Character lowercaseLetter = Character.toLowerCase(uppercaseLetter);
+		Coordinate ghostInitialLocation = maze.findNode(uppercaseLetter);
+
+		if(ghostInitialLocation == null) {
+			return;
+		}
+				
+		this.ghostStartX = ghostInitialLocation.x;
+		this.ghostStartY = ghostInitialLocation.y;
+		
+		wallToLeftOfGhost = ghostStartY;
+		while(maze.get(ghostStartX, wallToLeftOfGhost) == lowercaseLetter || maze.get(ghostStartX, wallToLeftOfGhost) == uppercaseLetter) {
+			wallToLeftOfGhost--;
+		}
+		wallToRightOfGhost = ghostStartY;
+		while(maze.get(ghostStartX, wallToRightOfGhost) == lowercaseLetter || maze.get(ghostStartX, wallToRightOfGhost) == uppercaseLetter) {
+			wallToRightOfGhost++;
+        }
 	}
 
 	public int getX(Node parent) {

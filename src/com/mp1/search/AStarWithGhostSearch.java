@@ -7,67 +7,30 @@ import com.mp1.movement.DIRECTION;
 import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
 import com.mp1.node.State;
-import com.mp1.search.base.Coordinate;
 
 public class AStarWithGhostSearch extends AStarSearch {
 
 	private Ghost ghost;
-    private FastGhost fGhost;
+    private Ghost fGhost;
     private Ghost AGhost;
 	
 	public AStarWithGhostSearch(String filename) {
 		super(filename);
 		
-		Coordinate ghostXY = this.maze.findNode('G');
-		Node ghostInitialLocation = this.makeNode(ghostXY.x, ghostXY.y, DIRECTION.RIGHT, null, "no-action");
+		Ghost ghost = new HorizontalGhost('G', this.maze);
+		if(ghost != null) {
+			this.ghost = ghost;
+		}		
 		
-		int ghostStartX = ghostInitialLocation.getState().x;
-		int ghostStartY = ghostInitialLocation.getState().y;
+		Ghost fGhost = new FastGhost('F', this.maze);
+		if(fGhost != null) {
+			this.fGhost = fGhost;
+		}		
 		
-		int wallToLeftOfGhost = ghostStartY;
-		while(this.maze.get(ghostStartX, wallToLeftOfGhost) == 'g' || this.maze.get(ghostStartX, wallToLeftOfGhost) == 'G') {
-			wallToLeftOfGhost--;
+		Ghost aGhost = new HorizontalGhost('A', this.maze);
+		if(aGhost != null) {
+			this.AGhost = aGhost;
 		}
-		int wallToRightOfGhost = ghostStartY;
-		while(this.maze.get(ghostStartX, wallToRightOfGhost) == 'g' || this.maze.get(ghostStartX, wallToRightOfGhost) == 'G') {
-            wallToRightOfGhost++;
-        }
-		this.ghost = new HorizontalGhost(ghostStartX, ghostStartY, wallToLeftOfGhost, wallToRightOfGhost);
-
-
-//        Node fGhostInitialLocation = this.findNode('F');
-//
-//        if(fGhostInitialLocation != null) {
-//            int fGhostStartX = fGhostInitialLocation.getState().x;
-//            int fGhostStartY = fGhostInitialLocation.getState().y;
-//
-//            int fWallToLeftOfGhost = fGhostStartY;
-//            while (this.maze[fGhostStartX][fWallToLeftOfGhost] == 'f' || this.maze[fGhostStartX][fWallToLeftOfGhost] == 'F') {
-//                fWallToLeftOfGhost--;
-//            }
-//            int fWallToRightOfGhost = fGhostStartY;
-//            while (this.maze[fGhostStartX][fWallToRightOfGhost] == 'f' || this.maze[fGhostStartX][fWallToRightOfGhost] == 'F') {
-//                fWallToRightOfGhost++;
-//            }
-//            this.fGhost = new FastGhost(fGhostStartX, fGhostStartY, fWallToLeftOfGhost, fWallToRightOfGhost);
-//        }
-//        Node AGhostInitialLocation = this.findNode('A');
-//
-//        if(AGhostInitialLocation != null) {
-//            int AGhostStartX = AGhostInitialLocation.getState().x;
-//            int AGhostStartY = AGhostInitialLocation.getState().y;
-//
-//            int AWallToLeftOfGhost = AGhostStartY;
-//            while (this.maze[AGhostStartX][AWallToLeftOfGhost] == 'g' || this.maze[AGhostStartX][AWallToLeftOfGhost] == 'G') {
-//                AWallToLeftOfGhost--;
-//            }
-//            int AWallToRightOfGhost = AGhostStartY;
-//            while (this.maze[AGhostStartX][AWallToRightOfGhost] == 'g' || this.maze[AGhostStartX][AWallToRightOfGhost] == 'G') {
-//                AWallToRightOfGhost++;
-//            }
-//
-//            this.AGhost = new HorizontalGhost(AGhostStartX, AGhostStartY, AWallToLeftOfGhost, AWallToRightOfGhost);
-//        }
 
 	}
 

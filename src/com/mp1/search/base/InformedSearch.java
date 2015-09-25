@@ -44,7 +44,7 @@ public abstract class InformedSearch extends Search {
 		while (!this.isFrontierEmpty()) {
 
 			Node node = this.popNodeOffFrontier();
-			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
+//			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
 			this.numNodesExpanded++;
 			this.explored.add(node);
 			
@@ -81,31 +81,36 @@ public abstract class InformedSearch extends Search {
 
 	private void findGhosts() {
 
-		Coordinate ghostXY = this.maze.findNode('G');
-		if(ghostXY != null) {
-		
-			Node ghostStart = this.makeNode(ghostXY.x, ghostXY.y, DIRECTION.RIGHT, null, "no-action");
-	        if(ghostStart == null) {
-	        	this.ghost = null;
-	        }
-
-	        else {
-	            int ghostStartX = ghostStart.getState().x;
-	            int ghostStartY = ghostStart.getState().y;
-
-	            int ghostLeftY = ghostStartY;
-	            while(this.maze.get(ghostStartX, ghostLeftY) == 'g' || this.maze.get(ghostStartX, ghostLeftY) == 'G') {
-	                ghostLeftY--; // find the farthest left point
-	            }
-	            int ghostRightY = ghostStartY;
-	            while(this.maze.get(ghostStartX, ghostRightY) == 'g' || this.maze.get(ghostStartX, ghostRightY) == 'G') {
-	                ghostRightY++; // find the farthest right point
-	            }
-
-	            this.ghost = new HorizontalGhost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
-	        }
-			
+		Ghost ghost = new HorizontalGhost('G', this.maze);
+		if(ghost != null) {
+			this.ghost = ghost;
 		}
+		
+//		Coordinate ghostXY = this.maze.findNode('G');
+//		if(ghostXY != null) {
+//		
+//			Node ghostStart = this.makeNode(ghostXY.x, ghostXY.y, DIRECTION.RIGHT, null, "no-action");
+//	        if(ghostStart == null) {
+//	        	this.ghost = null;
+//	        }
+//
+//	        else {
+//	            int ghostStartX = ghostStart.getState().x;
+//	            int ghostStartY = ghostStart.getState().y;
+//
+//	            int ghostLeftY = ghostStartY;
+//	            while(this.maze.get(ghostStartX, ghostLeftY) == 'g' || this.maze.get(ghostStartX, ghostLeftY) == 'G') {
+//	                ghostLeftY--; // find the farthest left point
+//	            }
+//	            int ghostRightY = ghostStartY;
+//	            while(this.maze.get(ghostStartX, ghostRightY) == 'g' || this.maze.get(ghostStartX, ghostRightY) == 'G') {
+//	                ghostRightY++; // find the farthest right point
+//	            }
+//
+//	            this.ghost = new HorizontalGhost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
+//	        }
+//			
+//		}
 
 //        Node fGhostStart = this.findNode('F');
 //        if(fGhostStart == null) {
