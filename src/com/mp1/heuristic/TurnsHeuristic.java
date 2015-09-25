@@ -1,5 +1,6 @@
 package com.mp1.heuristic;
 
+import com.mp1.movement.DIRECTION;
 import com.mp1.node.State;
 
 public class TurnsHeuristic implements Heuristic {
@@ -22,13 +23,13 @@ public class TurnsHeuristic implements Heuristic {
 		// compute the minimum number of turns we must have from this location/direction facing to be admissible
 		int minNumberTurns;
 		if(goalIsBehind(currentState, goalState)) {
-			minNumberTurns = 2; //System.out.println("BEHIND - 2");
+			minNumberTurns = 2;
 		}
 		else if(goalIsDirectlyAhead(currentState, goalState)) {
-			minNumberTurns = 0; //System.out.println("DIRECTLY AHEAD - 0");
+			minNumberTurns = 0;
 		}
 		else { // goal is ahead but not directly in front of me, or directly to my right or left
-			minNumberTurns = 1;  //System.out.println("FRONT SIDES OR SIDES - 1");
+			minNumberTurns = 1;
 		}
 
 		System.out.println("  for child " + currentState.x + " " + currentState.y + " " + currentState.directionFacing + " = " + (manhattanDistance * forwardCost) + (minNumberTurns * turnCost));
@@ -36,13 +37,13 @@ public class TurnsHeuristic implements Heuristic {
 	}
 	
 	private boolean goalIsBehind(State currentState, State goalState) {
-		if(currentState.directionFacing.equals("LEFT")) {
+		if(currentState.directionFacing.equals(DIRECTION.LEFT)) {
 			return currentState.y < goalState.y; // goal state is bigger = behind
 		}
-		else if(currentState.directionFacing.equals("UP")) {
+		else if(currentState.directionFacing.equals(DIRECTION.UP)) {
 			return currentState.x < goalState.x; // goal state is bigger = behind
 		}
-		if(currentState.directionFacing.equals("RIGHT")) {
+		if(currentState.directionFacing.equals(DIRECTION.RIGHT)) {
 			return currentState.y > goalState.y; // goal state is smaller = behind
 		}
 		else { // DOWN
@@ -51,7 +52,7 @@ public class TurnsHeuristic implements Heuristic {
 	}
 
 	private boolean goalIsDirectlyAhead(State currentState, State goalState) {
-		if(currentState.directionFacing.equals("LEFT") || currentState.directionFacing.equals("RIGHT")) {
+		if(currentState.directionFacing.equals(DIRECTION.LEFT) || currentState.directionFacing.equals(DIRECTION.RIGHT)) {
 			return currentState.x == goalState.x; // directly ahead if xs are equal (because this is the else if)
 		}
 		else { // UP or DOWN

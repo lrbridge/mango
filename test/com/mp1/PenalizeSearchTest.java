@@ -89,7 +89,7 @@ public class PenalizeSearchTest {
         System.out.println(actual.toString());
 
         assertEquals(actual.pathCost, 28);
-        assertEquals(actual.numNodesExpanded, 58);
+        assertEquals(actual.numNodesExpanded, 55);
         assertMazesAreEqual(actual, expectedPath);
     }
     
@@ -114,7 +114,7 @@ public class PenalizeSearchTest {
         System.out.println(actual.toString());
 
         assertEquals(actual.pathCost, 18);
-        assertEquals(actual.numNodesExpanded, 46); // explores U/L/R/D for every node
+        assertEquals(actual.numNodesExpanded, 42); // explores U/L/R/D for every node... less UPs now because now we know those are at least 2 turns away
         assertMazesAreEqual(actual, expectedPath);
     }
 
