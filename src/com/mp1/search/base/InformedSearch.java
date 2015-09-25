@@ -3,9 +3,6 @@ package com.mp1.search.base;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-import com.mp1.ghost.FastGhost;
-import com.mp1.ghost.Ghost;
-import com.mp1.ghost.HorizontalGhost;
 import com.mp1.movement.DIRECTION;
 import com.mp1.movement.Movement;
 import com.mp1.node.Node;
@@ -19,10 +16,6 @@ public abstract class InformedSearch extends Search {
 	protected PriorityQueue<Node> frontier;
 	    
 	protected Node goalNode;
-		
-    private Ghost ghost;
-    private FastGhost fGhost;
-    private Ghost AGhost;
     
 	public InformedSearch(String filename, Movement movement) {
 		super(filename);
@@ -34,9 +27,7 @@ public abstract class InformedSearch extends Search {
 
 		Coordinate goalXY = this.maze.findNode('.');
 		this.goalNode = this.makeNode(goalXY.x, goalXY.y, DIRECTION.RIGHT, null, "no-action");
-		
-		this.findGhosts();
-		
+				
 		Coordinate startXY = this.maze.findNode('P');
 		Node firstNode = this.makeNode(startXY.x, startXY.y, DIRECTION.RIGHT, null, "no-action");
 		this.addNodeToFrontier(firstNode);
@@ -79,87 +70,8 @@ public abstract class InformedSearch extends Search {
 		return null; // fail if no solution is found
 	}
 
-	private void findGhosts() {
-
-		Ghost ghost = new HorizontalGhost('G', this.maze);
-		if(ghost != null) {
-			this.ghost = ghost;
-		}
-		
-//		Coordinate ghostXY = this.maze.findNode('G');
-//		if(ghostXY != null) {
-//		
-//			Node ghostStart = this.makeNode(ghostXY.x, ghostXY.y, DIRECTION.RIGHT, null, "no-action");
-//	        if(ghostStart == null) {
-//	        	this.ghost = null;
-//	        }
-//
-//	        else {
-//	            int ghostStartX = ghostStart.getState().x;
-//	            int ghostStartY = ghostStart.getState().y;
-//
-//	            int ghostLeftY = ghostStartY;
-//	            while(this.maze.get(ghostStartX, ghostLeftY) == 'g' || this.maze.get(ghostStartX, ghostLeftY) == 'G') {
-//	                ghostLeftY--; // find the farthest left point
-//	            }
-//	            int ghostRightY = ghostStartY;
-//	            while(this.maze.get(ghostStartX, ghostRightY) == 'g' || this.maze.get(ghostStartX, ghostRightY) == 'G') {
-//	                ghostRightY++; // find the farthest right point
-//	            }
-//
-//	            this.ghost = new HorizontalGhost(ghostStartX, ghostStartY, ghostLeftY, ghostRightY);
-//	        }
-//			
-//		}
-
-//        Node fGhostStart = this.findNode('F');
-//        if(fGhostStart == null) {
-//            this.fGhost = null;
-//        }
-//
-//        else {
-//            int fGhostStartX = fGhostStart.getState().x;
-//            int fGhostStartY = fGhostStart.getState().y;
-//
-//            int fGhostLeftY = fGhostStartY;
-//            while(this.maze[fGhostStartX][fGhostLeftY] == 'f' || this.maze[fGhostStartX][fGhostLeftY] == 'F') {
-//                fGhostLeftY--; // find the farthest left point
-//            }
-//            int fGhostRightY = fGhostStartY;
-//            while(this.maze[fGhostStartX][fGhostRightY] == 'f' || this.maze[fGhostStartX][fGhostRightY] == 'F') {
-//                fGhostRightY++; // find the farthest right point
-//            }
-//
-//            this.ghost = new HorizontalGhost(fGhostStartX, fGhostStartY, fGhostLeftY, fGhostRightY);
-//        }
-//
-//        Node AGhostStart = this.findNode('A');
-//        if(AGhostStart == null) {
-//            this.fGhost = null;
-//        }
-//
-//        else {
-//            int AGhostStartX = AGhostStart.getState().x;
-//            int AGhostStartY = AGhostStart.getState().y;
-//
-//            int AGhostLeftY = AGhostStartY;
-//            while(this.maze[AGhostStartX][AGhostLeftY] == 'f' || this.maze[AGhostStartX][AGhostLeftY] == 'F') {
-//                AGhostLeftY--; // find the farthest left point
-//            }
-//            int AGhostRightY = AGhostStartY;
-//            while(this.maze[AGhostStartX][AGhostRightY] == 'f' || this.maze[AGhostStartX][AGhostRightY] == 'F') {
-//                AGhostRightY++; // find the farthest right point
-//            }
-//
-//            this.ghost = new HorizontalGhost(AGhostStartX, AGhostStartY, AGhostLeftY, AGhostRightY);
-//        }
-	}
-
 	private boolean collidesWithGhost(Node child) {
-		if(this.ghost == null && this.fGhost == null) {
-			return false; // no ghost
-		}
-		
+
 		State childState = child.getState();
 		State parentState = child.getParent().getState();
 
@@ -189,8 +101,6 @@ public abstract class InformedSearch extends Search {
                 return true;
             }
         }
-
-
 
         return false;
 	}
