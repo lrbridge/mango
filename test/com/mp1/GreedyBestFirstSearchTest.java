@@ -28,7 +28,7 @@ public class GreedyBestFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '.', '.', '.', '%', '%', 'P', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
-		Search x = new GreedyBestFirstSearch("simpleMaze.txt");
+		Search x = new GreedyBestFirstSearch("test-files/simpleMaze.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -52,7 +52,7 @@ public class GreedyBestFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-        Search x = new GreedyBestFirstSearch("smallMaze.txt");
+        Search x = new GreedyBestFirstSearch("test-files/smallMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -92,7 +92,7 @@ public class GreedyBestFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-        Search x = new GreedyBestFirstSearch("mediumMaze.txt");
+        Search x = new GreedyBestFirstSearch("test-files/mediumMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -147,7 +147,7 @@ public class GreedyBestFirstSearchTest {
 
         };
 
-        Search x = new GreedyBestFirstSearch("bigMaze.txt");
+        Search x = new GreedyBestFirstSearch("test-files/bigMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -184,7 +184,7 @@ public class GreedyBestFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-        Search x = new GreedyBestFirstSearch("openMaze.txt");
+        Search x = new GreedyBestFirstSearch("test-files/openMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -207,7 +207,7 @@ public class GreedyBestFirstSearchTest {
 				{ '%', '.', '.', '.', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new GreedyBestFirstSearch("badGreedy.txt");
+		Search x = new GreedyBestFirstSearch("test-files/badGreedy.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -232,7 +232,7 @@ public class GreedyBestFirstSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new GreedyBestFirstSearch("greedyVsAStar.txt");
+		Search x = new GreedyBestFirstSearch("test-files/greedyVsAStar.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -259,7 +259,7 @@ public class GreedyBestFirstSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new GreedyBestFirstSearch("greedyVsAStar2.txt");
+		Search x = new GreedyBestFirstSearch("test-files/greedyVsAStar2.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());

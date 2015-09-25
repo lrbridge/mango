@@ -28,7 +28,7 @@ public class DepthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '.', '.', '.', '%', '%', 'P', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
-		Search x = new DepthFirstSearch("simpleMaze.txt");
+		Search x = new DepthFirstSearch("test-files/simpleMaze.txt");
 		MazeSolution actual = x.solve();
 		
 		assertEquals(actual.pathCost, 12);
@@ -50,7 +50,7 @@ public class DepthFirstSearchTest {
             { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-		Search x = new DepthFirstSearch("smallMaze.txt");
+		Search x = new DepthFirstSearch("test-files/smallMaze.txt");
 		MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -89,7 +89,7 @@ public class DepthFirstSearchTest {
             { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-		Search x = new DepthFirstSearch("mediumMaze.txt");
+		Search x = new DepthFirstSearch("test-files/mediumMaze.txt");
 		MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -142,7 +142,7 @@ public class DepthFirstSearchTest {
             { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
 
         };
-		Search x = new DepthFirstSearch("bigMaze.txt");
+		Search x = new DepthFirstSearch("test-files/bigMaze.txt");
 		MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -178,7 +178,7 @@ public class DepthFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-        Search x = new DepthFirstSearch("openMaze.txt");
+        Search x = new DepthFirstSearch("test-files/openMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -199,7 +199,7 @@ public class DepthFirstSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', '.', '.', '.', '.', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 		
-		Search x = new DepthFirstSearch("dfsVsBfs.txt");
+		Search x = new DepthFirstSearch("test-files/dfsVsBfs.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -220,7 +220,7 @@ public class DepthFirstSearchTest {
 				{ '%', ' ', '.', '.', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new DepthFirstSearch("dfsVsBfs2.txt");
+		Search x = new DepthFirstSearch("test-files/dfsVsBfs2.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -242,7 +242,7 @@ public class DepthFirstSearchTest {
 				{ '%', '.', '.', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new DepthFirstSearch("badGreedy.txt");
+		Search x = new DepthFirstSearch("test-files/badGreedy.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());

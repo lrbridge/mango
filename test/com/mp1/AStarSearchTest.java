@@ -28,7 +28,7 @@ public class AStarSearchTest {
 				{ '%', '%', '%', '%', '%', '.', '.', '.', '%', '%', 'P', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
-		Search x = new AStarSearch("simpleMaze.txt");
+		Search x = new AStarSearch("test-files/simpleMaze.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -51,7 +51,7 @@ public class AStarSearchTest {
                 { '%', ' ', '%', ' ', '%', ' ', ' ', ' ', '%', '.', '.', '.', '.', '.', '.', '.', '%', ' ', '%', '.', '.', 'P', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }, };
 
-        Search x = new AStarSearch("smallMaze.txt");
+        Search x = new AStarSearch("test-files/smallMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -90,7 +90,7 @@ public class AStarSearchTest {
                 { '%', ' ', '%', ' ', '%', ' ', ' ', ' ', '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%', ' ', '%', '.', '.', 'P', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }, };
 
-        Search x = new AStarSearch("mediumMaze.txt");
+        Search x = new AStarSearch("test-files/mediumMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -145,7 +145,7 @@ public class AStarSearchTest {
 
         };
 
-        Search x = new AStarSearch("bigMaze.txt");
+        Search x = new AStarSearch("test-files/bigMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -183,7 +183,7 @@ public class AStarSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-        Search x = new AStarSearch("openMaze.txt");
+        Search x = new AStarSearch("test-files/openMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -206,7 +206,7 @@ public class AStarSearchTest {
 				{ '%', '.', '.', '.', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new AStarSearch("badGreedy.txt");
+		Search x = new AStarSearch("test-files/badGreedy.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -231,7 +231,7 @@ public class AStarSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new AStarSearch("greedyVsAStar.txt");
+		Search x = new AStarSearch("test-files/greedyVsAStar.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -255,7 +255,7 @@ public class AStarSearchTest {
                     {'%','%','%','%','%','%','%','%','%','%','%','%','%','%','%','%','%'}};
                     
 		
-		Search x = new AStarSearch("simpleMazeCKW.txt");
+		Search x = new AStarSearch("test-files/simpleMazeCKW.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -282,7 +282,7 @@ public class AStarSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new AStarSearch("greedyVsAStar2.txt");
+		Search x = new AStarSearch("test-files/greedyVsAStar2.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());

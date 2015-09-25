@@ -34,7 +34,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', '.', '.', '.', ' ', ' ', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1, new ManhattanDistanceHeuristic());
+        Search x = new AStarPenalizingTurnsSearch("test-files/turns1.txt", 2, 1, new ManhattanDistanceHeuristic());
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -59,7 +59,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', ' ', ' ', '.', '.', '.', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2, new ManhattanDistanceHeuristic());
+        Search x = new AStarPenalizingTurnsSearch("test-files/turns1.txt", 1, 2, new ManhattanDistanceHeuristic());
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -83,7 +83,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', '.', '.', '.', ' ', ' ', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 2, 1, new TurnsHeuristic(2, 1));
+        Search x = new AStarPenalizingTurnsSearch("test-files/turns1.txt", 2, 1, new TurnsHeuristic(2, 1));
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -108,7 +108,7 @@ public class PenalizeSearchTest {
                 { '%', '%', '%', '%', ' ', ' ', '.', '.', '.', '%' },
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }};
 
-        Search x = new AStarPenalizingTurnsSearch("turns1.txt", 1, 2, new TurnsHeuristic(1, 2));
+        Search x = new AStarPenalizingTurnsSearch("test-files/turns1.txt", 1, 2, new TurnsHeuristic(1, 2));
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());

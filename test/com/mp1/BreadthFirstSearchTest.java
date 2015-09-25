@@ -28,7 +28,7 @@ public class BreadthFirstSearchTest {
 				{ '%', '%', '%', '%', '%', '.', '.', '.', '%', '%', 'P', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 
-		Search x = new BreadthFirstSearch("simpleMaze.txt");
+		Search x = new BreadthFirstSearch("test-files/simpleMaze.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -52,7 +52,7 @@ public class BreadthFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' }
         };
 
-		Search x = new BreadthFirstSearch("smallMaze.txt");
+		Search x = new BreadthFirstSearch("test-files/smallMaze.txt");
 		MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -92,7 +92,7 @@ public class BreadthFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-		Search x = new BreadthFirstSearch("mediumMaze.txt");
+		Search x = new BreadthFirstSearch("test-files/mediumMaze.txt");
 		MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -147,7 +147,7 @@ public class BreadthFirstSearchTest {
 
         };
 
-		Search x = new BreadthFirstSearch("bigMaze.txt");
+		Search x = new BreadthFirstSearch("test-files/bigMaze.txt");
 		MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -184,7 +184,7 @@ public class BreadthFirstSearchTest {
                 { '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' },
         };
 
-        Search x = new BreadthFirstSearch("openMaze.txt");
+        Search x = new BreadthFirstSearch("test-files/openMaze.txt");
         MazeSolution actual = x.solve();
 
         System.out.println(actual.toString());
@@ -207,7 +207,7 @@ public class BreadthFirstSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%', '%' } };
 		
-		Search x = new BreadthFirstSearch("dfsVsBfs.txt");
+		Search x = new BreadthFirstSearch("test-files/dfsVsBfs.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -228,7 +228,7 @@ public class BreadthFirstSearchTest {
 				{ '%', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new BreadthFirstSearch("dfsVsBfs2.txt");
+		Search x = new BreadthFirstSearch("test-files/dfsVsBfs2.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -250,7 +250,7 @@ public class BreadthFirstSearchTest {
 				{ '%', '.', '.', '.', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 		
-		Search x = new BreadthFirstSearch("badGreedy.txt");
+		Search x = new BreadthFirstSearch("test-files/badGreedy.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());

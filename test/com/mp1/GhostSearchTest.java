@@ -31,7 +31,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost1.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost1.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -54,7 +54,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost2.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost2.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -77,7 +77,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost3.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost3.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -100,7 +100,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost4.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost4.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -123,7 +123,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost5.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost5.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -144,7 +144,7 @@ public class GhostSearchTest {
 				{ '%', '%', '.', '.', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%'}};
 
-		Search x = new AStarWithGhostSearch("ghost6.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost6.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -165,7 +165,7 @@ public class GhostSearchTest {
 				{ '%', '%', '%', '.', '.', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%', '%'}};
 
-		Search x = new AStarWithGhostSearch("ghost7.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost7.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -188,7 +188,7 @@ public class GhostSearchTest {
 				{ '%', 'P', '.', '.', '.', '.', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%'}};
 
-		Search x = new AStarWithGhostSearch("ghost8.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost8.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -211,7 +211,7 @@ public class GhostSearchTest {
 				{ '%', 'P', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%'}};
 
-		Search x = new AStarWithGhostSearch("ghost9.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost9.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -234,7 +234,7 @@ public class GhostSearchTest {
 				{ '%', 'P', ' ', ' ', ' ', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%', '%', '%'}};
 
-		Search x = new AStarWithGhostSearch("ghost10.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost10.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());
@@ -257,7 +257,7 @@ public class GhostSearchTest {
 				{ '%', '%', 'P', ' ', ' ', '%' },
 				{ '%', '%', '%', '%', '%', '%' }};
 
-		Search x = new AStarWithGhostSearch("ghost11.txt");
+		Search x = new AStarWithGhostSearch("test-files/ghost11.txt");
 		MazeSolution actual = x.solve();
 
 		System.out.println(actual.toString());

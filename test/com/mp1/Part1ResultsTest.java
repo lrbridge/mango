@@ -24,30 +24,30 @@ public class Part1ResultsTest {
 		
 	@Test
 	public void bfs() {
-		this.runMaze(new BreadthFirstSearch("mediumMaze.txt"), "mediumMaze.txt", 42, 224);
-		this.runMaze(new BreadthFirstSearch("bigMaze.txt"), "bigMaze.txt", 62, 720);
-		this.runMaze(new BreadthFirstSearch("openMaze.txt"), "openMaze.txt", 54, 275);
+		this.runMaze(new BreadthFirstSearch("test-files/mediumMaze.txt"), "mediumMaze.txt", 42, 224);
+		this.runMaze(new BreadthFirstSearch("test-files/bigMaze.txt"), "bigMaze.txt", 62, 720);
+		this.runMaze(new BreadthFirstSearch("test-files/openMaze.txt"), "openMaze.txt", 54, 275);
 	}
 	
 	@Test
 	public void dfs() {
-		this.runMaze(new DepthFirstSearch("mediumMaze.txt"), "mediumMaze.txt", 88, 201);
-		this.runMaze(new DepthFirstSearch("bigMaze.txt"), "bigMaze.txt", 232, 603);
-		this.runMaze(new DepthFirstSearch("openMaze.txt"), "openMaze.txt", 162, 274);
+		this.runMaze(new DepthFirstSearch("test-files/mediumMaze.txt"), "mediumMaze.txt", 88, 201);
+		this.runMaze(new DepthFirstSearch("test-files/bigMaze.txt"), "bigMaze.txt", 232, 603);
+		this.runMaze(new DepthFirstSearch("test-files/openMaze.txt"), "openMaze.txt", 162, 274);
 	}
 	
 	@Test
 	public void greedyBestFirstSearch() {
-		this.runMaze(new GreedyBestFirstSearch("mediumMaze.txt"), "mediumMaze.txt", 56, 80);
-		this.runMaze(new GreedyBestFirstSearch("bigMaze.txt"), "bigMaze.txt", 70, 117);
-		this.runMaze(new GreedyBestFirstSearch("openMaze.txt"), "openMaze.txt", 60, 123);
+		this.runMaze(new GreedyBestFirstSearch("test-files/mediumMaze.txt"), "mediumMaze.txt", 56, 80);
+		this.runMaze(new GreedyBestFirstSearch("test-files/bigMaze.txt"), "bigMaze.txt", 70, 117);
+		this.runMaze(new GreedyBestFirstSearch("test-files/openMaze.txt"), "openMaze.txt", 60, 123);
 	}
 	
 	@Test
 	public void aStar() {
-		this.runMaze(new AStarSearch("mediumMaze.txt"), "mediumMaze.txt", 42, 88);
-		this.runMaze(new AStarSearch("bigMaze.txt"), "bigMaze.txt", 62, 273);
-		this.runMaze(new AStarSearch("openMaze.txt"), "openMaze.txt", 54, 123);
+		this.runMaze(new AStarSearch("test-files/mediumMaze.txt"), "mediumMaze.txt", 42, 88);
+		this.runMaze(new AStarSearch("test-files/bigMaze.txt"), "bigMaze.txt", 62, 273);
+		this.runMaze(new AStarSearch("test-files/openMaze.txt"), "openMaze.txt", 54, 123);
 	}
 	
 }
