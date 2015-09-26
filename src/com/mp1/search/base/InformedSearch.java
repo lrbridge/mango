@@ -102,6 +102,16 @@ public abstract class InformedSearch extends Search {
             }
         }
 
+
+        if(childState.x == childState.VGhostX) {
+            if(childState.y == childState.VGhostY) {
+                return true;
+            }
+            else if(parentState.y == childState.VGhostX && parentState.VGhostY == childState.y) {
+                return true;
+            }
+        }
+
         return false;
 	}
 

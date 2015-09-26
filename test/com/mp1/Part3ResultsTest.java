@@ -82,5 +82,11 @@ public class Part3ResultsTest {
         this.runMaze(new AStarWithGhostSearch("test-files/ghostWorld2.txt"), "ghostWorld2.txt", 34, 226);
     }
 
+    @Test
+    public void ghostWorld3() {
+        this.runMaze(new AStarSearch("test-files/ghostWorld3.txt"), "ghostWorld3.txt", 50, 115);
+        this.runMaze(new AStarWithGhostSearch("test-files/ghostWorld3.txt"), "ghostWorld3.txt", 60, 281);
+    }
+
 
 }

@@ -24,6 +24,10 @@ public class State {
     public int AGhostY; // (OPTIONAL)
     public DIRECTION AGhostDirection; // (OPTIONAL) the direction moving - left or right
 
+    public int VGhostX; // (OPTIONAL)
+    public int VGhostY; // (OPTIONAL)
+    public DIRECTION VGhostDirection; // (OPTIONAL) the direction moving - left or right
+
 	public State(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -53,6 +57,25 @@ public class State {
         this.fGhostY = fGhostY;
         this.fGhostDirection = fGhostDirection;
     }
+
+    public State(int x, int y, int ghostX, int ghostY, DIRECTION ghostDirection, int fGhostX, int fGhostY, DIRECTION fGhostDirection,
+                 int AGhostX, int AGhostY, DIRECTION AGhostDirection, int VGhostX,  int VGhostY, DIRECTION VGhostDirection) {
+        this.x = x;
+        this.y = y;
+        this.ghostX = ghostX;
+        this.ghostY = ghostY;
+        this.ghostDirection = ghostDirection;
+        this.fGhostX = fGhostX;
+        this.fGhostY = fGhostY;
+        this.fGhostDirection = fGhostDirection;
+        this.AGhostX = AGhostX;
+        this.AGhostY = AGhostY;
+        this.AGhostDirection = AGhostDirection;
+        this.VGhostX = VGhostX;
+        this.VGhostY = VGhostY;
+        this.VGhostDirection = VGhostDirection;
+    }
+
 
     public State(int x, int y, int ghostX, int ghostY, DIRECTION ghostDirection, int fGhostX, int fGhostY, DIRECTION fGhostDirection,
                  int AGhostX, int AGhostY, DIRECTION AGhostDirection) {
