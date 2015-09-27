@@ -68,7 +68,19 @@ public class Part3ResultsTest {
         this.runMaze(new AStarSearch("test-files/bigGhost2.txt"), "bigGhost2.txt", 68, 110);
         this.runMaze(new AStarWithGhostSearch("test-files/bigGhost2.txt"), "bigGhost2.txt", 70, 126);
     }
+    
+    @Test
+    public void fastghost() {
+        this.runMaze(new AStarSearch("test-files/fastghost.txt"), "fastghost.txt", 7, 8);
+        this.runMaze(new AStarWithGhostSearch("test-files/fastghost.txt"), "fastghost.txt", 9, 10);
+    }
 
+    @Test
+    public void verticalghost() {
+        this.runMaze(new AStarSearch("test-files/verticalghost.txt"), "verticalghost.txt", 7, 8);
+        this.runMaze(new AStarWithGhostSearch("test-files/verticalghost.txt"), "verticalghost.txt", 11, 15);
+    }
+    
     /* part 3-2-2 : even more ghosts */
     @Test
     public void ghostWorld1() {

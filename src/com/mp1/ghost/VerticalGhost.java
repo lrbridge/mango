@@ -1,102 +1,86 @@
-//package com.mp1.ghost;
-//
-//import com.mp1.movement.DIRECTION;
-//import com.mp1.node.Node;
-//import com.mp1.search.base.Coordinate;
-//import com.mp1.search.base.Maze;
-//
-//public class VerticalGhost implements Ghost {
-//
-//    private int ghostStartX;
-//    private int ghostStartY;
-//    private int wallToUpOfGhost;
-//    private int wallToDownOfGhost;
-//
-//    public VerticalGhost(Character uppercaseLetter, Maze maze) {
-//        Character lowercaseLetter = Character.toLowerCase(uppercaseLetter);
-//        Coordinate ghostInitialLocation = maze.findNode(uppercaseLetter);
-//
-//        if(ghostInitialLocation == null) {
-//            return;
-//        }
-//
-//        this.ghostStartX = ghostInitialLocation.x;
-//        this.ghostStartY = ghostInitialLocation.y;
-//
-//        wallToUpOfGhost = ghostStartX;
-//        while(maze.get(ghostStartX, wallToUpOfGhost) == lowercaseLetter || maze.get(ghostStartX, wallToUpOfGhost) == uppercaseLetter) {
-//            wallToUpOfGhost--;
-//        }
-//        wallToDownOfGhost = ghostStartX;
-//        while(maze.get(ghostStartX, wallToDownOfGhost) == lowercaseLetter || maze.get(ghostStartX, wallToDownOfGhost) == uppercaseLetter) {
-//            wallToDownOfGhost++;
-//        }
-//    }
-//
-//
-//
-//    public int getX(Node parent) {
-//
-//        if(parent == null) { // if no parent, ghost is in starting position
-//            return this.ghostStartX;
-//        }
-//
-//        int parentGhostX = parent.getState().ghostX;
-//        DIRECTION parentGhostDirection = parent.getState().ghostDirection;
-//
-//        int ghostX;
-//
-//        if(this.wallToUpOfGhost+1 == this.wallToDownOfGhost-1) {
-//            // if there is only 1 G (no g's), don't change location
-//            ghostX = parentGhostX;
-//        }
-//        else if(parentGhostDirection.equals(DIRECTION.DOWN)) { // moving up
-//
-//            if(parentGhostX < (this.wallToDownOfGhost - 1)) { // still room to move
-//                ghostX = parentGhostX + 1;
-//            }
-//            else { // change direction
-//                ghostX = parentGhostX - 1;
-//            }
-//
-//        }
-//        else { // moving down
-//
-//            if(parentGhostX > (this.wallToDownOfGhost + 1)) { // still room to move
-//                ghostX = parentGhostX - 1;
-//            }
-//            else { // change direction
-//                ghostX = parentGhostX + 1;
-//            }
-//
-//        }
-//
-//        return ghostX;
-//    }
-//
-//    public int getY(Node parent) {
-//        return this.ghostStartY;
-//    }
-//
-//    public DIRECTION getDirection(Node parent) {
-//
-//        if(parent == null) { // if no parent, ghost starts off down
-//            return DIRECTION.DOWN;
-//        }
-//
-//        int parentGhostX = parent.getState().ghostX;
-//        DIRECTION parentGhostDirection = parent.getState().ghostDirection;
-//
-//        DIRECTION newDirection = parentGhostDirection;
-//
-//        if(parentGhostDirection.equals(DIRECTION.DOWN) && parentGhostX >= (this.wallToDownOfGhost - 1)) {
-//            newDirection = DIRECTION.UP;
-//        }
-//        else if(parentGhostDirection.equals(DIRECTION.UP) && parentGhostX <= (this.wallToUpOfGhost + 1)){
-//            newDirection = DIRECTION.DOWN;
-//        }
-//
-//        return newDirection;
-//    }
-//
-//}
+package com.mp1.ghost;
+
+import com.mp1.movement.DIRECTION;
+import com.mp1.search.base.Coordinate;
+import com.mp1.search.base.Maze;
+
+public class VerticalGhost implements Ghost {
+
+    private int ghostStartX;
+    private int ghostStartY;
+    private int wallAboveGhost;
+    private int wallBelowGhost;
+	private boolean exists = false;
+	
+	public boolean exists() {
+		return this.exists;
+	}
+	
+    public VerticalGhost(Character uppercaseLetter, Maze maze) {
+        Character lowercaseLetter = Character.toLowerCase(uppercaseLetter);
+        Coordinate ghostInitialLocation = maze.findNode(uppercaseLetter);
+
+        if(ghostInitialLocation == null) {
+            return;
+        }
+        
+        this.exists = true;
+
+        this.ghostStartX = ghostInitialLocation.x;
+        this.ghostStartY = ghostInitialLocation.y;
+
+        wallAboveGhost = ghostStartX;
+        while(maze.get(wallAboveGhost, ghostStartY) == lowercaseLetter || maze.get(wallAboveGhost, ghostStartY) == uppercaseLetter) {
+        	wallAboveGhost--;
+        }
+        wallBelowGhost = ghostStartX;
+        while(maze.get(wallBelowGhost, ghostStartY) == lowercaseLetter || maze.get(wallBelowGhost, ghostStartY) == uppercaseLetter) {
+        	wallBelowGhost++;
+        }    
+    }
+
+	public Coordinate getCoordinate(Coordinate lastCoordinate) {
+
+		int newGhostX;
+		int newGhostY = this.ghostStartY;
+		DIRECTION newGhostDirection;
+		
+		if(lastCoordinate == null) { // if no previous coordinates, ghost is in starting position & going right
+			newGhostX = this.ghostStartX;
+			newGhostDirection = DIRECTION.DOWN;
+		}
+		else {
+			if(this.wallAboveGhost+1 == this.wallBelowGhost-1) {
+				newGhostX = lastCoordinate.x;
+				newGhostDirection = lastCoordinate.direction;
+			}
+			else if(lastCoordinate.direction.equals(DIRECTION.DOWN)) { // moving down
+				
+				if(lastCoordinate.x < (this.wallBelowGhost - 1)) { // still room to move
+					newGhostX = lastCoordinate.x + 1;
+					newGhostDirection = lastCoordinate.direction;
+				}
+				else { // change direction
+					newGhostX = lastCoordinate.x - 1;
+					newGhostDirection = DIRECTION.UP;
+				}
+				
+			}
+			else { // moving up
+			
+				if(lastCoordinate.x > (this.wallAboveGhost + 1)) { // still room to move
+					newGhostX = lastCoordinate.x - 1;
+					newGhostDirection = lastCoordinate.direction;
+				}
+				else { // change direction
+					newGhostX = lastCoordinate.x + 1;
+					newGhostDirection = DIRECTION.DOWN;
+				}
+				
+			}
+			
+		}
+		
+		return new Coordinate(newGhostX, newGhostY, newGhostDirection);
+	}
+}

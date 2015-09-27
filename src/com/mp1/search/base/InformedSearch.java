@@ -79,18 +79,31 @@ public abstract class InformedSearch extends Search {
 		State parentState = child.getParent().getState();
 
 		int ghostIndex = 0;
-		while(ghostIndex < childState.ghostCoordinates.size()) { // TODO must fix this for non horizontal movement...
+		while(ghostIndex < childState.ghostCoordinates.size()) {
 			
 			Coordinate childGhost = childState.ghostCoordinates.get(ghostIndex);
 			Coordinate parentGhost = parentState.ghostCoordinates.get(ghostIndex);
 			
-			if(childState.x == childGhost.x) { // x must be the same for horizontal ghost
-				if(childState.y == childGhost.y) {
-					return true; // if ghost & pacman are in same square
-				}
-				else if(parentState.y == childGhost.y && parentGhost.y == childState.y) {
-	                return true; // if ghost & pacman passed in the night
-	            }
+			if(childGhost.direction.equals(DIRECTION.LEFT) || childGhost.direction.equals(DIRECTION.RIGHT)) {
+				if(childState.x == childGhost.x) { // x must be the same for horizontal ghost
+					if(childState.y == childGhost.y) {
+						return true; // if ghost & pacman are in same square
+					}
+					else if(parentState.y == childGhost.y && parentGhost.y == childState.y) {
+		                return true; // if ghost & pacman passed in the night
+		            }
+				}	
+			}
+			
+			else { // UP or DOWN
+				if(childState.y == childGhost.y) { 
+					if(childState.x == childGhost.x) {
+						return true; // if ghost & pacman are in same square
+					}
+					else if(parentState.x == childGhost.x && parentGhost.x == childState.x) {
+		                return true; // if ghost & pacman passed in the night
+		            }
+				}	
 			}
 			
 			ghostIndex++;

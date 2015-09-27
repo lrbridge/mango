@@ -3,8 +3,10 @@ package com.mp1.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mp1.ghost.FastGhost;
 import com.mp1.ghost.Ghost;
 import com.mp1.ghost.HorizontalGhost;
+import com.mp1.ghost.VerticalGhost;
 import com.mp1.movement.DIRECTION;
 import com.mp1.node.AStarNode;
 import com.mp1.node.Node;
@@ -24,21 +26,21 @@ public class AStarWithGhostSearch extends AStarSearch {
 		if(ghost.exists()) {
 			ghosts.add(ghost);
 		}		
-//		
-//		Ghost fGhost = new FastGhost('F', this.maze);
-//		if(fGhost != null) {
-//			ghosts.add(fGhost);
-//		}		
+		
+		Ghost fGhost = new FastGhost('F', this.maze);
+		if(fGhost.exists()) {
+			ghosts.add(fGhost);
+		}		
 		
 		Ghost aGhost = new HorizontalGhost('A', this.maze);
 		if(aGhost.exists()) {
 			ghosts.add(aGhost);
 		}
-//
-//        Ghost vGhost = new VerticalGhost('V', this.maze);
-//        if(vGhost != null) {
-//			ghosts.add(vGhost);
-//        }
+
+        Ghost vGhost = new VerticalGhost('V', this.maze);
+        if(vGhost.exists()) {
+			ghosts.add(vGhost);
+        }
 
 	}
 
