@@ -35,7 +35,10 @@ public abstract class InformedSearch extends Search {
 		while (!this.isFrontierEmpty()) {
 
 			Node node = this.popNodeOffFrontier();
-//			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
+			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
+			for(Coordinate x : node.getState().ghostCoordinates) {
+				System.out.println("    " + x.x + " " + x.y + " " + x.direction);
+			}
 			this.numNodesExpanded++;
 			this.explored.add(node);
 			
@@ -75,42 +78,23 @@ public abstract class InformedSearch extends Search {
 		State childState = child.getState();
 		State parentState = child.getParent().getState();
 
-		if(childState.x == childState.ghostX) {
-			if(childState.y == childState.ghostY) {
-				return true;
+		int ghostIndex = 0;
+		while(ghostIndex < childState.ghostCoordinates.size()) { // TODO must fix this for non horizontal movement...
+			
+			Coordinate childGhost = childState.ghostCoordinates.get(ghostIndex);
+			Coordinate parentGhost = parentState.ghostCoordinates.get(ghostIndex);
+			
+			if(childState.x == childGhost.x) { // x must be the same for horizontal ghost
+				if(childState.y == childGhost.y) {
+					return true; // if ghost & pacman are in same square
+				}
+				else if(parentState.y == childGhost.y && parentGhost.y == childState.y) {
+	                return true; // if ghost & pacman passed in the night
+	            }
 			}
-			else if(parentState.y == childState.ghostY && parentState.ghostY == childState.y) {
-                return true;
-            }
+			
+			ghostIndex++;
 		}
-
-        if(childState.x == childState.fGhostX) {
-            if(childState.y == childState.fGhostY) {
-                return true;
-            }
-            else if(parentState.y == childState.fGhostY && parentState.fGhostY == childState.y) {
-                return true;
-            }
-        }
-
-        if(childState.x == childState.AGhostX) {
-            if(childState.y == childState.AGhostY) {
-                return true;
-            }
-            else if(parentState.y == childState.AGhostY && parentState.AGhostY == childState.y) {
-                return true;
-            }
-        }
-
-
-        if(childState.x == childState.VGhostX) {
-            if(childState.y == childState.VGhostY) {
-                return true;
-            }
-            else if(parentState.y == childState.VGhostX && parentState.VGhostY == childState.y) {
-                return true;
-            }
-        }
 
         return false;
 	}

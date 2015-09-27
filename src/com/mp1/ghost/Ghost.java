@@ -1,14 +1,11 @@
 package com.mp1.ghost;
 
-import com.mp1.movement.DIRECTION;
-import com.mp1.node.Node;
+import com.mp1.search.base.Coordinate;
 
 public interface Ghost {
 
-	public int getX(Node parent);
-
-	public int getY(Node parent);
-
-	public DIRECTION getDirection(Node parent);
+	public Coordinate getCoordinate(Coordinate lastCoordinate);
+	
+	public boolean exists();
 
 }
