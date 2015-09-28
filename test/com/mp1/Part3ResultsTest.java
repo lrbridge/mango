@@ -84,7 +84,7 @@ public class Part3ResultsTest {
     /* part 3-2-2 : even more ghosts */
     @Test
     public void ghostWorld1() {
-//        this.runMaze(new AStarSearch("test-files/ghostWorld1.txt"), "ghostWorld1.txt", 26, 41);
+        this.runMaze(new AStarSearch("test-files/ghostWorld1.txt"), "ghostWorld1.txt", 26, 41);
         try {
         	this.runMaze(new AStarWithGhostSearch("test-files/ghostWorld1.txt"), "ghostWorld1.txt", 32, 88);
         	// passes A no problem @ 6
@@ -120,5 +120,9 @@ public class Part3ResultsTest {
         }
     }
 
-
+    @Test
+    public void ghostWorld4() {
+        this.runMaze(new AStarSearch("test-files/ghostWorld4.txt"), "ghostWorld4.txt", 48, 111);
+        this.runMaze(new AStarWithGhostSearch("test-files/ghostWorld4.txt"), "ghostWorld4.txt", 62, 1075);
+    }
 }
