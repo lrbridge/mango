@@ -122,7 +122,7 @@ public class Part3ResultsTest {
 
     @Test
     public void ghostWorld4() {
-        this.runMaze(new AStarSearch("test-files/ghostWorld4.txt"), "ghostWorld4.txt", 48, 111);
-        this.runMaze(new AStarWithGhostSearch("test-files/ghostWorld4.txt"), "ghostWorld4.txt", 62, 1075);
+        this.runMaze(new AStarSearch("test-files/ghostWorld4.txt"), "ghostWorld4.txt", 48, 116);
+        this.runMaze(new AStarWithGhostSearch("test-files/ghostWorld4.txt"), "ghostWorld4.txt", 62, 1069);
     }
 }

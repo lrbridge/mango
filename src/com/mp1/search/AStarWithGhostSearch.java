@@ -41,6 +41,11 @@ public class AStarWithGhostSearch extends AStarSearch {
         if(vGhost.exists()) {
 			ghosts.add(vGhost);
         }
+        
+		Ghost hGhost = new FastGhost('H', this.maze);
+		if(hGhost.exists()) {
+			ghosts.add(hGhost);
+		}	
 
 	}
 
