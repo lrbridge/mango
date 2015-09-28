@@ -35,10 +35,10 @@ public abstract class InformedSearch extends Search {
 		while (!this.isFrontierEmpty()) {
 
 			Node node = this.popNodeOffFrontier();
-			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
-			for(Coordinate x : node.getState().ghostCoordinates) {
-				System.out.println("    " + x.x + " " + x.y + " " + x.direction);
-			}
+//			System.out.println("EXPANDING " + node.getState().x + " " + node.getState().y + " " + node.getState().directionFacing);
+//			for(Coordinate x : node.getState().ghostCoordinates) {
+//				System.out.println("    " + x.x + " " + x.y + " " + x.direction);
+//			}
 			this.numNodesExpanded++;
 			this.explored.add(node);
 			
@@ -80,9 +80,11 @@ public abstract class InformedSearch extends Search {
 
 		int ghostIndex = 0;
 		while(ghostIndex < childState.ghostCoordinates.size()) {
-			
+
 			Coordinate childGhost = childState.ghostCoordinates.get(ghostIndex);
 			Coordinate parentGhost = parentState.ghostCoordinates.get(ghostIndex);
+			
+//			System.out.println("...andghost" + childGhost.x + " " + childGhost.y + " " + childGhost.direction);
 			
 			if(childGhost.direction.equals(DIRECTION.LEFT) || childGhost.direction.equals(DIRECTION.RIGHT)) {
 				if(childState.x == childGhost.x) { // x must be the same for horizontal ghost
@@ -90,8 +92,29 @@ public abstract class InformedSearch extends Search {
 						return true; // if ghost & pacman are in same square
 					}
 					else if(parentState.y == childGhost.y && parentGhost.y == childState.y) {
-		                return true; // if ghost & pacman passed in the night
+						return true; // if ghost & pacman passed in the night
 		            }
+					else {
+						// if the fast moving ghost, bounce back off wall
+						if(parentGhost.direction != childGhost.direction && parentGhost.y == childGhost.y) {
+							if(parentGhost.direction == DIRECTION.RIGHT && childState.y == childGhost.y + 1) {
+								return true;
+							}
+							if(parentGhost.direction == DIRECTION.LEFT && childState.y == childGhost.y - 1) {
+								return true;
+							}
+						}
+//						if(parentGhost.direction == childGhost.direction) {
+							// if fast moving ghost, moving 2 squares in one direction, if in between pass in night or if swap
+							if(childGhost.direction == DIRECTION.RIGHT  && parentGhost.y + 2 == childGhost.y && childState.x == parentState.x && (childState.y == parentGhost.y + 1 || childState.y == parentGhost.y)) {
+								return true;
+							}
+							if(childGhost.direction == DIRECTION.LEFT  && parentGhost.y - 2 == childGhost.y && childState.x == parentState.x && (childState.y == parentGhost.y - 1 || childState.y == parentGhost.y)) {
+								return true;
+							}
+							
+//						}
+					}
 				}	
 			}
 			

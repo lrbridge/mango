@@ -13,8 +13,9 @@ public class MazeSolution {
 	
 	public MazeSolution(Maze maze, Node finalNode, int numNodesExpanded) {	
 		this.pathCost = finalNode.getDistanceSoFar();
-
+//System.out.println("walking backwards...");
 		while (finalNode.getParent() != null) {
+//			System.out.println(finalNode.getState().x + " " + finalNode.getState().y + " -- ghost" + finalNode.getState().ghostCoordinates.get(1).x + " " + finalNode.getState().ghostCoordinates.get(1).y);
 			maze.set(finalNode.getState().x, finalNode.getState().y, '.');
 			finalNode = finalNode.getParent();
 		}
